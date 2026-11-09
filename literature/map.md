@@ -579,7 +579,7 @@ by ProteinMPNN and RF3 is not.
 
 ## The generators — RFdiffusion3, and the line behind it
 
-- **RFdiffusion3 (RFD3)** — `rfdiffusion3` · `10.1101/2025.09.18.676967` ·
+- **RFdiffusion3 (RFD3)** — `rfdiffusion3` · `10.1126/science.aeh2982` ·
   **meat** — transformer-based all-atom diffusion, adopting AF3's
   non-equivariant approach. _Carries:_ the lineage's own break with Level 0 —
   unlike RFdiffusion 1/2 it is not fine-tuned from a predictor but trained from

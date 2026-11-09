@@ -7,7 +7,7 @@ passage is what a draft needs. Covers all 73 entries in
 parsed Markdown in `literature/corpus/`; regenerate after adding a publication.
 **Do not edit by hand.**
 
-576 edges. A number in parentheses is how often the citing paper *names* the
+557 edges. A number in parentheses is how often the citing paper *names* the
 cited one in its prose — a reference-list row scores 1, a paper argued with
 scores much higher. That gap is usually the interesting part.
 
@@ -87,7 +87,7 @@ covers them. Papers from this year are omitted: their zero carries no signal.
 
 *Fast and Ultra-Capable Protein Design: Advancing the Frontier Through Atomistic SE(3)-Equivariance with Genie 3* · `10.64898/2026.05.01.722168`
 
-- **Cites (17):** `proteina_complexa` (41), `rfdiffusion` (33), `proteinmpnn` (32), `boltzgen` (13), `alphafold3` (9), `frameflow` (8), `alphafold2` (7), `alphafold_multimer` (6), `alphaproteo` (4), `boltz2` (3), `rfdiffusion2` (3), `boltz1` (2), `boltzdesign1` (2), `rfdiffusion3` (2), `rosettafold` (2), `rosettafold_all_atom`, `esm2`
+- **Cites (16):** `proteina_complexa` (41), `rfdiffusion` (33), `proteinmpnn` (32), `boltzgen` (13), `alphafold3` (9), `frameflow` (8), `alphafold2` (7), `alphafold_multimer` (6), `alphaproteo` (4), `boltz2` (3), `rfdiffusion2` (3), `boltz1` (2), `boltzdesign1` (2), `rosettafold` (2), `rosettafold_all_atom`, `esm2`
 - **Cited by (0):** —
 
 ### `halludesign` — §-, 2025
@@ -115,14 +115,14 @@ covers them. Papers from this year are omitted: their zero carries no signal.
 
 *ProtDBench: A Unified Benchmark of Protein Binder Design and Evaluation* · `10.48550/arXiv.2605.04118`
 
-- **Cites (18):** `bindcraft` (21), `pxdesign` (16), `boltzgen` (15), `rfdiffusion` (15), `boltzdesign1` (11), `rfdiffusion3` (11), `alphafold2` (5), `alphaproteo` (5), `boltz1` (4), `boltz2` (4), `chai1` (4), `alphafold3` (3), `colabfold` (3), `alphafold_multimer` (2), `rosettafold` (2), `chai2`, `esm2`, `latentx1`
+- **Cites (17):** `bindcraft` (21), `pxdesign` (16), `boltzgen` (15), `rfdiffusion` (15), `boltzdesign1` (11), `alphafold2` (5), `alphaproteo` (5), `boltz1` (4), `boltz2` (4), `chai1` (4), `alphafold3` (3), `colabfold` (3), `alphafold_multimer` (2), `rosettafold` (2), `chai2`, `esm2`, `latentx1`
 - **Cited by (0):** —
 
 ### `protein_hunter` — §-, 2025
 
 *Protein Hunter: exploiting structure hallucination within diffusion for protein design* · `10.1101/2025.10.10.681530`
 
-- **Cites (12):** `boltz2` (16), `rfdiffusion` (11), `chai1` (8), `alphafold3` (6), `bindcraft` (4), `alphafold2` (2), `boltz1` (2), `boltzdesign1` (2), `rfdiffusion2`, `rfdiffusion3`, `afcycdesign`, `rfpeptides`
+- **Cites (11):** `boltz2` (16), `rfdiffusion` (11), `chai1` (8), `alphafold3` (6), `bindcraft` (4), `alphafold2` (2), `boltz1` (2), `boltzdesign1` (2), `rfdiffusion2`, `afcycdesign`, `rfpeptides`
 - **Cited by (2):** `rfoptimization` (11), `boltzgen`
 
 ### `proteina_complexa` — §-, 2026
@@ -151,14 +151,14 @@ covers them. Papers from this year are omitted: their zero carries no signal.
 *Highly accurate protein structure prediction with AlphaFold* · `10.1038/s41586-021-03819-2`
 
 - **Cites (2):** `lddt` (17), `tm_score` (8)
-- **Cited by (49):** `openfold` (103), `colabfold` (75), `ipsae` (37), `atlasfold` (31), `caliby` (21), `afcycdesign` (19), `proteina_complexa` (11), `rosettafold2` (8), `genie3` (7), `alphafold3` (6), `pxdesign` (6), `alphaproteo` (5), `bender_perspective` (5), `boltz1` (5), `chai1` (5), `halludesign` (5), `moppit` (5), `protdbench` (5), `rfdiffusion` (5), `alphafold_multimer` (4), `boltz2` (4), `boltzdesign1` (4), `latentx1` (4), `openbind` (4), `rfantibody` (4), `rosettafold_all_atom` (4), `bindcraft` (3), `atomflow` (2), `protein_hunter` (2), `rfdiffusion3` (2), `rfoptimization` (2), `esm3`, `esmc`, `foldbench`, `originflow`, `rfdiffusion2`, `saprot`, `alphadesign`, `dflow`, `drugflow`, `flowr`, `frameflow`, `gauss_seidel_projection`, `germinal`, `ligandmpnn`, `ppiflow`, `proteinmpnn`, `protenix_v2`, `protflow`
+- **Cited by (48):** `openfold` (103), `colabfold` (75), `ipsae` (37), `atlasfold` (31), `caliby` (21), `afcycdesign` (19), `proteina_complexa` (11), `rosettafold2` (8), `genie3` (7), `alphafold3` (6), `pxdesign` (6), `alphaproteo` (5), `bender_perspective` (5), `boltz1` (5), `chai1` (5), `halludesign` (5), `moppit` (5), `protdbench` (5), `rfdiffusion` (5), `alphafold_multimer` (4), `boltz2` (4), `boltzdesign1` (4), `latentx1` (4), `openbind` (4), `rfantibody` (4), `rosettafold_all_atom` (4), `bindcraft` (3), `atomflow` (2), `protein_hunter` (2), `rfoptimization` (2), `esm3`, `esmc`, `foldbench`, `originflow`, `rfdiffusion2`, `saprot`, `alphadesign`, `dflow`, `drugflow`, `flowr`, `frameflow`, `gauss_seidel_projection`, `germinal`, `ligandmpnn`, `ppiflow`, `proteinmpnn`, `protenix_v2`, `protflow`
 
 ### `alphafold3` — §1, 2024
 
 *Accurate structure prediction of biomolecular interactions with AlphaFold 3* · `10.1038/s41586-024-07487-w`
 
 - **Cites (9):** `posebusters` (34), `lddt` (21), `dockq` (18), `alphafold_multimer` (11), `rosettafold` (7), `alphafold2` (6), `rosettafold_all_atom` (6), `esm2`, `tm_score`
-- **Cited by (42):** `foldbench` (64), `atlasfold` (40), `boltz1` (37), `protenix_v1` (33), `boltz2` (32), `ipsae` (27), `opendde` (21), `rfantibody` (21), `halludesign` (20), `esmc` (14), `boltzgen` (12), `gauss_seidel_projection` (10), `latentx1` (10), `protenix_v2` (10), `boltzdesign1` (9), `genie3` (9), `openbind` (9), `ppiflow` (9), `pxmeter` (7), `protein_hunter` (6), `rfoptimization` (6), `alphaproteo` (5), `bindcraft` (5), `pxdesign` (5), `rfdiffusion3` (5), `chai1` (4), `originflow` (4), `rfdiffusion2` (4), `rosettafold3` (4), `aintibody` (3), `chai2` (3), `mber` (3), `protdbench` (3), `atomflow` (2), `drugflow` (2), `germinal` (2), `proteina_complexa` (2), `afcycdesign`, `esm3`, `flowr`, `latentx2`, `moppit`
+- **Cited by (41):** `foldbench` (64), `atlasfold` (40), `boltz1` (37), `protenix_v1` (33), `boltz2` (32), `ipsae` (27), `opendde` (21), `rfantibody` (21), `halludesign` (20), `esmc` (14), `boltzgen` (12), `gauss_seidel_projection` (10), `latentx1` (10), `protenix_v2` (10), `boltzdesign1` (9), `genie3` (9), `openbind` (9), `ppiflow` (9), `pxmeter` (7), `protein_hunter` (6), `rfoptimization` (6), `alphaproteo` (5), `bindcraft` (5), `pxdesign` (5), `chai1` (4), `originflow` (4), `rfdiffusion2` (4), `rosettafold3` (4), `aintibody` (3), `chai2` (3), `mber` (3), `protdbench` (3), `atomflow` (2), `drugflow` (2), `germinal` (2), `proteina_complexa` (2), `afcycdesign`, `esm3`, `flowr`, `latentx2`, `moppit`
 
 ### `alphafold_multimer` — §1, 2021
 
@@ -186,14 +186,14 @@ covers them. Papers from this year are omitted: their zero carries no signal.
 *Atomic context-conditioned protein sequence design using LigandMPNN* · `10.1038/s41592-025-02626-1`
 
 - **Cites (7):** `proteinmpnn` (28), `alphafold_multimer`, `rfdiffusion`, `rosettafold`, `rosettafold_all_atom`, `alphafold2`, `esm2`
-- **Cited by (12):** `proteina_complexa` (20), `boltzdesign1` (17), `rfdiffusion3` (17), `rfoptimization` (12), `rosettafold3` (10), `rfdiffusion2` (6), `halludesign` (5), `boltzgen` (4), `rosettafold_all_atom` (4), `atomflow` (3), `rfpeptides` (2), `caliby`
+- **Cited by (11):** `proteina_complexa` (20), `boltzdesign1` (17), `rfoptimization` (12), `rosettafold3` (10), `rfdiffusion2` (6), `halludesign` (5), `boltzgen` (4), `rosettafold_all_atom` (4), `atomflow` (3), `rfpeptides` (2), `caliby`
 
 ### `proteinmpnn` — §2, 2022
 
 *Robust deep learning--based protein sequence design using ProteinMPNN* · `10.1126/science.add2187`
 
 - **Cites (3):** `lddt` (2), `rosettafold`, `alphafold2`
-- **Cited by (25):** `genie3` (32), `ligandmpnn` (28), `caliby` (20), `afcycdesign` (17), `alphadesign` (17), `rfpeptides` (14), `rfoptimization` (12), `rfdiffusion` (10), `rfdiffusion3` (10), `boltzgen` (9), `proteina_complexa` (8), `rosettafold3` (7), `bindcraft` (5), `latentx1` (5), `pxdesign` (5), `halludesign` (4), `ppiflow` (4), `alphaproteo` (3), `germinal` (3), `bender_perspective` (2), `dflow` (2), `frameflow` (2), `originflow` (2), `saprot` (2), `rosettafold_all_atom`
+- **Cited by (24):** `genie3` (32), `ligandmpnn` (28), `caliby` (20), `afcycdesign` (17), `alphadesign` (17), `rfpeptides` (14), `rfoptimization` (12), `rfdiffusion` (10), `boltzgen` (9), `proteina_complexa` (8), `rosettafold3` (7), `bindcraft` (5), `latentx1` (5), `pxdesign` (5), `halludesign` (4), `ppiflow` (4), `alphaproteo` (3), `germinal` (3), `bender_perspective` (2), `dflow` (2), `frameflow` (2), `originflow` (2), `saprot` (2), `rosettafold_all_atom`
 
 ### `rfantibody` — §2, 2025
 
@@ -207,21 +207,21 @@ covers them. Papers from this year are omitted: their zero carries no signal.
 *De novo design of protein structure and function with RFdiffusion* · `10.1038/s41586-023-06415-8`
 
 - **Cites (4):** `proteinmpnn` (10), `alphafold2` (5), `rosettafold` (4), `alphadesign`
-- **Cited by (39):** `alphaproteo` (52), `latentx1` (50), `rfantibody` (45), `genie3` (33), `rfdiffusion2` (26), `halludesign` (25), `pxdesign` (24), `proteina_complexa` (22), `alphadesign` (19), `rfpeptides` (19), `protdbench` (15), `boltzgen` (13), `bindcraft` (12), `atomflow` (11), `protein_hunter` (11), `rfoptimization` (10), `originflow` (9), `caliby` (8), `rfdiffusion3` (8), `rosettafold_all_atom` (7), `dflow` (6), `frameflow` (6), `ppiflow` (6), `boltzdesign1` (4), `germinal` (4), `moppit` (4), `opengerminal` (4), `bender_perspective` (3), `ipsae` (3), `mber` (3), `boltz1` (2), `chai2` (2), `afcycdesign`, `boltzprot1`, `esm3`, `gauss_seidel_projection`, `latentx2`, `ligandmpnn`, `opendde`
+- **Cited by (38):** `alphaproteo` (52), `latentx1` (50), `rfantibody` (45), `genie3` (33), `rfdiffusion2` (26), `halludesign` (25), `pxdesign` (24), `proteina_complexa` (22), `alphadesign` (19), `rfpeptides` (19), `protdbench` (15), `boltzgen` (13), `bindcraft` (12), `atomflow` (11), `protein_hunter` (11), `rfoptimization` (10), `originflow` (9), `caliby` (8), `rosettafold_all_atom` (7), `dflow` (6), `frameflow` (6), `ppiflow` (6), `boltzdesign1` (4), `germinal` (4), `moppit` (4), `opengerminal` (4), `bender_perspective` (3), `ipsae` (3), `mber` (3), `boltz1` (2), `chai2` (2), `afcycdesign`, `boltzprot1`, `esm3`, `gauss_seidel_projection`, `latentx2`, `ligandmpnn`, `opendde`
 
 ### `rfdiffusion2` — §2, 2025
 
 *Atom-level enzyme active site scaffolding using RFdiffusion2* · `10.1038/s41592-025-02975-x`
 
 - **Cites (11):** `rfdiffusion` (26), `chai1` (9), `ligandmpnn` (6), `tm_score` (6), `alphafold3` (4), `boltz1` (2), `rosettafold_all_atom` (2), `alphafold2`, `frameflow`, `rosettafold2`, `esm2`
-- **Cited by (6):** `proteina_complexa` (14), `rfdiffusion3` (5), `genie3` (3), `rfoptimization` (2), `boltzgen`, `protein_hunter`
+- **Cited by (5):** `proteina_complexa` (14), `genie3` (3), `rfoptimization` (2), `boltzgen`, `protein_hunter`
 
-### `rfdiffusion3` — §2, 2025
+### `rfdiffusion3` — §2, 2026
 
-*De novo Design of All-atom Biomolecular Interactions with RFdiffusion3* · `10.1101/2025.09.18.676967`
+*Atomic functional site scaffolding in biopolymers with RFdiffusion3* · `10.1126/science.aeh2982`
 
-- **Cites (15):** `ligandmpnn` (17), `proteinmpnn` (10), `rfdiffusion` (8), `alphafold3` (5), `rfdiffusion2` (5), `alphafold2` (2), `bindcraft` (2), `chai1` (2), `rosettafold` (2), `alphaproteo`, `boltzdesign1`, `rosettafold2`, `rosettafold_all_atom`, `chai2`, `rosettafold3`
-- **Cited by (5):** `protdbench` (11), `boltzgen` (2), `genie3` (2), `protein_hunter`, `rfoptimization`
+- **Cites (0):** —
+- **Cited by (1):** `rfoptimization`
 
 ### `rfpeptides` — §2, 2025
 
@@ -235,28 +235,28 @@ covers them. Papers from this year are omitted: their zero carries no signal.
 *Accurate prediction of protein structures and interactions using a three-track neural network* · `10.1126/science.abj8754`
 
 - **Cites (0):** —
-- **Cited by (21):** `colabfold` (18), `rosettafold_all_atom` (13), `atlasfold` (8), `alphafold3` (7), `rosettafold2` (6), `chai1` (4), `rfdiffusion` (4), `afcycdesign` (3), `rfpeptides` (3), `genie3` (2), `originflow` (2), `protdbench` (2), `rfdiffusion3` (2), `rosettafold3` (2), `alphaproteo`, `ligandmpnn`, `proteinmpnn`, `esmc`, `flowr`, `gauss_seidel_projection`, `germinal`
+- **Cited by (20):** `colabfold` (18), `rosettafold_all_atom` (13), `atlasfold` (8), `alphafold3` (7), `rosettafold2` (6), `chai1` (4), `rfdiffusion` (4), `afcycdesign` (3), `rfpeptides` (3), `genie3` (2), `originflow` (2), `protdbench` (2), `rosettafold3` (2), `alphaproteo`, `ligandmpnn`, `proteinmpnn`, `esmc`, `flowr`, `gauss_seidel_projection`, `germinal`
 
 ### `rosettafold2` — §2, 2023
 
 *Efficient and accurate prediction of protein structure using RoseTTAFold2* · `10.1101/2023.05.24.542179`
 
 - **Cites (6):** `alphafold2` (8), `rosettafold` (6), `openfold` (2), `alphadesign`, `afcycdesign`, `esm2`
-- **Cited by (5):** `atlasfold` (9), `rosettafold_all_atom` (3), `foldbench` (2), `rfdiffusion2`, `rfdiffusion3`
+- **Cited by (4):** `atlasfold` (9), `rosettafold_all_atom` (3), `foldbench` (2), `rfdiffusion2`
 
 ### `rosettafold3` — §2, 2025
 
 *Accelerating Biomolecular Modeling with AtomWorks and RF3* · `10.1101/2025.08.14.670328`
 
 - **Cites (10):** `ligandmpnn` (10), `chai1` (8), `proteinmpnn` (7), `alphafold3` (4), `posebusters` (3), `boltz1` (2), `rosettafold` (2), `alphafold_multimer`, `rosettafold_all_atom`, `frameflow`
-- **Cited by (7):** `proteina_complexa` (4), `openbind` (3), `rfoptimization` (3), `caliby`, `protenix_v1`, `pxdesign`, `rfdiffusion3`
+- **Cited by (6):** `proteina_complexa` (4), `openbind` (3), `rfoptimization` (3), `caliby`, `protenix_v1`, `pxdesign`
 
 ### `rosettafold_all_atom` — §2, 2024
 
 *Generalized biomolecular modeling and design with RoseTTAFold All-Atom* · `10.1126/science.adl2528`
 
 - **Cites (9):** `rosettafold` (13), `rfdiffusion` (7), `alphafold2` (4), `ligandmpnn` (4), `posebusters` (4), `rosettafold2` (3), `alphafold_multimer`, `proteinmpnn`, `esm2`
-- **Cited by (20):** `alphafold3` (6), `chai1` (3), `boltzdesign1` (2), `rfdiffusion2` (2), `afcycdesign`, `alphaproteo`, `atomflow`, `boltzgen`, `chai2`, `genie3`, `halludesign`, `ligandmpnn`, `originflow`, `proteina_complexa`, `pxdesign`, `rfantibody`, `rfdiffusion3`, `rfoptimization`, `rfpeptides`, `rosettafold3`
+- **Cited by (19):** `alphafold3` (6), `chai1` (3), `boltzdesign1` (2), `rfdiffusion2` (2), `afcycdesign`, `alphaproteo`, `atomflow`, `boltzgen`, `chai2`, `genie3`, `halludesign`, `ligandmpnn`, `originflow`, `proteina_complexa`, `pxdesign`, `rfantibody`, `rfoptimization`, `rfpeptides`, `rosettafold3`
 
 ### `boltz1` — §3, 2024
 
@@ -276,7 +276,7 @@ covers them. Papers from this year are omitted: their zero carries no signal.
 
 *BoltzGen: Toward Universal Binder Design* · `10.1101/2025.11.20.689494`
 
-- **Cites (19):** `boltz2` (22), `rfdiffusion` (13), `alphafold3` (12), `boltz1` (10), `proteinmpnn` (9), `ligandmpnn` (4), `boltzdesign1` (2), `rfdiffusion3` (2), `alphaproteo`, `frameflow`, `germinal`, `halludesign`, `protein_hunter`, `pxdesign`, `rfdiffusion2`, `rosettafold_all_atom`, `chai2`, `latentx1`, `rfantibody`
+- **Cites (18):** `boltz2` (22), `rfdiffusion` (13), `alphafold3` (12), `boltz1` (10), `proteinmpnn` (9), `ligandmpnn` (4), `boltzdesign1` (2), `alphaproteo`, `frameflow`, `germinal`, `halludesign`, `protein_hunter`, `pxdesign`, `rfdiffusion2`, `rosettafold_all_atom`, `chai2`, `latentx1`, `rfantibody`
 - **Cited by (10):** `boltzprot1` (57), `protdbench` (15), `genie3` (13), `protenix_v2` (3), `bender_perspective` (2), `germinal` (2), `ppiflow` (2), `latentx2`, `opendde`, `protenix_v1`
 
 ### `boltzprot1` — §3, 2026
@@ -291,14 +291,14 @@ covers them. Papers from this year are omitted: their zero carries no signal.
 *Chai-1: Decoding the molecular interactions of life* · `10.1101/2024.10.10.615955`
 
 - **Cites (11):** `dockq` (27), `lddt` (19), `posebusters` (16), `colabfold` (6), `alphafold2` (5), `alphafold3` (4), `rosettafold` (4), `alphafold_multimer` (3), `esm3` (3), `rosettafold_all_atom` (3), `esm2`
-- **Cited by (22):** `pxmeter` (50), `protenix_v1` (31), `foldbench` (29), `chai2` (19), `latentx1` (19), `boltz1` (16), `opendde` (15), `opengerminal` (13), `boltz2` (10), `rfdiffusion2` (9), `protein_hunter` (8), `rosettafold3` (8), `esmc` (4), `halludesign` (4), `protdbench` (4), `overath_meta` (3), `boltzdesign1` (2), `rfdiffusion3` (2), `atlasfold`, `latentx2`, `protenix_v2`, `pxdesign`
+- **Cited by (21):** `pxmeter` (50), `protenix_v1` (31), `foldbench` (29), `chai2` (19), `latentx1` (19), `boltz1` (16), `opendde` (15), `opengerminal` (13), `boltz2` (10), `rfdiffusion2` (9), `protein_hunter` (8), `rosettafold3` (8), `esmc` (4), `halludesign` (4), `protdbench` (4), `overath_meta` (3), `boltzdesign1` (2), `atlasfold`, `latentx2`, `protenix_v2`, `pxdesign`
 
 ### `chai2` — §4, 2025
 
 *Zero-shot antibody design in a 24-well plate* · `10.1101/2025.07.05.663018`
 
 - **Cites (10):** `chai1` (19), `dockq` (15), `colabfold` (9), `alphafold3` (3), `alphaproteo` (2), `rfdiffusion` (2), `alphafold_multimer`, `boltz1`, `rosettafold_all_atom`, `esm2`
-- **Cited by (15):** `pxdesign` (5), `protenix_v2` (4), `mber` (2), `bender_perspective`, `foldbench`, `protdbench`, `proteina_complexa`, `boltzgen`, `germinal`, `halludesign`, `latentx1`, `latentx2`, `protenix_v1`, `rfdiffusion3`, `rfoptimization`
+- **Cited by (14):** `pxdesign` (5), `protenix_v2` (4), `mber` (2), `bender_perspective`, `foldbench`, `protdbench`, `proteina_complexa`, `boltzgen`, `germinal`, `halludesign`, `latentx1`, `latentx2`, `protenix_v1`, `rfoptimization`
 
 ### `afcycdesign` — §5, 2025
 
@@ -312,14 +312,14 @@ covers them. Papers from this year are omitted: their zero carries no signal.
 *One-shot design of functional protein binders with BindCraft* · `10.1038/s41586-025-09429-6`
 
 - **Cites (7):** `rfdiffusion` (12), `alphafold3` (5), `proteinmpnn` (5), `alphafold2` (3), `alphaproteo` (2), `alphadesign`, `alphafold_multimer`
-- **Cited by (13):** `proteina_complexa` (58), `protdbench` (21), `pxdesign` (14), `rfoptimization` (9), `ppiflow` (6), `protein_hunter` (4), `opengerminal` (3), `germinal` (2), `ipsae` (2), `rfdiffusion3` (2), `esmc`, `opendde`, `rfantibody`
+- **Cited by (12):** `proteina_complexa` (58), `protdbench` (21), `pxdesign` (14), `rfoptimization` (9), `ppiflow` (6), `protein_hunter` (4), `opengerminal` (3), `germinal` (2), `ipsae` (2), `esmc`, `opendde`, `rfantibody`
 
 ### `boltzdesign1` — §5, 2025
 
 *Boltzdesign1: Inverting All-Atom Structure Prediction Model for Generalized Biomolecular Binder Design* · `10.1101/2025.04.06.647261`
 
 - **Cites (8):** `ligandmpnn` (17), `alphafold3` (9), `boltz1` (9), `alphafold2` (4), `rfdiffusion` (4), `chai1` (2), `rosettafold_all_atom` (2), `alphadesign`
-- **Cited by (13):** `protdbench` (11), `pxdesign` (6), `proteina_complexa` (5), `halludesign` (3), `boltzgen` (2), `genie3` (2), `protein_hunter` (2), `rfoptimization` (2), `boltz2`, `esmc`, `latentx1`, `mber`, `rfdiffusion3`
+- **Cited by (12):** `protdbench` (11), `pxdesign` (6), `proteina_complexa` (5), `halludesign` (3), `boltzgen` (2), `genie3` (2), `protein_hunter` (2), `rfoptimization` (2), `boltz2`, `esmc`, `latentx1`, `mber`
 
 ### `colabdesign` — §5, 2025
 
@@ -417,7 +417,7 @@ covers them. Papers from this year are omitted: their zero carries no signal.
 *De novo design of high-affinity protein binders with AlphaProteo* · `10.48550/arXiv.2409.08022`
 
 - **Cites (9):** `rfdiffusion` (52), `alphafold2` (5), `alphafold3` (5), `proteinmpnn` (3), `alphafold_multimer`, `rosettafold`, `rosettafold_all_atom`, `esm2`, `esm3`
-- **Cited by (14):** `latentx1` (17), `proteina_complexa` (16), `pxdesign` (11), `protdbench` (5), `genie3` (4), `bindcraft` (2), `chai2` (2), `overath_meta` (2), `boltzgen`, `esmc`, `germinal`, `latentx2`, `rfdiffusion3`, `rfoptimization`
+- **Cited by (13):** `latentx1` (17), `proteina_complexa` (16), `pxdesign` (11), `protdbench` (5), `genie3` (4), `bindcraft` (2), `chai2` (2), `overath_meta` (2), `boltzgen`, `esmc`, `germinal`, `latentx2`, `rfoptimization`
 
 ### `latentx1` — §8, 2025
 
@@ -559,3 +559,4 @@ neither cite nor are counted as citing:
 
 - `colabdesign`
 - `openfold3`
+- `rfdiffusion3`
