@@ -879,6 +879,13 @@ modification anyone made to it, and the system that fills out every stage.
     for that model, which the annealing and the five-model swap appear to
     compensate for. Its own paper adds that the ipTM it ranks on predicts
     _whether_ a design binds but not _how tightly_.
+  - **BindCraft2** — the successor, released as code while the paper is still
+    announced as forthcoming. The loop is unchanged; what widens is the catalog
+    of modalities it will emit — cyclic peptides, VHHs, scFv/Fab, ankyrin
+    repeats, multidomain binders — and of targets, including disordered motifs
+    and molecular glues. No benchmark and no success rate accompany it, so the
+    numbers above remain the lineage's. _(map-only — code and a lab page, no
+    publication.)_ · **mention**
 
 ## Where the gradient stops when the predictor diffuses
 
@@ -996,6 +1003,13 @@ optimizer walks under.
     one target's rate from 0.4% overall to 7.5% at its best hotspot.
   - _Caveat:_ its hits are phage-display enrichments — screening hits, not
     confirmed binders, with no affinity quantification.
+  - **mBER-2** — the successor, announced as a technical report on the company's
+    own site, extending the method to microbinders and reporting hit rates an
+    order of magnitude above the campaign above. Those rates are
+    company-reported and the campaign behind them does not state how its targets
+    were chosen, so the entry's control — hotspots drawn at random — is the 2025
+    campaign's alone and does not transfer. _(map-only — technical report, no
+    publication.)_ · **mention**
 
 # §6 — Protenix
 

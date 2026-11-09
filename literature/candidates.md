@@ -27,47 +27,7 @@ ______________________________________________________________________
 
 # UNDECIDED
 
-Both entries below are **successor releases of works already in the map**, and
-both break the DOI-verified rule above: neither has a preprint, so there is
-nothing to verify, retrieve or parse. They are recorded here rather than in the
-map because an invariant of the catalog is that what the map names must resolve
-to a publication, and a code drop or a self-hosted technical report does not.
-Everything stated is from the vendor's own page.
-
-- **BindCraft2** — no DOI; `https://www.pacesalab.com/bindcraft`,
-  `https://github.com/PacesaLab/BindCraft2` — successor to BindCraft (§5,
-  backbone), released as code with the paper listed on the lab's own page as
-  _"Preprint (coming soon)"_. Same ColabDesign hallucination loop; what it adds
-  is breadth of modality (miniproteins, linear and cyclic peptides,
-  homo-oligomers, multidomain binders, VHHs, scFv/Fab, ankyrin repeats) and of
-  target type (disordered motifs, cross-reactive and multi-target binders,
-  detargeting, molecular glues), plus a claim of much lower compute per design.
-  Still protein-protein only, no ligands, ranked by binding probability rather
-  than affinity. _Why it waits:_ the page reports no benchmark and no wet-lab
-  success rate — the one figure given, _"expect to screen 2-20 designs in the
-  wet lab"_, is planning guidance, not a measurement — so there is nothing for
-  §5 to lean on and nothing for Table B. _What to re-check:_ the preprint. When
-  it lands, the question is whether BindCraft2 is a second entry or a clause
-  extending BindCraft's, which turns on whether the modality breadth comes with
-  measured hit rates per modality.
-- **mBER-2** — no DOI; `https://www.manifold.bio/news/mber-2-...`, with a
-  self-hosted technical report PDF — successor to mBER (§5, meat), announced 22
-  September 2026. Same generative approach, optimized for inference cost,
-  epitope targeting and hit rate, extended to microbinders (structured peptides
-  of ~10-45 residues). Company-reported: binders to 55 of 56 therapeutic targets
-  with a 16.8% average hit rate for high-confidence VHH designs, more than 20
-  distinct sites on one target, 31+ validated microbinder formats, over 50
-  million designs against 1,000 targets in one run on 4,500+ GPUs, and over 3
-  million binders tested in animals including 1 million in non-human primates.
-  Weights and code are not stated as released; mBER-open was. _Why it waits:_
-  not peer-reviewed, not on a preprint server, and not independently checked, so
-  none of those numbers can enter Table B or the conclusion's designs-tested
-  trajectory beside numbers that can be traced to a paper. _It does not disturb
-  the map:_ mBER's standing in §5 and in the conclusion rests on the 2025
-  campaign's controlled target and epitope selection, which mBER-2 does not
-  retract. _What to re-check:_ a preprint, and whether the 55-of-56 campaign
-  selected its own targets — if it did, mBER-2 cannot inherit the one claim mBER
-  is in the review for.
+_Nothing undecided._
 
 ______________________________________________________________________
 
