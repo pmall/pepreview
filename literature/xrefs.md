@@ -62,6 +62,13 @@ covers them. Papers from this year are omitted: their zero carries no signal.
 - **Cites (9):** `alphafold2` (21), `proteinmpnn` (20), `rfdiffusion` (8), `boltz1` (5), `colabfold` (2), `ligandmpnn`, `esm2`, `esm3`, `rosettafold3`
 - **Cited by (0):** —
 
+### `colabfold` — §-, 2022
+
+*ColabFold: making protein folding accessible to all* · `10.1038/s41592-022-01488-1`
+
+- **Cites (4):** `alphafold2` (75), `rosettafold` (18), `alphafold_multimer` (12), `dockq` (6)
+- **Cited by (18):** `ipsae` (16), `chai2` (9), `alphafold_multimer` (6), `chai1` (6), `esmc` (6), `atlasfold` (4), `boltz1` (3), `boltz2` (3), `protdbench` (3), `protenix_v1` (3), `afcycdesign` (2), `alphadesign` (2), `caliby` (2), `moppit` (2), `pxmeter` (2), `openfold`, `protenix_v2`, `pxdesign`
+
 ### `drugflow` — §-, 2025
 
 *Multi-domain Distribution Learning for De Novo Drug Design* · `10.48550/arXiv.2508.17815`
@@ -412,12 +419,33 @@ covers them. Papers from this year are omitted: their zero carries no signal.
 - **Cites (16):** `foldbench` (30), `alphafold3` (14), `esm2` (14), `boltz2` (7), `colabfold` (6), `posebusters` (5), `chai1` (4), `protenix_v1` (3), `boltz1` (2), `esm3` (2), `alphafold2`, `alphafold_multimer`, `alphaproteo`, `bindcraft`, `boltzdesign1`, `rosettafold`
 - **Cited by (2):** `atlasfold` (19), `opendde`
 
+### `aintibody` — §8, 2026
+
+*A blinded, prospective benchmark of in silico antibody discovery anchored to experimental affinity and developability* · `10.1038/s41587-026-03238-6`
+
+- **Cites (1):** `alphafold3` (3)
+- **Cited by (0):** —
+
 ### `alphaproteo` — §8, 2024
 
 *De novo design of high-affinity protein binders with AlphaProteo* · `10.48550/arXiv.2409.08022`
 
 - **Cites (9):** `rfdiffusion` (52), `alphafold2` (5), `alphafold3` (5), `proteinmpnn` (3), `alphafold_multimer`, `rosettafold`, `rosettafold_all_atom`, `esm2`, `esm3`
 - **Cited by (13):** `latentx1` (17), `proteina_complexa` (16), `pxdesign` (11), `protdbench` (5), `genie3` (4), `bindcraft` (2), `chai2` (2), `overath_meta` (2), `boltzgen`, `esmc`, `germinal`, `latentx2`, `rfoptimization`
+
+### `bender_perspective` — §8, 2026
+
+*Artificial intelligence in drug discovery --- what it is, where we stand and the path forward* · `10.1038/s41573-026-01496-2`
+
+- **Cites (5):** `alphafold2` (5), `rfdiffusion` (3), `boltzgen` (2), `proteinmpnn` (2), `chai2`
+- **Cited by (0):** —
+
+### `foldbench` — §8, 2025
+
+*Benchmarking all-atom biomolecular structure prediction with FoldBench* · `10.1038/s41467-025-67127-3`
+
+- **Cites (10):** `alphafold3` (64), `dockq` (40), `boltz1` (31), `chai1` (29), `alphafold_multimer` (3), `boltz2` (2), `rosettafold2` (2), `alphafold2`, `chai2`, `esm2`
+- **Cited by (4):** `protenix_v1` (33), `esmc` (30), `protenix_v2` (16), `atlasfold` (15)
 
 ### `latentx1` — §8, 2025
 
@@ -439,6 +467,13 @@ covers them. Papers from this year are omitted: their zero carries no signal.
 
 - **Cites (11):** `alphafold3` (21), `boltz1` (15), `chai1` (15), `pxmeter` (11), `protenix_v2` (5), `bindcraft`, `boltz2`, `boltzgen`, `rfdiffusion`, `esmc`, `proteina_complexa`
 - **Cited by (0):** —
+
+### `overath_meta` — §8, 2025
+
+*Predicting Experimental Success in De Novo Binder Design: A Meta-Analysis of 3,766 Experimentally Characterised Binders* · `10.1101/2025.08.14.670059`
+
+- **Cites (5):** `boltz1` (19), `dockq` (10), `alphafold_multimer` (4), `chai1` (3), `alphaproteo` (2)
+- **Cited by (3):** `germinal`, `ipsae`, `proteina_complexa`
 
 ### `atomflow` — §BG, 2024
 
@@ -475,40 +510,12 @@ covers them. Papers from this year are omitted: their zero carries no signal.
 - **Cites (8):** `alphafold3` (9), `bindcraft` (6), `rfdiffusion` (6), `proteinmpnn` (4), `boltzgen` (2), `rfantibody`, `alphafold2`, `frameflow`
 - **Cited by (1):** `protenix_v2`
 
-### `aintibody` — §IV, 2026
-
-*A blinded, prospective benchmark of in silico antibody discovery anchored to experimental affinity and developability* · `10.1038/s41587-026-03238-6`
-
-- **Cites (1):** `alphafold3` (3)
-- **Cited by (0):** —
-
-### `bender_perspective` — §IV, 2026
-
-*Artificial intelligence in drug discovery --- what it is, where we stand and the path forward* · `10.1038/s41573-026-01496-2`
-
-- **Cites (5):** `alphafold2` (5), `rfdiffusion` (3), `boltzgen` (2), `proteinmpnn` (2), `chai2`
-- **Cited by (0):** —
-
-### `colabfold` — §IV, 2022
-
-*ColabFold: making protein folding accessible to all* · `10.1038/s41592-022-01488-1`
-
-- **Cites (4):** `alphafold2` (75), `rosettafold` (18), `alphafold_multimer` (12), `dockq` (6)
-- **Cited by (18):** `ipsae` (16), `chai2` (9), `alphafold_multimer` (6), `chai1` (6), `esmc` (6), `atlasfold` (4), `boltz1` (3), `boltz2` (3), `protdbench` (3), `protenix_v1` (3), `afcycdesign` (2), `alphadesign` (2), `caliby` (2), `moppit` (2), `pxmeter` (2), `openfold`, `protenix_v2`, `pxdesign`
-
 ### `dockq` — §IV, 2016
 
 *DockQ: A Quality Measure for Protein-Protein Docking Models* · `10.1371/journal.pone.0161879`
 
 - **Cites (1):** `tm_score` (4)
 - **Cited by (10):** `alphafold_multimer` (41), `foldbench` (40), `pxmeter` (32), `chai1` (27), `alphafold3` (18), `protenix_v1` (16), `chai2` (15), `atlasfold` (14), `overath_meta` (10), `colabfold` (6)
-
-### `foldbench` — §IV, 2025
-
-*Benchmarking all-atom biomolecular structure prediction with FoldBench* · `10.1038/s41467-025-67127-3`
-
-- **Cites (10):** `alphafold3` (64), `dockq` (40), `boltz1` (31), `chai1` (29), `alphafold_multimer` (3), `boltz2` (2), `rosettafold2` (2), `alphafold2`, `chai2`, `esm2`
-- **Cited by (4):** `protenix_v1` (33), `esmc` (30), `protenix_v2` (16), `atlasfold` (15)
 
 ### `ipsae` — §IV, 2025
 
@@ -530,13 +537,6 @@ covers them. Papers from this year are omitted: their zero carries no signal.
 
 - **Cites (1):** `tm_score`
 - **Cited by (9):** `protenix_v1` (40), `pxmeter` (34), `openfold` (30), `alphafold3` (21), `chai1` (19), `alphafold2` (17), `atlasfold` (17), `proteinmpnn` (2), `latentx1`
-
-### `overath_meta` — §IV, 2025
-
-*Predicting Experimental Success in De Novo Binder Design: A Meta-Analysis of 3,766 Experimentally Characterised Binders* · `10.1101/2025.08.14.670059`
-
-- **Cites (5):** `boltz1` (19), `dockq` (10), `alphafold_multimer` (4), `chai1` (3), `alphaproteo` (2)
-- **Cited by (3):** `germinal`, `ipsae`, `proteina_complexa`
 
 ### `posebusters` — §IV, 2024
 

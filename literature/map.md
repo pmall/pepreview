@@ -397,7 +397,7 @@ criterion its `< 10`.
 **ipSAE** — `ipsae` · `10.1101/2025.02.10.637595` · **backbone** — restricts
 ipTM to the well-predicted interchain pairs, which removes its dependence on how
 the input was trimmed. _Carries:_ the unit the design half has converged on —
-Germinal (§5) reports its threshold and the Overath meta-analysis (Table B)
+Germinal (§5) reports its threshold and the Overath meta-analysis (conclusion)
 scores designs with it.
 
 | Unit           | Compared to      | What it measures                                                                                | Introduced by      |
@@ -655,16 +655,16 @@ the metric it is scored on, may not track whether the sequence folds.
   Latent-X1 (§8), which designed against these targets and epitopes and
   re-synthesized these binders to measure in its own assays. The corpus's only
   third-party wet-lab comparison of two design methods runs through this entry.
-  _Collision:_ that head-to-head is argued under Table B, where its limits
-  belong.
+  _Collision:_ that head-to-head is argued under the numbers unit, where its
+  limits belong.
 - **RFOptimization (RFO)** — _see §5_ — the lineage's optimizer: training-free
   refinement of finished designs, with gradients taken from RF3 above.
   _Carries:_ this lineage's completion of the stack — predict, generate,
   inverse-fold, optimize, filter, all from one group — and the Baker lab
   returning, on its own AF3-class predictor, to the technique RFdiffusion
   displaced above. _Caveat:_ **in silico only.** No wet-lab validation, no
-  designs-tested denominator, no Table B row — the ceiling on how far the review
-  leans on it.
+  designs-tested denominator, no Exhibit 4 row — the ceiling on how far the
+  review leans on it.
 
 # §3 — Boltz
 
@@ -749,7 +749,7 @@ commercial**, yet still publishes a paper and wet-lab numbers.
   corpus's cleanest evidence that hit rate lives in the critic. And it is the
   corpus's first critic trained against experimental outcomes rather than a
   confidence metric reused as a filter. It also splits _screening hits_ from
-  _confirmed binders_, the definition problem the identity beat and Table B
+  _confirmed binders_, the definition problem the identity beat and Exhibit 5
   inherit. _Against:_ BoltzGen, its own unmodified generator — the only
   controlled comparison of a filter in the corpus, and the reason the claim is
   not confounded. _Caveat:_ API-only, no weights — the closed half of the fork
@@ -940,7 +940,8 @@ structure.
   - _Against:_ BindCraft, which it reports beating on cost per filter-passing
     design.
   - _Caveat:_ **in silico only.** No wet-lab validation, no designs-tested
-    denominator, no Table B row — the ceiling on how far the review leans on it.
+    denominator, no Exhibit 4 row — the ceiling on how far the review leans on
+    it.
 
 ## A second prior on the sequence
 
@@ -999,7 +1000,7 @@ optimizer walks under.
   - _Carries:_ scale and target choice. Million-design campaigns against
     hundreds of targets with hotspots drawn at random from exposed surface
     residues — the corpus's only campaign that did not choose its own epitopes,
-    and the control for every hit rate in Table B. Epitope choice alone moves
+    and the control for every hit rate in Exhibit 4. Epitope choice alone moves
     one target's rate from 0.4% overall to 7.5% at its best hotspot.
   - _Caveat:_ its hits are phage-display enrichments — screening hits, not
     confirmed binders, with no affinity quantification.
@@ -1035,7 +1036,7 @@ couplings are configuration, and the ruler is part of the delivery.
   accuracy rising roughly log-linearly with sampling budget, a behaviour AF3 has
   and prior open models largely did not — which is the baseline v2's efficiency
   claim below is measured against. And the **common-intersection critique** of
-  FoldBench, which lands in Table A's defect column: models fail or run out of
+  FoldBench, which lands in Exhibit 1's defect note: models fail or run out of
   memory on different targets, so the published aggregates score each model on a
   different subset — Boltz-1 on 252 interfaces, Chai-1 on 251, 237 shared — and
   restricting to the shared set flips which of the two leads. Its own bootstrap
@@ -1074,7 +1075,7 @@ couplings are configuration, and the ruler is part of the delivery.
     is the corpus's clearest instance of the field arguing about where a Level-2
     gradient should attach.
   - _Caveat:_ the head-to-head is run by the system being promoted, so it
-    belongs in Table B's self-reported column like every other in-house
+    belongs in Exhibit 4's self-reported band like every other in-house
     comparison. Its own filtering analysis adds that confidence thresholds do
     not transfer across targets — gains on one target cost gains on another.
 - **Protenix-v2** — `protenix_v2` · `10.64898/2026.04.10.717613` · **backbone**
@@ -1084,7 +1085,7 @@ couplings are configuration, and the ruler is part of the delivery.
   - _Prediction:_ 9–13 point antibody-antigen success gains over v1 at DockQ >
     0.23 across three benchmark collections, and the payoff of v1's scaling
     result — v2 at 5 seeds beats v1 at 1,000. It also finds the PoseBusters
-    criterion itself incomplete (Table A): predictions pass it with twisted
+    criterion itself incomplete (Exhibit 1): predictions pass it with twisted
     amides and flat sp3 centres, which is why PXMeter v1.1.0 adds planarity
     checks, and under the stricter criterion almost every model scores lower.
   - _Design:_ target-conditioned generation with epitope-specific and
@@ -1112,7 +1113,7 @@ couplings are configuration, and the ruler is part of the delivery.
     extension to a hard target class, and the open-mechanism contrast.
   - _Caveat:_ its targets were drawn from what was in stock for immediate assay
     and its epitopes were selected, the exact opposite of mBER's control, so
-    these rates sit at the self-chosen end of Table B. It reports no
+    these rates sit at the self-chosen end of Exhibit 4. It reports no
     head-to-head against Chai-2 because the overlapping targets were published
     in a different antibody format, and its rankers are compared against a
     single human expert on one target.
@@ -1124,7 +1125,7 @@ couplings are configuration, and the ruler is part of the delivery.
   makes this section a platform rather than a model line. The lineage ships the
   predictor, both design arms **and** the instrument its competitors are
   measured on, so §6's numbers are partly its own measurements of other people's
-  models. _Against:_ FoldBench (Tables A and B), the other multi-model
+  models. _Against:_ FoldBench (the numbers unit), the other multi-model
   prediction benchmark — and Protenix-v1's common-intersection critique of it is
   this group arguing for its own instrument, which the review states rather than
   adjudicates. _Caveat:_ its uptake is real but narrow — OpenDDE (§8) benchmarks
@@ -1199,11 +1200,11 @@ is why §8 is a coda rather than a ninth step.
     Germinal in particular: the same sequence prior, reached with one model
     instead of two.
   - _Caveat:_ it flags the temporal-leakage problem in Boltz-2's numbers, so its
-    own comparisons should be read under Table A's defect note like everyone's —
-    and its own margin over AF3 is inside the error bars, reversing sign when
+    own comparisons should be read under Exhibit 1's defect note like everyone's
+    — and its own margin over AF3 is inside the error bars, reversing sign when
     AtlasFold re-runs the same benchmark. "Matching" is the claim that survives
     both runs; "exceeding" is not. The campaign adds self-chosen targets and a
-    self-reported hit rate, the corpus's highest outside §8, so Table B's
+    self-reported hit rate, the corpus's highest outside §8, so Exhibit 4's
     provenance columns apply here as everywhere.
 - **AtlasFold** — `atlasfold` · `10.64898/2026.09.04.749352` · **mention** — the
   route is not one lab's: a second group reaches single-sequence folding from a
@@ -1240,22 +1241,27 @@ Results, benchmarks and a paper; the generator described in a clause.
   then drug-like low-immunogenicity antibodies (X2). Architecture credited only
   as _"our proprietary architecture"_; filters on ipTM/pAE and self-consistency.
   The one design lineage in this map with no predictor parent in §1–§7.
-  _Carries:_ §8's one checkable result, and the awkward direction the disclosure
-  beat has to absorb. Latent-X1 designed macrocycles against **RFpeptides'** own
-  targets and epitopes, re-synthesized RFpeptides' published best binders, and
-  measured them in its own assays — the corpus's only third-party wet-lab
-  comparison of two design methods. The mechanism-withholding system did the
-  more disciplined experiment. _Against:_ RFpeptides (§2), which is why the
-  entry exists here rather than as a line in Table B — and against the rest of
-  §8, since it is the only mechanism-withholding system that can be checked
-  against an open method at all. _Caveat:_ two, and they are what keep the
-  comparison honest. Only the _binders_ were re-measured, while the hit rates it
-  contrasts with are RFpeptides' literature-reported ones, so that half is not a
-  matched-assay comparison; and it covers one pair of methods on one modality.
-  Its own headline rates are self-reported and the corpus's highest.
-  _Collision:_ the head-to-head is argued in full under Table B, where its
-  limits belong. **Latent-X2 carries the conclusion's developability gap**, not
-  this one.
+  _Carries:_ §8's one checkable result. Latent-X1 designed macrocycles against
+  **RFpeptides'** own targets and epitope regions, re-synthesized RFpeptides'
+  two best published binders, and measured them in its own assays beside its
+  own. _Against:_ RFpeptides (§2), which is why the entry exists here rather
+  than as a row in Exhibit 4 — and against the rest of §8, since it is the only
+  mechanism-withholding system that can be checked against an open method at
+  all. _Caveat, and it is heavier than the entry used to claim._ **This is not
+  the corpus's only third-party wet-lab comparison of two design methods, and
+  not the most disciplined one** — AlphaProteo re-ran RFdiffusion's published
+  designs including its non-binders, which is what produces a hit rate, and
+  reported itself recovering less than RFdiffusion published. Latent-X1
+  re-measured two _binders_, not a campaign, so its hit-rate contrast of 91–100%
+  against RFpeptides' 21–38% is its own assay against the literature. **And its
+  own replicated data splits 1–1:** on MDM2 its best macrocycle beat RFpeptides'
+  at 5.35 against 8.38 µM, while on MCL-1 RFpeptides' beat its own, 10.0 against
+  18.4 µM. The abstract nonetheless calls the comparison _"definitive evidence
+  of Latent-X's leading performance"_ — the gap between a withheld mechanism and
+  an overclaimed result, in one paper. Its headline rates are self-reported and
+  the corpus's highest. _Collision:_ the head-to-head is argued in full under
+  the numbers unit's closing argument, where its limits belong. **Latent-X2
+  carries the conclusion's developability gap**, not this one.
 - **Back-references:** **Chai-2**'s generator (§4) and **BoltzProt-1** (§3)
   belong here and are reviewed in their own lineages. Boltz is the most
   informative case, because the same lab's earlier models are open and in the
@@ -1275,12 +1281,11 @@ the beat.
   trained as one task. _Carries:_ what it _measured_. Its scaling curve is the
   only public evidence about IsoDDE, and its antibody-antigen head-to-head of
   AlphaFold3, Boltz-1, Chai-1, Protenix-v1 and OpenFold3 is the corpus's most
-  complete third-party comparison, which Table A's "who measured it" column
-  rests on. _Caveat:_ in its own words _"not as a complete drug-discovery
-  system"_ — design is roadmap only, so it belongs to the prediction half
-  throughout. And it is a competitor measuring competitors: the comparison is
-  third-party but not disinterested.
-  [GitHub](https://github.com/aurekaresearch/OpenDDE)
+  complete third-party comparison, which Exhibit 1's provenance line rests on.
+  _Caveat:_ in its own words _"not as a complete drug-discovery system"_ —
+  design is roadmap only, so it belongs to the prediction half throughout. And
+  it is a competitor measuring competitors: the comparison is third-party but
+  not disinterested. [GitHub](https://github.com/aurekaresearch/OpenDDE)
 - **IsoDDE** (Isomorphic Labs) — the frontier reference at the top of OpenDDE's
   scaling curve. Everything the review can say about it was measured by a
   competitor, which OpenDDE itself states as a limit on what can be concluded.
@@ -1295,171 +1300,183 @@ half of that organisation's work and closes on the half that stopped publishing.
 
 ______________________________________________________________________
 
-# Tables A and B — planned, not yet filled
+# The numbers
 
-Two tables close the review, gathering the numbers spread across §1–§8 so a
-reader sees the whole field at once. **Numbers are deliberately not entered
-here** — the map does not carry per-paper figures; they are gathered from the
-corpus when the tables are written.
+**Five exhibits close the review**, gathering the figures spread across §1–§8 so
+a reader sees the field at once. **Numbers are not entered here** — the map does
+not carry per-paper figures; they are read out of the corpus at writing time.
+The filled draft is `literature/drafts/the-numbers.md`.
 
-**The risk they carry.** Everything else in the benchmarking units argues these
-numbers are _not_ comparable, and a tidy side-by-side table reads as a
-leaderboard — the exact misreading they exist to prevent. The tables therefore
-make their own construction visible: **the provenance columns are not
-decoration, they are the point**, and a cell without a stated benchmark, cutoff
-and measurer has no entry.
+**Why five and not two.** One accuracy table and one design table was the plan
+until the corpus was read against it. Both failed the same way: a tidy
+side-by-side reads as a leaderboard, which is the misreading the unit exists to
+prevent, and the design rows turned out not to be commensurable at all. So two
+of the five exhibits now do nothing but show how far a number moves when the
+bookkeeping behind it changes. **The organizing claim: a reported score is a
+property of a model, a benchmark, a target subset, a selection rule and an
+averaging unit — and changing any of the last four moves it further than the
+gaps between models do.**
+
+## Exhibit 1 — prediction accuracy on one common set
+
+_Rows:_ the predictors of §1, §3, §4 and §6 — AlphaFold3, Boltz-1, Chai-1,
+HelixFold3, the Protenix line — scored on the common intersection of targets
+every model completed. _Columns:_ the six interface and monomer classes plus the
+two nucleic-acid monomer classes.
+
+_Carries:_ two organizing facts. **Monomer prediction is saturated**, every
+model inside 0.85–0.89 lDDT, so monomer accuracy is no longer a discriminating
+number. And **antibody–antigen spans a factor of two**, which is the class
+§3–§7's design systems need their critics to get right; a model leading on
+monomers and trailing there is a weak critic for this review, and only a split
+table shows it.
+
+_Against:_ FoldBench's own published aggregates, which do not enforce that
+intersection. The exhibit is a correction of the field's default table, not a
+new measurement.
+
+_Provenance is the substance here, not the footnote._ The competitor rows were
+recomputed from published per-instance logs under one intersection rule, not
+re-run, and the table is assembled by the author of its best-performing model.
+What makes it usable anyway: the correction cuts against its own convenience,
+and the uncorrected numbers are printed beside it.
+
+_Caveat:_ every instrument in it carries a documented defect, and Boltz-2 is
+absent because its 2023 training cutoff overlaps the benchmark window — a
+leakage flag three groups raise independently.
 
 - **FoldBench** — `foldbench` · `10.1038/s41467-025-67127-3` · **backbone** —
   peer-reviewed all-atom prediction benchmark spanning monomers,
   protein-protein, antibody-antigen, protein-ligand and protein-nucleic
-  interfaces, scored in lDDT, DockQ and RMSD. It is the shared evaluation set
-  behind the AF3 / Protenix / Boltz / ESMFold2 / OpenDDE comparisons. _Carries:_
-  the benchmark column of Table A.
+  interfaces, scored in lDDT, DockQ and RMSD. The shared evaluation set behind
+  the AF3 / Protenix / Boltz / ESMFold2 / OpenDDE comparisons. _Carries:_ the
+  benchmark column of Exhibit 1 — and its own defect, since model-specific
+  inference failures leave each model scored on a different subset, which is
+  exactly what Exhibit 1 corrects.
 
-## Table A — structure prediction accuracy
+## Exhibit 2 — the same model, the same task, three numbers
 
-_Rows:_ the predictors of §1, §3, §4, §6, §7, §8 — AlphaFold2/3,
-AlphaFold-Multimer, OpenDDE, OpenFold3, Boltz-1/2, Chai-1, Protenix-v1/v2,
-ESMFold/ESMFold2, plus the RoseTTAFold pair from §2 as the historical baseline.
-_Columns:_ model · benchmark and version · training cutoff · target class ·
-metric · **who measured it**.
+_Carries:_ the claim that makes Exhibit 1 readable instead of rankable. Two
+panels, both on models already introduced: AlphaFold3's antibody–antigen figure
+as three different papers report it from nominally one benchmark, and **Chai-1's
+antibody figure differing by roughly a factor of two between its own paper and
+FoldBench, caused entirely by averaging per sequence cluster versus per
+interface.** Neither is wrong; they answer different questions and both are
+called "DockQ success rate".
 
-_Target class is the axis that matters,_ not a single aggregate — split at
-minimum into monomer, protein-protein, **antibody-antigen**, protein-ligand,
-protein-nucleic. Antibody-antigen carries the most weight: most systems in §3–§7
-design antibodies or nanobodies, so that is the accuracy their critics actually
-run on, and a model leading on monomers while trailing there is a weak critic
-for this review's purposes. Only a split table shows it.
+_Against:_ the reader's assumption that a published score is a property of the
+model. A third averaging unit exists — Boltz-1's per-complex mean — so three
+papers report three statistics under one name.
 
-_The "who measured it" column earns its place_ because the corpus contains
-genuine third-party measurement — OpenDDE's antibody-antigen head-to-head,
-Protenix-v2's baseline runs of OpenFold3 and others. Make self-reported and
-independently-run numbers visually distinguishable: that distinction is the
-disclosure beat arriving early. **OpenFold3 is the hardest row to source**: it
-has no publication, so its self-reported figures come from a repository and a
-technical report covering superseded weights, and Protenix-v2's baseline run is
-the only version of them anyone else has checked.
+_Carries, second:_ that the correction can reverse a published ordering. Under
+the intersection filter Boltz-1 and Chai-1 swap places on protein–protein, and
+the lesson is not that one leads but that the two are indistinguishable and
+either printed order is an artifact.
 
-_Every instrument in this table has a documented defect, and the column is where
-they land._ FoldBench's aggregates do not enforce a common intersection of
-evaluated targets, PoseBusters' criterion passes structures with distorted
-geometry, and Boltz-2's numbers carry a temporal-leakage flag raised by three
-separate groups. Not one benchmark here is uncontested, and two numbers from two
-papers were almost never produced under the same conditions — which is what this
-table is built to show rather than hide.
+## Exhibit 3 — how much of a reported score is the ranking, not the structure
 
-_One provenance note the AF2 rows carry._ Where a paper reports "AF2" it has
-almost always run ColabFold (`colabfold` · `10.1038/s41592-022-01488-1`) — same
-weights, different homology search — so the AF2 cells here and the AF2 filters
-in Table B are ColabFold runs, with the MSA depth and recycle count set
-differently paper to paper.
+_Rows:_ the seven models AtlasFold (§7) re-ran, under confidence-based selection
+and under best-of-25 oracle selection, on FoldBench antibody–antigen and
+protein–protein.
 
-## Table B — quality of generated binders
+_Carries:_ the unit's one genuinely new finding, and the quantitative case for
+§3's trained critic. **On antibody–antigen every model loses 11 to 21 points to
+its own confidence head** — the structure module produces a near-native sample
+and the ranker cannot identify it. On protein–protein the same gap is 3 to 8.
+FoldBench states the mechanism: per-sample confidence does not reliably pick
+near-native CDR-H3 conformations.
 
-_Rows:_ the design systems — RFdiffusion, RFantibody, RFpeptides, BoltzGen,
-BoltzProt-1, PXDesign-d/h, Protenix-v2 design, Chai-2, BindCraft, BoltzDesign1,
-Germinal, mBER, the ESMFold2 campaign, AlphaProteo, Latent-X1/X2.
-_RFOptimization cannot be one:_ in-silico success rates only, so no
-designs-tested denominator and no hit definition. It sits beneath the table
-instead — the corpus's first system to claim a design advance on refolding
-statistics alone. _Columns:_ system · coupling level · target class and count ·
-**designs tested per target** · **hit definition** · assay · hit rate · affinity
-reached · targets self-chosen?
+_Against:_ the field's default reading of Level 1, in which the filter is the
+predictor's own confidence score. Exhibit 3 measures what that default costs,
+which is why §3's BoltzPPI and §6's mixed filters are not refinements but
+attacks on the largest single loss in the corpus.
 
-**Sorted by designs-tested, not hit rate.** The identity beat's thesis is that
-the measure of progress is how few designs you must make to get a binder, so the
-denominator is the argument; sorting by hit rate silently converts the table
-into the leaderboard.
+_Collision:_ inference-time seed scaling is explained here and not re-argued in
+§1, §6 or §8, though AF3's 1,000-seed antibody figures and OpenDDE's seed curves
+are read under it.
 
-**The hit-definition column is mandatory, and is why this table is hard.**
-BoltzProt-1 (§3) separates _screening hits_ from _confirmed binders_ and states
-that screening hits are _"what prior binder design model literature typically
-reports as binders"_. Its own percentages are confirmed-binder rates; most
-others quoted in this map are on the looser definition. Without the column the
-table compares two different events and calls it progress.
+## Exhibit 4 — design campaigns, banded by what was measured
 
-**The one documented exception.** Latent-X1 (§8) designed macrocycles against
-RFpeptides' own targets and epitopes, re-synthesized RFpeptides' published best
-binders, and measured them in its own assays alongside its own designs — the
-corpus's only third-party wet-lab comparison of two design methods. Two limits
-keep it honest: only the _binders_ were re-measured, while the hit rates it
-contrasts with are RFpeptides' own literature-reported ones, so that half is not
-a matched-assay comparison; and it covers one pair of methods on one modality.
-It runs in the awkward direction for the disclosure beat: the
-mechanism-withholding system did the more disciplined experiment.
+_Rows:_ the design systems of §2–§8, **grouped by evidence tier and only then by
+designs tested.** The bands: binding reproduced in a second assay format; single
+format with a stated numeric threshold; display or enrichment signal with no
+affinity; functional readout with no binding assay; no wet lab at all.
 
-**What the pair says together, and why they stay adjacent.** Table A has a
-benchmark column that can be filled — FoldBench, PXM and PoseBusters are
-instruments several groups actually ran against. Table B's is empty, and **the
-claim is about these rows, not about the field's inventory: not one campaign in
-this table was measured against any benchmark another campaign in it used.**
-Each chose its own targets, assays and hit definition. The prediction half of
-this field is measured in common, the design half self-reported, and two
-adjacent tables demonstrate that as no paragraph can. That asymmetry is the
-benchmarking units' finding and the disclosure beat's strongest empirical
-support.
+_Carries:_ the identity beat's thesis in the only form the evidence supports.
+Per-target design budgets in this corpus run from **5 designs to 9,000**, so a
+denominator is the argument — but sorting by hit rate across incommensurable hit
+definitions is the leaderboard error in its purest form, and banding is what
+replaces it. **A number in a lower band is not worse science; it is a
+measurement of a different thing.**
 
-**The one common frame anyone built, and how far it reaches.** The **Overath
-binder meta-analysis** — `overath_meta` · `10.1101/2025.08.14.670059` · **meat**
-— comes from a group with no design system of its own. It pooled 3,766 tested
-designs from six published campaigns across 15 targets, re-scored every one
-under a single pipeline, and asked which in-silico score predicts wet-lab
-binding; AF3's ipSAE came out the best single predictor. That is the corpus's
-only cross-lab test of the **filters**, as Latent-X1 (§8) is its only
-third-party wet-lab comparison of two **methods** — and it belongs here, after
-the lineages whose designs it scores. _Carries:_ the cross-lab evidence under
-the conclusion's fifth gap, which without it rests on three labs each reporting
-on their own designs. _What it reaches and what it does not:_ re-scoring reaches
-the designs, not the assays or the hit definitions, so it standardizes the
-filter and leaves the denominator and the hit definition exactly as each
-campaign reported them — its own source table lists a different binding
-definition for nearly every campaign it pooled. Its designs are also the
-generation before the one this review centres on.
+_Against:_ RFantibody (§2), which sits in the display band having paired design
+with 9,000-design screening per target and said why — the honest baseline the
+collapsing-budget claim is measured against.
 
-**The one prospective instrument, and why it is not a row either.** The
-**AIntibody challenge** — `aintibody` · `10.1038/s41587-026-03238-6` · **meat**
-— is the field's one blinded, prospective benchmark: 511 antibodies from 29
-organizations across three tasks, expressed as full IgGs and measured by
-independent laboratories under one protocol — HT-SPR, KinExA, and a five-assay
-developability panel with a stated pass threshold. It is the complement of
-Overath: Overath standardizes the filter on designs already made, AIntibody
-standardizes the assay and the hit definition, which is the half Overath leaves
-untouched. Together they are the only two places in the corpus where anyone
-other than a method's authors decided what counted. _Carries:_ the second half
-of the conclusion's fourth gap, and the prospective version of its fifth —
-challenge 2 asked participants to rank sequences by affinity within HCDR3
-clusters, and only one group of 26 beat the baseline of picking clones at
-random. _What it does to Table B's claim:_ nothing, and the paper states why —
-it notes "the absence of several prominent groups that have publicly reported
-strong computational antibody design capabilities", so the systems in this table
-were measured neither here nor against each other. Its one contact with a map
-lineage is the challenge-1 winner, a **Protenix**-derived pairformer (§6) with a
-DPO fitness head, disclosed in the paper's Methods with code released. _What it
-found:_ the best design, 95 pM, was statistically indistinguishable from the
-best antibody the wet-lab campaign produced (113 pM), a non-ML consensus of the
-selection data ranked third, and the out-of-library design task returned 30.4%
-nonbinders and a winning 2.9 pM design that failed to elute from the HIC column.
-_Caveat, and it bounds what the review can take:_ one antigen — SARS-CoV-2 RBD,
-chosen because it is the best-characterized target available and the challenge
-was "deliberately primed for success" — a Q1-2025 snapshot, organized by the
-consortium that reports it, and blinded on organizer integrity rather than
-informatically. Its tasks are also **library-conditioned antibody engineering,
-not target-conditioned de novo binder design**: challenges 2 and 3 handed
-participants measured affinities a real campaign does not have until the end. It
-tests the review's design half on a neighbouring problem, which is why it sits
-here and not in a section.
+_Caveat:_ three distortions run through the whole exhibit and are stated once,
+there. **Avidity** — bivalent Fc constructs inflate the best-affinity column in
+three systems. **Attrition** between designs selected, synthesised and tested,
+which PXDesign alone reports from both ends. And **target-level versus
+per-design success**, where the same paper can report 100% and 2% of the same
+campaign.
 
-______________________________________________________________________
+_Collision:_ RFOptimization (§5) is in the no-wet-lab band and cannot be a row
+above it — no designs-tested denominator, no hit definition. Its ceiling on the
+review is argued in §5, not here.
+
+## Exhibit 5 — what each paper means by "hit"
+
+_Rows:_ the binding criterion each campaign used, quoted.
+
+_Carries:_ why Exhibit 4 is banded, and the sharpest single fact about the
+design literature: **BoltzProt-1 (§3) is the only system that separates
+screening hits from confirmed binders**, and says the rest of the field reports
+the former as the latter. _Carries, second:_ that **three papers report a hit
+rate without publishing the threshold that produced it.**
+
+_Caveat:_ BoltzProt-1's own screening-hit rate is internally contradictory
+between its table and its prose, so only its confirmed tier — 3.3% to 8.0%, the
+2.4× the identity beat quotes — is quotable. The paper that introduced the
+distinction is the one whose numbers need the most care.
+
+## What the two halves say together
+
+_Carries:_ the disclosure beat's strongest empirical support, demonstrated
+rather than asserted, and the reason the exhibits stay adjacent.
+
+**The prediction half is measured in common and argues in public.** Several
+groups ran the same instruments, the disputes are about aggregation and leakage
+rather than about what was measured, and the corpus holds genuine third-party
+re-measurement — Protenix-v2 running OpenFold3, OpenDDE running every baseline
+on a benchmark that postdates them all, AtlasFold reversing a competitor's
+published margin, Protenix-v1 recomputing five models under one rule. Papers
+here contest each other's numbers by name.
+
+**The design half is not measured in common at all.** No campaign in Exhibit 4
+was evaluated against any benchmark another campaign in it used; each chose its
+targets, epitopes, assay, threshold and denominator. **No paper used a blinded
+or third-party-held target set** — the strongest constraints were self-applied
+novelty filters, further narrowed by vendor catalogue availability.
+
+_The distinction that keeps this honest:_ reusing another paper's target is
+routine and is not reproducing its measurement. Three papers re-measured a
+competitor's actual molecules — AlphaProteo re-running RFdiffusion's published
+designs in its own yeast assay, Latent-X1 resynthesizing RFpeptides' two best
+macrocycles, Latent-X2 resynthesizing two RaPID macrocycles. **Only
+AlphaProteo's includes a competitor's non-binders, and so it is the only
+independently produced competitor hit rate in the corpus** — and it came out
+below the published figure on two of three targets. **No design method's hit
+rate has been independently reproduced.**
 
 # The conclusion
 
 **Where the review's open questions are gathered, not where new ones are
 raised.** Everything it lands is already argued above and none of it is
 resolved: the open-versus-closed question the disclosure beat opens and §8
-leaves standing; the two threads, which are paid off in §7 and under Table B but
-not closed; the identity beat's designs-tested number, whose trajectory is the
-review's spine and has no shared instrument to measure it against; and the five
-gaps below, which are the conclusion's material.
+leaves standing; the two threads, which are paid off in §7 and under Exhibit 4
+but not closed; the identity beat's designs-tested number, whose trajectory is
+the review's spine and has no shared instrument to measure it against; and the
+five gaps below, which are the conclusion's material.
 
 **Order of the beats, and how it ends, are not settled** — they follow from the
 units above rather than preceding them, so they are decided once those exist.
@@ -1540,7 +1557,7 @@ here would fall short if it were.
 ## What the field has not shown
 
 Five gaps, each a question §1–§8 raise and none of them answer. They sit here
-rather than after §8 because three of the five rest on Tables A and B, which a
+rather than after §8 because three of the five rest on the numbers unit, which a
 reader has not met before this point.
 
 **Each entry is a limit the corpus states about itself** — no gap is asserted
@@ -1564,24 +1581,63 @@ binary. BindCraft (§5) says so of its own: AF2 ipTM is a strong predictor of
 _whether_ a design binds and does not track _how tightly_. The corpus's one
 affinity module is Boltz-2's (§3), which is protein-ligand and whose own paper
 states it does not handle multimeric binding partners. So the field designs
-binders it cannot rank by strength, and affinity appears in Table B only as an
+binders it cannot rank by strength, and affinity appears in Exhibit 4 only as an
 outcome measured in a wet lab after the fact.
 
 **3. Design success against targets with no experimental structure is
 untested.** Germinal (§5) names it: how far design success depends on the
 quality of the antigen model _"remains an open question"_. Every campaign in
-Table B designed against solved or confidently predicted structures. What the
+Exhibit 4 designed against solved or confidently predicted structures. What the
 methods do on the targets that most need them is not in the corpus.
 
 **4. No two design campaigns in the review were measured against a common
 benchmark, and the one blinded benchmark the field has built did not measure
-them.** Both facts are established elsewhere — the first under Tables A and B,
-the second under AIntibody there, which ran 29 organizations through one assay
-suite and records that the groups publicly claiming the strongest design
-capabilities did not enter. Inside the corpus the only third-party wet-lab
-comparison of two design _methods_ remains Latent-X1's, in §2's RFpeptides entry
-and §8's. The conclusion does not re-argue any of it; it collects them as what
-they are, the measurement gap the review's caveats keep running into.
+them.** The first fact is established under Exhibit 4; the conclusion does not
+re-argue it. The second is this gap's own, and it needs the instrument that
+establishes it.
+
+- **AIntibody challenge** — `aintibody` · `10.1038/s41587-026-03238-6` ·
+  **meat** — the field's one blinded, prospective benchmark: 511 antibodies from
+  29 organizations across three tasks, expressed as full IgGs and measured by
+  independent laboratories under one protocol — HT-SPR, KinExA, and a five-assay
+  developability panel with a stated pass threshold. _Carries:_ the second half
+  of this gap, and the prospective form of gap 5 — challenge 2 asked
+  participants to rank sequences by affinity within HCDR3 clusters, and **only
+  one group of 26 beat the baseline of picking clones at random.** _Against:_
+  the Overath meta-analysis below, and it is the complement: Overath
+  standardizes the filter on designs already made, AIntibody standardizes the
+  assay and the hit definition, which is the half Overath leaves untouched.
+  Together they are the only two places in the corpus where anyone other than a
+  method's authors decided what counted. _What it found:_ the best design, 95
+  pM, was statistically indistinguishable from the best antibody the wet-lab
+  campaign produced (113 pM); a non-ML consensus of the selection data ranked
+  third; the out-of-library task returned 30.4% nonbinders and a winning 2.9 pM
+  design that failed to elute from the HIC column. Its one contact with a map
+  lineage is the challenge-1 winner, a **Protenix**-derived pairformer (§6) with
+  a DPO fitness head, disclosed in the Methods with code released. _Why it does
+  nothing to Exhibit 4's claim, in the paper's own words:_ it notes _"the
+  absence of several prominent groups that have publicly reported strong
+  computational antibody design capabilities"_, so the systems in this review
+  were measured neither here nor against each other. _Caveat, and it bounds what
+  the review can take:_ one antigen — SARS-CoV-2 RBD, chosen as the
+  best-characterized target available, the challenge _"deliberately primed for
+  success"_ — a Q1-2025 snapshot, organized by the consortium that reports it,
+  and blinded on organizer integrity rather than informatically. Its tasks are
+  also **library-conditioned antibody engineering, not target-conditioned de
+  novo binder design**: challenges 2 and 3 handed participants measured
+  affinities a real campaign does not have until the end. It tests the review's
+  design half on a neighbouring problem, which is why it sits here and not in a
+  section.
+
+_And the within-corpus version of the same gap._ Reusing another paper's target
+is routine; reproducing its measurement is not. Three papers re-measured a
+competitor's molecules, and **only AlphaProteo (§8) re-ran a competitor's
+designs including its non-binders** — resynthesizing RFdiffusion's published set
+and recovering 16% against a published 33% on IL-7Rα, 0% against 6% on TrkA.
+That is the corpus's only independently produced hit rate for another method.
+Latent-X1's macrocycle head-to-head (§8, §2) re-measured two binders and not a
+campaign, and split 1–1 on affinity. The conclusion collects these as what they
+are: the measurement gap the review's caveats keep running into.
 
 **5. The filters have not been shown to work on the individual design.** Every
 Level-1 pipeline selects designs on a confidence metric, and two papers report
@@ -1589,13 +1645,27 @@ the same limit from opposite directions. Germinal (§5) finds its nonbinders
 clearing the ipSAE threshold alongside its binders. mBER (§5) finds the opposite
 at million-design scale, hit rates climbing with ipTM. Both hold: across a
 population a confidence score enriches, on any one design it does not
-discriminate. The Overath meta-analysis (Table B) is the only cross-lab test and
-sharpens it — re-scoring 3,766 designs from six campaigns, the best single
-score's average precision ranged from 0.1 to 1 depending on the target, so the
-score that works on one target is not the one that works on the next. _Why this
-is a gap and not a caveat:_ the identity beat's collapsing designs-tested number
-is the move out of the regime where enrichment is enough and into the one where
-it is not.
+discriminate. The one cross-lab test of the filters sharpens it, and belongs
+here.
+
+- **Overath binder meta-analysis** — `overath_meta` ·
+  `10.1101/2025.08.14.670059` · **meat** — from a group with no design system of
+  its own: it pooled 3,766 tested designs from six published campaigns across 15
+  targets, re-scored every one under a single pipeline, and asked which
+  in-silico score predicts wet-lab binding; AF3's ipSAE came out the best single
+  predictor. _Carries:_ the cross-lab evidence under this gap, which without it
+  rests on three labs each reporting on their own designs. **Re-scoring 3,766
+  designs, the best single score's average precision ranged from 0.1 to 1
+  depending on the target — so the score that works on one target is not the one
+  that works on the next.** _What it reaches and what it does not:_ re-scoring
+  reaches the designs, not the assays or the hit definitions, so it standardizes
+  the filter and leaves the denominator and the hit definition exactly as each
+  campaign reported them — its own source table lists a different binding
+  definition for nearly every campaign it pooled, which is Exhibit 5's finding
+  arrived at independently. Its designs are also the generation before the one
+  this review centres on. _Why this is a gap and not a caveat:_ the identity
+  beat's collapsing designs-tested number is the move out of the regime where
+  enrichment is enough and into the one where it is not.
 
 _What this subsection is not._ Not a wish list, not a speculation about what
 comes next, and not a place for limitations already attached to an entry. A gap
