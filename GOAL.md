@@ -19,6 +19,27 @@ Show a curious newcomer that landscape and give them the keys to understand it.
 The review is not a record of isolated claims, and not a log of disputes between
 approaches and lineages.
 
+## The register
+
+**The review explains principles and documents what has been published. It has
+nothing to prove.** There is no thesis, no case against anyone, and no verdict
+to reach about a lab, a paper or a lineage.
+
+Commentary is allowed, and it is commentary: it helps a reader read what is in
+front of them. The line is simple — **state the conditions a number was measured
+under, never grade the people who measured it.** That a benchmark counts 172
+targets, that one paper averages per sequence cluster and another per interface,
+that a hit threshold was 0.1 nm, that 15 designs were tested per target: all of
+this is information a reader needs to interpret a figure, and it is stated
+flatly. That a paper overclaims, that a literature is unaccountable, that one
+group did the more disciplined experiment: none of this belongs anywhere in the
+review.
+
+The recurring failure here is **inventing a point to argue and then building a
+unit to win it** — most often by assembling real facts into an indictment no
+source makes. Facts stay facts. If a passage reads as prosecution, it is wrong
+in register even when every number in it is correct.
+
 ## The test
 
 Weigh every claim against the weight of presenting AlphaFold, RoseTTAFold,
