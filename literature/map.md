@@ -595,9 +595,9 @@ by ProteinMPNN and RF3 is not.
   beat's claim** in its cleanest historical form — a predictor fine-tuned into a
   generator, with nothing else changed. **The coupling beat's Level 1**, the
   pipeline this paper established (backbone, then ProteinMPNN, then AF2 judges)
-  which every section from §3 to §6 either runs or argues with. And its
-  **verdict on hallucination** — the technique §5 runs on stronger predictors —
-  which sent gradient design quiet for two years. _Against:_ hallucination
+  which every section from §3 to §6 either runs or argues with. And its **result
+  on hallucination** — the technique §5 runs on stronger predictors — after
+  which gradient design went quiet for two years. _Against:_ hallucination
   through RoseTTAFold — the Baker lab's own predecessor, beaten on the Baker
   lab's own benchmark. RFOptimization below reopens exactly that comparison,
   which is why this lineage ends on a return to what it abandoned. _Caveat:_ its
@@ -635,14 +635,15 @@ the metric it is scored on, may not track whether the sequence folds.
 - **RFantibody** — `rfantibody` · `10.1038/s41586-025-09721-5` · **meat**
   _(inherits RFdiffusion)_ — the lineage's antibody arm: a fine-tuned
   RFdiffusion designing VHHs, scFvs and full antibodies against chosen epitopes.
-  _Carries:_ the concession that **the screen remains**. It pairs design with
-  yeast-display library screening and says so, which makes it the honest
-  baseline the identity beat's collapsing-budget table is measured against — and
-  the paper §3, §4 and §5 cite when claiming they no longer need library
-  selection. _Against:_ immunization and random library screening, which it
-  states cannot be aimed at a chosen epitope. That framing is what the whole
-  design half inherits. _Collision:_ the identity beat quotes its statement of
-  the epitope gap; this entry owns the concession, not the gap.
+  _Carries:_ that **the screen remains**. It pairs design with yeast-display
+  library screening — 9,000 designs per target — and states the screen is
+  currently necessary given the design success rate, which makes it the baseline
+  the identity beat's collapsing-budget figures are read against, and the paper
+  §3, §4 and §5 cite when reporting that they no longer use library selection.
+  _Against:_ immunization and random library screening, which it states cannot
+  be aimed at a chosen epitope. That framing is what the whole design half
+  inherits. _Collision:_ the identity beat quotes its statement of the epitope
+  gap; this entry owns the screening requirement, not the gap.
 - **RFpeptides** — `rfpeptides` · `10.1038/s41589-025-01929-w` · **meat**
   _(inherits RFdiffusion)_ — the lineage's macrocycle arm: RFdiffusion and RF2
   extended with a **cyclic relative positional encoding** so the generated chain
@@ -790,15 +791,14 @@ from a generator whose mechanism is never stated.
   and the characterisation the table's top row quotes — that prior work needed
   _"thousands to millions of designs to reliably identify hits"_. It is the
   result the field measures antibody design against. _Against:_ library
-  screening, explicitly and by the number. The paper's framing — zero-shot, no
-  affinity maturation, small plate assays — is the sharpest statement in the
-  corpus that the screen has been removed, and it is exactly the claim
-  RFantibody (§2) declines to make. _Caveat, and the section's finding:_ the
-  paper describes only the _folding_ submodule (Chai-2f, _"a similar
-  architecture as Chai-1"_). **The generative mechanism is never stated.** The
-  strongest antibody result in the corpus is the one the review can say least
-  about — §8's argument arriving early, inside a lineage rather than in the
-  coda.
+  screening, explicitly and by the number. The paper reports zero-shot design,
+  no affinity maturation and small plate assays, which is the corpus's most
+  direct statement that the screen has been removed — the claim RFantibody (§2)
+  does not make. _Caveat, and the section's finding:_ the paper describes only
+  the _folding_ submodule (Chai-2f, _"a similar architecture as Chai-1"_). **The
+  generative mechanism is never stated.** The strongest antibody result in the
+  corpus is the one the review can say least about — §8's argument arriving
+  early, inside a lineage rather than in the coda.
 - **Chai-3 (2026)** — high-throughput commercial 3D foundation model, no
   publication. _see §8_ [platform](https://lab.chaidiscovery.com/)
 
@@ -841,7 +841,7 @@ modification anyone made to it, and the system that fills out every stage.
     target keeping default encodings.
   - _Sequence update:_ ColabDesign's three-stage protocol unmodified, continuous
     representation annealed to one-hot. The paper changes the predictor, not the
-    optimizer — which is the point: the loop was already a library call.
+    optimizer; the loop was already a library call.
   - _Afterwards:_ 48,000 hallucinated models per length for 7–10 residue
     macrocycles, clustered on torsion bins and filtered on pLDDT and Rosetta
     energy landscapes. Eight crystal structures, all within 1.0 Å of their
@@ -1028,9 +1028,8 @@ couplings are configuration, and the ruler is part of the delivery.
 - **Protenix-v1** — `protenix_v1` · `10.64898/2026.02.05.703733` · **backbone**
   — ByteDance Seed's open all-atom model, the second answer to AF3's closed
   weights after Boltz-1, and the predictor every arm below attaches to.
-  _Carries:_ three things. The **matched-conditions** framing — same training
-  cutoff, model scale and inference budget as AF3 — which makes "matches AF3" a
-  checkable claim rather than a leaderboard position, and whose verdict is
+  _Carries:_ three things. The **matched-conditions** comparison — same training
+  cutoff, model scale and inference budget as AF3 — under which its results
   split: ahead of AF3 on protein-protein and antibody-antigen interfaces, behind
   it on protein-ligand and protein-DNA. The **inference-time scaling** result —
   accuracy rising roughly log-linearly with sampling budget, a behaviour AF3 has
@@ -1540,10 +1539,9 @@ Every system in §1–§7 generates, filters and reports on _binding_. Latent-X2
 binding, but because binding alone is insufficient when clinical success demands
 developability and low immunogenicity"_, and it reports developability profiles
 and what it claims is the first low-immunogenicity demonstration for an
-AI-generated antibody. _The awkward part, and the reason this is its own beat
-rather than a caveat:_ the one system in the review that optimizes past binding
-is a closed one. The disclosure beat's uncomfortable direction, arriving a
-second time.
+AI-generated antibody. _Why this is its own beat rather than a caveat:_ the one
+system in the review that optimizes past binding publishes no mechanism, so what
+it reports cannot be examined the way §1–§7 examine everything else.
 
 **2. No system here predicts protein-protein binding affinity.** The filters are
 binary. BindCraft (§5) says so of its own: AF2 ipTM is a strong predictor of
