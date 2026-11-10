@@ -3,7 +3,7 @@
 > **This file is the review minus its prose** — every publication and every
 > claim the review makes, in the order the final review will read. Its
 > conventions are defined once in `AGENTS.md`; what the drafter does with it is
-> in `literature/writing-plan.md`; what is in scope is in `GOAL.md`.
+> in `literature/writing-plan.md`; what is in scope is in `WRITING.md`.
 >
 > **Claims here, evidence in the corpus.** The map says _what the review
 > asserts_; `literature/corpus/` holds what proves it. "Changing only the filter

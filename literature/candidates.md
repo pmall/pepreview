@@ -167,9 +167,9 @@ already cites.
   lineages followed to the design systems built on them, and Genie descends from
   none of the six. Admitting it on its benchmark result alone would make the
   review a scoreboard between generation and hallucination — the log of disputes
-  `GOAL.md` rules out — and the coupling levels are an ordering of the material,
-  not a claim that tighter coupling wins, so there is no beat here for it to
-  overturn. _Reopen when:_ the Adaptyv Nipah competition is written up as
+  `WRITING.md` rules out — and the coupling levels are an ordering of the
+  material, not a claim that tighter coupling wins, so there is no beat here for
+  it to overturn. _Reopen when:_ the Adaptyv Nipah competition is written up as
   material in its own right; §5's joltz/mosaic line is the map's only Nipah
   entry today, and it is in-silico only. Genie 3 is the wet-lab side of the same
   competition — 1 binder in 8 designs at KD ≈ 92 nM — and reports RFdiffusion
