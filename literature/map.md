@@ -582,11 +582,14 @@ by ProteinMPNN and RF3 is not.
 ## The generators — RFdiffusion3, and the line behind it
 
 - **RFdiffusion3 (RFD3)** — `rfdiffusion3` · `10.1126/science.aeh2982` ·
-  **meat** — transformer-based all-atom diffusion, adopting AF3's
-  non-equivariant approach. _Carries:_ the lineage's own break with Level 0 —
-  unlike RFdiffusion 1/2 it is not fine-tuned from a predictor but trained from
-  scratch, so the claim the identity beat rests on is weakest in the lineage
-  that established it.
+  **meat** — all-atom diffusion with a transformer-based U-Net module modeled on
+  AF3's diffusion module (Pairformer shrunk from 48 to 2 layers, 168M trainable
+  parameters, 100-step sampling, about an order of magnitude faster than earlier
+  RFdiffusion generations). _Carries:_ the lineage's own break with Level 0 —
+  unlike RFdiffusion 1/2 it is not initialized from a RoseTTAFold predictor's
+  weights; it is pre-trained on PDB structures plus AF2-predicted distillations,
+  so the claim the identity beat rests on is weakest in the lineage that
+  established it.
 - **RFdiffusion2 (RFD2)** — `rfdiffusion2` · `10.1038/s41592-025-02975-x` ·
   **mention** _(inherits RF1)_ — atom-level enzyme active-site scaffolding from
   functional-group positions, sequence-agnostic.
