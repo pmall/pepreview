@@ -57,8 +57,9 @@ computed, in whatever number you want.
 AlphaFold2 closed a fifty-year-old question at CASP14, and AlphaFold3 carried
 the result from single chains to arbitrary complexes. Prediction became
 something other work is built on rather than something being argued about, and
-the field's attention moved to design. _Collision:_ the wager that made it work,
-its numbers and the anatomy of a co-folder are the founding bet beat's.
+the field's attention moved to design. _Collision:_ the assumption that made it
+work, its numbers and the anatomy of a co-folder are the founding-assumption
+beat's.
 
 **Designing a binder is not the same problem.** A predictor is asked what a
 known sequence folds into, and an experimental structure can say whether it was
@@ -73,10 +74,9 @@ every one of them; results published faster than anyone compares them; and
 vendors paying for speed on these exact models — during one week of September
 2026, NVIDIA, Anthropic and the ESM side each shipped optimized inference
 kernels for Boltz, Chai-1, Protenix, OpenFold, RoseTTAFold3, RFdiffusion,
-BindCraft, PXDesign and ESMFold2, reporting two- to fourfold throughput gains.
-Nobody spends that on software nobody runs. A newcomer cannot see the shape of
-any of this from the papers alone. _(map-only — blog posts and repository
-releases, no publication.)_
+BindCraft, PXDesign and ESMFold2, reporting two- to fourfold throughput gains. A
+newcomer cannot see the shape of any of this from the papers alone. _(map-only —
+blog posts and repository releases, no publication.)_
 [NVIDIA](https://developer.nvidia.com/blog/high-throughput-structure-prediction-with-bionemo-inference-runtime/)
 ·
 [Anthropic](https://www.anthropic.com/research/claude-uplifts-biomolecular-modeling)
@@ -113,13 +113,13 @@ ______________________________________________________________________
 
 # Background
 
-## The founding bet, and how a co-folder is built
+## The founding assumption, and how a co-folder is built
 
-Design needed prediction first, and prediction was solved on a single wager:
+Design needed prediction first, and prediction succeeded on a single assumption:
 **that coevolution between two positions in a multiple sequence alignment is a
-usable proxy for the two residues being close in space.** AlphaFold2 cashed it —
-median 0.96 Å backbone accuracy on CASP14, against 2.8 Å for the next best
-method — and AlphaFold3 generalized it from single chains to arbitrary complexes
+usable proxy for the two residues being close in space.** AlphaFold2 confirmed
+it: median 0.96 Å backbone accuracy on CASP14, against 2.8 Å for the next best
+method. AlphaFold3 then generalized it from single chains to arbitrary complexes
 of proteins, nucleic acids, ligands and ions.
 
 **Every co-folder in this review is two stages, and they do different jobs.**
@@ -129,7 +129,7 @@ disagreement between systems is a disagreement about one of the two.
 **Stage 1 — the trunk. Sequences in, pairwise reasoning out.** What comes out is
 principally a **distogram**: for each pair of residues, a probability
 distribution over how far apart they are. The contact map _is_ the trunk's
-output, so this is where the coevolution bet is cashed, and the stage is
+output, so this is where the coevolution signal enters, and the stage is
 differentiable throughout. The variation here is what feeds it, and the divide
 runs the length of the review:
 
@@ -234,7 +234,7 @@ larger number.
 comes from a campaign whose targets and epitopes its own authors selected. mBER
 (§5) is the exception — a million-scale VHH campaign against hundreds of human
 cell-surface proteins, hotspots drawn at random — and its median per-design hit
-rate lands two orders of magnitude below the headline numbers, at the same
+rate sits two orders of magnitude below the headline numbers, at the same
 coupling level and on the same predictor as Germinal. The spread _inside_ that
 single campaign is the finding: its best epitopes come back up into the range
 everyone else reports. **Target and epitope selection alone move a hit rate
@@ -303,7 +303,7 @@ the anatomy beat decides it. AlphaFold2 is differentiable end to end, so a
 design loop can backpropagate through the whole network. AF3-class models
 replaced the structure module with diffusion and broke that — not because
 diffusion is undifferentiable, but because unrolling a thousand denoising steps
-to get a gradient is impossible. The corpus holds three answers to that one
+to get a gradient is impossible. The corpus holds three approaches to that one
 architectural fact, and they are the substance of §5; this unit's business is
 that the question exists and that the anatomy beat's architecture is what raises
 it.
@@ -315,9 +315,9 @@ RFOptimization (§5) treats agreement with a single predictor as the failure mod
 itself, mixing three predictor families across its loop and holding one of them
 out as an independent check. PXDesign (§6) finds that Protenix and AF2-IG
 filters retain _different_ true positives. And BoltzPPI (§3) replaces BoltzGen's
-confidence metrics with a critic trained to answer "will this bind", roughly
-doubling the confirmed-binder rate with the generator untouched — the same
-designs, a different judge.
+confidence metrics with a critic trained to answer "will this bind", raising the
+confirmed-binder rate from 3.3% to 8.0% with the generator untouched — the same
+designs under a different critic.
 
 ## The disclosure limit
 
@@ -391,8 +391,9 @@ land.
 
 **AlphaFold-Multimer** added the interface versions, computed over interchain
 residue pairs only: **ipTM**, which scores the interface rather than the chains,
-and the **pAE / iPAE** reduction of the PAE matrix that gives the canonical
-criterion its `< 10`.
+and the **pAE / iPAE** reduction of the PAE matrix to interchain pairs. (The
+`< 10` Å cutoff of the canonical design-filter criterion is quoted from
+AlphaProteo, §8; the ipSAE paper suggests PAE cutoffs of 10–15 Å.)
 
 **ipSAE** — `ipsae` · `10.1101/2025.02.10.637595` · **backbone** — restricts
 ipTM to the well-predicted interchain pairs, which removes its dependence on how
@@ -421,20 +422,20 @@ ______________________________________________________________________
 Prediction only. The forward problem — sequence / chemical input → 3D structural
 state — and the reference every later section is defined against.
 
-_Why it opens:_ AlphaFold is the elephant in the room — everything later
-reproduces it, reacts to it, or replaces its evolutionary input, so the review
-cannot begin anywhere else without the reader waiting for it. The open
-reproductions join their pole here rather than getting sections of their own,
-since neither has a design descendant to follow.
+_Why it opens:_ AlphaFold is the reference point — everything later reproduces
+it, reacts to it, or replaces its evolutionary input, so the review cannot begin
+anywhere else without the reader waiting for it. The open reproductions join
+their pole here rather than getting sections of their own, since neither has a
+design descendant to follow.
 
 ## The AF2 pole — AlphaFold2, and its open reproduction
 
 - **AlphaFold2** — `alphafold2` · `10.1038/s41586-021-03819-2` · **backbone** —
-  single-chain predictor at experimental accuracy, and the model that cashed the
-  MSA-as-coevolution bet. _Carries:_ three facts the review is built on. The
-  anatomy beat's **Stage 1** — trunk, distogram, coevolution wager — is AF2's
-  design, and every co-folder in §3, §4, §6 and §8 is a variation on it. Its
-  **single regression pass** is the structure stage everything after it
+  single-chain predictor at experimental accuracy, and the model that confirmed
+  the MSA-as-coevolution assumption. _Carries:_ three facts the review is built
+  on. The anatomy beat's **Stage 1** — trunk, distogram, coevolution assumption
+  — is AF2's design, and every co-folder in §3, §4, §6 and §8 is a variation on
+  it. Its **single regression pass** is the structure stage everything after it
   replaced. And because the whole network is differentiable, it is the **only
   predictor a design loop can invert without choosing an attachment point** —
   the fact §5 is built on and the reason BindCraft exists. It is also the
@@ -470,7 +471,7 @@ since neither has a design descendant to follow.
   nucleic acids, ligands and ions, and the architecture the open lineages
   reproduce. _Carries:_ the review's second structural fact — replacing AF2's
   structure module with **diffusion** broke end-to-end differentiability, and
-  the three answers to that one decision (attach to the trunk, attach to the
+  the three approaches to that one decision (attach to the trunk, attach to the
   confidence heads, shorten the trajectory) are what §2, §5 and §6 disagree
   about. It also carries the openness thread's opening: closed weights are the
   stated motivating gap behind Boltz-1, Protenix and OpenFold3, so §3 and §6
@@ -478,22 +479,23 @@ since neither has a design descendant to follow.
   antibody-antigen gain is reported from predictions top-ranked over **1,000
   seeds** rather than the usual 5, with quality still climbing at 1,000 — the
   behaviour Protenix-v1 (§6) reproduces in an open model and Protenix-v2 then
-  collapses back to 5 seeds. _Against:_ AF2, on both counts — more modalities,
-  at the cost of the property §5 depends on. The review's central trade, stated
-  by the same lab in two papers. On the ligand half it is measured against
-  classical docking instead: on PoseBusters' 428 structures it beats Vina and
-  RoseTTAFold All-Atom while taking no structural input, where the docking tools
-  are handed the solved pocket. _Caveat:_ diffusion brought failure modes AF2
-  did not have, and this paper's own limitations section is where the review's
+  returns to 5 seeds. _Against:_ AF2, on both counts — more modalities, at the
+  cost of the property §5 depends on. The review's central trade, stated by the
+  same lab in two papers. On the ligand half it is measured against classical
+  docking instead: on PoseBusters' 428 structures it beats Vina and RoseTTAFold
+  All-Atom while taking no structural input, where the docking tools are handed
+  the solved pocket. _Caveat:_ diffusion brought failure modes AF2 did not have,
+  and this paper's own limitations section is where the review's
   physical-validity thread starts. Sampled coordinates can be chemically
   impossible — a 4.4% chirality violation rate on PoseBusters **after** a
   chirality penalty is added to the ranking, plus clashes that ranking reduces
-  without eliminating — and "PB-valid" enters the literature here as the test
-  for it. Generation also hallucinates order into disordered regions, which AF3
-  answers by cross-distilling from AF2 predictions. Two limits carry further:
-  predictions are static PDB-like structures, not conformational ensembles, and
-  accuracy still falls with MSA depth exactly as AlphaFold-Multimer's does — the
-  dependence §7 sets out to remove.
+  without eliminating; AF3 reports the PoseBusters PB-valid test alongside these
+  failure modes (the term itself is coined in the PoseBusters paper). Generation
+  also hallucinates order into disordered regions, which AF3 answers by
+  cross-distilling from AlphaFold-Multimer v2.3 predictions. Two limits carry
+  further: predictions are static PDB-like structures, not conformational
+  ensembles, and accuracy still falls with MSA depth exactly as
+  AlphaFold-Multimer's does — the dependence §7 sets out to remove.
 - **OpenFold3** — `openfold3` · `10.5281/zenodo.17485509` · **meat** —
   Apache-2.0 AF3 reproduction released with weights, training code and training
   data. _Carries:_ the far end of the openness axis. Boltz-1's openness is a
@@ -590,19 +592,20 @@ by ProteinMPNN and RF3 is not.
   functional-group positions, sequence-agnostic.
 - **RFdiffusion (RFD1)** — `rfdiffusion` · `10.1038/s41586-023-06415-8` ·
   **backbone** _(inherits RF1)_ — the generative turn itself, and the most-cited
-  design model in the corpus. SE(3)-equivariant frame diffusion, fine-tuned from
-  a predictor, filtered by AF2 pAE. _Carries:_ three beats. **The identity
-  beat's claim** in its cleanest historical form — a predictor fine-tuned into a
-  generator, with nothing else changed. **The coupling beat's Level 1**, the
-  pipeline this paper established (backbone, then ProteinMPNN, then AF2 judges)
-  which every section from §3 to §6 either runs or argues with. And its **result
-  on hallucination** — the technique §5 runs on stronger predictors — after
-  which gradient design went quiet for two years. _Against:_ hallucination
-  through RoseTTAFold — the Baker lab's own predecessor, beaten on the Baker
-  lab's own benchmark. RFOptimization below reopens exactly that comparison,
-  which is why this lineage ends on a return to what it abandoned. _Caveat:_ its
-  "in silico success" criterion is a confidence-metric filter, so the
-  designs-tested numbers attached to it are in-silico rather than measured.
+  design model in the corpus. Equivariant frame diffusion (a Cα coordinate plus
+  N–Cα–C orientation per residue), fine-tuned from a predictor, filtered by AF2.
+  _Carries:_ three beats. **The identity beat's claim** in its cleanest
+  historical form — a predictor fine-tuned into a generator, with nothing else
+  changed. **The coupling beat's Level 1**, the pipeline this paper established
+  (backbone, then ProteinMPNN, then AF2 judges) which every section from §3 to
+  §6 either runs or argues with. And its **result on hallucination** — the
+  technique §5 runs on stronger predictors — after which gradient design went
+  quiet for two years. _Against:_ hallucination through RoseTTAFold — the Baker
+  lab's own predecessor, beaten on the Baker lab's own benchmark. RFOptimization
+  below reopens exactly that comparison, which is why this lineage ends on a
+  return to what it abandoned. _Caveat:_ its "in silico success" criterion is an
+  AF2 confidence-plus-RMSD filter, all computed in silico, so the designs-tested
+  numbers attached to it are in-silico rather than measured.
   [GitHub](https://github.com/RosettaCommons/RFdiffusion)
 
 ### The sequence stage — inverse folding
@@ -671,9 +674,11 @@ the metric it is scored on, may not track whether the sequence folds.
 
 Diffusion, stated outright: BoltzGen is _"a single all-atom diffusion model
 capable of performing both structure prediction and protein design"_ — Level 0
-in its cleanest published form. The section also carries the **trained-critic**
-refinement to Level 1, the **open→closed fork** the disclosure beat and §8 turn
-on, and the corpus's only affinity model.
+in its cleanest published form. Its designable modalities are proteins,
+peptides, nanobodies and related formats; full antibodies were excluded from its
+training data. The section also carries the **trained-critic** refinement to
+Level 1, the **open→closed fork** the disclosure beat and §8 turn on, and the
+corpus's only affinity model.
 
 _Why it precedes Chai:_ this lineage publishes the mechanism of its generator
 and §4's does not, so the reader meets a stated Level-0 design model before
@@ -711,9 +716,9 @@ commercial**, yet still publishes a paper and wet-lab numbers.
   assays, weak on the other five.
 - **BoltzGen** — `boltzgen` · `10.1101/2025.11.20.689494` · **backbone**
   _(inherits Boltz)_ — unified generative design across proteins, peptides,
-  nanobodies, antibodies and small molecules, filtered by refolding with
-  Boltz-2, released MIT with weights, data and training code. _Level 1,
-  confidence-as-critic._
+  nanobodies and related modalities, against targets from disordered proteins to
+  small molecules; filtered by refolding with Boltz-2, released MIT with
+  weights, data and training code. _Level 1, confidence-as-critic._
   - _Carries:_ the identity beat's claim in its published form. RFdiffusion
     demonstrated it historically by fine-tuning; BoltzGen states it as a design
     principle — _"a single all-atom diffusion model capable of performing both
@@ -730,9 +735,9 @@ commercial**, yet still publishes a paper and wet-lab numbers.
   - _Against:_ BoltzProt-1 below, which beats it by changing only the critic.
     The two are the same generator, which is what makes the comparison worth the
     section.
-  - _Caveat:_ two the paper discloses itself. Generation diversity collapses for
-    binders of length 73–76, where it samples ubiquitin almost exclusively — a
-    memorization artefact of ubiquitin's 900+ PDB entries. And an earlier
+  - _Caveat:_ two the paper discloses itself. Generation diversity breaks down
+    for binders of length 73–76, where it samples ubiquitin almost exclusively —
+    a memorization artefact of ubiquitin's 900+ PDB entries. And an earlier
     version, BoltzGenv0, mis-assigned fixed binder residues to the target, so
     refolding could only recapitulate the design and the ranking scores carried
     no filtering power: hit rates of 0/7 on two targets where the fixed version
@@ -745,18 +750,20 @@ commercial**, yet still publishes a paper and wet-lab numbers.
   _(inherits BoltzGen)_ — a refined BoltzGen ranked by **BoltzPPI**, a critic
   trained to answer "will this bind" rather than a confidence head reused as
   one. _Level 1, trained-critic regime._ _Carries:_ two beats at once. It is the
-  **trained-critic** half of the coupling beat — changing only the filter
-  roughly doubles the confirmed-binder rate with the generator untouched, the
+  **trained-critic** half of the coupling beat — changing only the filter raises
+  the confirmed-binder rate from 3.3% to 8.0% (2.4-fold; confirmed-target
+  coverage doubles from 2 to 4 of 10) with the candidate pool untouched, the
   corpus's cleanest evidence that hit rate lives in the critic. And it is the
   corpus's first critic trained against experimental outcomes rather than a
   confidence metric reused as a filter. It also splits _screening hits_ from
   _confirmed binders_, the definition problem the identity beat and Exhibit 5
   inherit. _Against:_ BoltzGen, its own unmodified generator — the only
   controlled comparison of a filter in the corpus, and the reason the claim is
-  not confounded. _Caveat:_ API-only, no weights — the closed half of the fork
-  above, so the result cannot be independently reproduced. _(BoltzPPI is the
-  critic itself, no separate publication — resolves to the `boltzppi` keyword on
-  this entry.)_
+  not confounded. _Caveat:_ API-only — the paper offers access through the Boltz
+  API and platform rather than released weights (recorded in `refs.bib`), so the
+  result cannot be independently reproduced from the paper alone. _(BoltzPPI is
+  the critic itself, no separate publication — resolves to the `boltzppi`
+  keyword on this entry.)_
 - **BoltzDesign1** — _see §5_ — inverts the Boltz predictor for binder design.
   _Level 2_, beside BindCraft, whose loop it reuses at a different attachment
   point.
@@ -814,8 +821,8 @@ other parts: someone else's predictor, someone else's sequence model, a loop
 written by hand.
 
 _Why it comes before §6 and §7:_ §6 ships the predictor and the design loop as
-one product, §7 collapses them into a single model. The reader should meet the
-parts bolted together before seeing them fused.
+one product, §7 fuses them into a single model. The reader should meet the parts
+bolted together before seeing them fused.
 
 ## The loop, on AlphaFold2
 
@@ -891,8 +898,8 @@ modification anyone made to it, and the system that fills out every stage.
 
 A diffusion structure stage cannot be unrolled for a gradient, so neither of
 these takes one through it. Both read the loss off the trunk's distogram and the
-confidence heads instead — the same wall, two escapes — and both have to argue
-that optimizing the distribution the sampler draws from is optimizing the
+confidence heads instead — the same limit, two workarounds — and both have to
+argue that optimizing the distribution the sampler draws from is optimizing the
 structure.
 
 - **BoltzDesign1** — `boltzdesign1` · `10.1101/2025.04.06.647261` · **meat** —
@@ -956,11 +963,12 @@ optimizer walks under.
   - _Gradient:_ two objectives merged into one update direction — AF-M's
     structural confidence, and IgLM, an antibody language model, scoring how
     natural the CDR sequence is. The merge is a weighted sum, MGDA, or a
-    weighted PCGrad. Framework positions are pinned to their one-hot encodings
-    and only CDRs are designed; the framework structure is given to AF-M as a
-    template with every CDR atom masked, so the prediction is anchored without
-    the loops being biased toward the framework's natural ones. A paratope loss
-    keeps contacts on the CDRs rather than the framework.
+    weighted PCGrad. Framework positions are initialized to their one-hot
+    encodings, with a soft framework sequence bias that still permits framework
+    mutations, and only CDRs are designed; the framework structure is given to
+    AF-M as a template with every CDR atom masked, so the prediction is anchored
+    without the loops being biased toward the framework's natural ones. A
+    paratope loss keeps contacts on the CDRs rather than the framework.
   - _Sequence update:_ a PSSM — initialized to uniform noise, Gumbel noise
     around the framework, or zeros — taken through a logit phase, a softmax
     phase, then 10 semigreedy iterations sampling five candidates each and
@@ -1020,10 +1028,10 @@ cannot be backpropagated through; Protenix replaces it with a **2-step ODE
 sampler**, so a Level-2 gradient runs end to end through the whole predictor
 instead of stopping at a trunk. On that one change the lineage ships a diffusion
 arm and a hallucination arm as two modes of one product — the couplings of §1–5
-stop being alternatives and become configuration, chosen per target — then
-benchmarks them against §5's own systems on an instrument it built and published
-itself. Boltz (§3) ships one coupling and varies the critic under it; here both
-couplings are configuration, and the ruler is part of the delivery.
+stop being alternatives and become configuration of one product. In silico the
+two arms trade wins target by target; every wet-lab campaign then ran the
+diffusion arm. Boltz (§3) ships one coupling and varies the critic under it;
+here both couplings are configuration, and the ruler is part of the delivery.
 
 - **Protenix-v1** — `protenix_v1` · `10.64898/2026.02.05.703733` · **backbone**
   — ByteDance Seed's open all-atom model, the second answer to AF3's closed
@@ -1035,7 +1043,7 @@ couplings are configuration, and the ruler is part of the delivery.
   accuracy rising roughly log-linearly with sampling budget, a behaviour AF3 has
   and prior open models largely did not — which is the baseline v2's efficiency
   claim below is measured against. And the **common-intersection critique** of
-  FoldBench, which lands in Exhibit 1's defect note: models fail or run out of
+  FoldBench, which goes into Exhibit 1's defect note: models fail or run out of
   memory on different targets, so the published aggregates score each model on a
   different subset — Boltz-1 on 252 interfaces, Chai-1 on 251, 237 shared — and
   restricting to the shared set flips which of the two leads. Its own bootstrap
@@ -1053,8 +1061,9 @@ couplings are configuration, and the ruler is part of the delivery.
   [GitHub](https://github.com/bytedance/Protenix)
 - **PXDesign** — `pxdesign` · `10.1101/2025.08.15.670450` · **backbone** — the
   section's reason for existing: the first system to ship **both couplings as
-  two modes of one product**, chosen per target rather than argued over.
-  Nanomolar hit rates of 20–73% on five of six targets, 2–6× AlphaProteo's.
+  two modes of one product**. In silico the arms trade wins target by target;
+  all six wet-lab campaigns ran the diffusion arm. Nanomolar hit rates of 20–73%
+  on five of six targets, 2–6× AlphaProteo's.
   - **PXDesign-d** — diffusion arm, generating Cartesian coordinates from a DiT
     backbone rather than the SE(3)-equivariant or frame representations
     RFdiffusion and AlphaProteo use. _Level:_ 1 _(inherits Protenix)_.
@@ -1286,9 +1295,10 @@ the beat.
   OpenDDE's scaling curve respectively. _(map-only.)_ · **mention**
 
 For everything in this beat, every number the review can cite was measured by a
-competitor. The disclosure beat's symmetry lands here: Isomorphic authors are
-core contributors on the AlphaFold3 paper, so the review opens on the published
-half of that organisation's work and closes on the half that stopped publishing.
+competitor. The disclosure beat's symmetry completes here: Isomorphic authors
+are core contributors on the AlphaFold3 paper, so the review opens on the
+published half of that organisation's work and closes on the half that stopped
+publishing.
 
 ______________________________________________________________________
 
@@ -1332,11 +1342,12 @@ note.
   peer-reviewed all-atom prediction benchmark: 1,522 assemblies over nine tasks,
   spanning monomers, protein-protein, antibody-antigen, protein-ligand and
   protein-nucleic interfaces, scored in lDDT, DockQ and RMSD. The shared
-  evaluation set behind the AF3 / Protenix / Boltz / ESMFold2 / OpenDDE
-  comparisons. _Carries:_ the benchmark column of Exhibit 1. _Caveat:_
-  model-specific inference failures leave each model scored on a different
-  subset of targets, which the paper reports and which Exhibit 1's intersection
-  restriction removes.
+  evaluation set behind the AF3 / Boltz-1 / Chai-1 / HelixFold3 / Protenix
+  comparisons; ESMFold2 and OpenDDE are scored on its targets by their own
+  authors, not by this paper. _Carries:_ the benchmark column of Exhibit 1.
+  _Caveat:_ model-specific inference failures leave each model scored on a
+  different subset of targets, which the paper reports and which Exhibit 1's
+  intersection restriction removes.
 
 ## Exhibit 2 — how much a figure depends on how it was computed
 
@@ -1439,7 +1450,7 @@ OpenFold3-preview2 as the one external check.
 # The conclusion
 
 **Where the review's open questions are gathered, not where new ones are
-raised.** Everything it lands is already argued above and none of it is
+raised.** Everything it gathers is already argued above and none of it is
 resolved: the open-versus-closed question the disclosure beat opens and §8
 leaves standing; the two threads, which are paid off in §7 and under Exhibit 4
 but not closed; the identity beat's designs-tested number, whose trajectory is

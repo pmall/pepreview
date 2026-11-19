@@ -1,5 +1,13 @@
 # Writing plan and method
 
+> **SUPERSEDED 2026-11-19 — kept for history, do not follow.** The single
+> binding instruction for the prose phase is now `WRITING.md`, which folds in
+> the still-binding rules from this file (weight and tier treatment, the four
+> moves of a section, placement directives, assembly, xrefs usage). The "Draft
+> units" and "Relative weight" tables below and the "no word count" line are
+> obsolete: draft units and budgets live in `WRITING.md` and are venue-driven
+> (`VENUE.md`, PLOS Computational Biology Review).
+
 > How the review gets written: what the draft units are, how big each one is,
 > what shape a section takes, and in what order they are drafted.
 >

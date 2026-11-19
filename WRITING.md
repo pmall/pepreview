@@ -1,10 +1,11 @@
 # How the review gets written
 
-> Single instruction file for the prose phase: the field, the goal and register,
-> the test every claim is weighed against, what a section draft is, and the
-> style rules distilled from the critique of the first completed pass ("Style:
-> describe, don't prove" at the end). The rest of `literature/writing-plan.md`
-> still binds; its "Draft units" table does not.
+> Single binding instruction file for the prose phase: the field, the goal and
+> register, the test every claim is weighed against, the target venue, the
+> budgets, what a section draft is, and the style rules distilled from the
+> critique of the first completed pass ("Style: describe, don't prove" at the
+> end). `literature/writing-plan.md` is superseded and kept for history only;
+> `VENUE.md` holds the target venue's extracted author guidelines.
 
 ## The field
 
@@ -12,18 +13,35 @@ Deep-learning models that predict protein structure and design proteins or
 peptides binding a target protein — the co-folding predictors and the design
 systems built on them.
 
-**In scope** = generates a protein or peptide binder conditioned on a target, or
-predicts the structure such a system designs against. **Out of scope** = a
-different modality (small molecules), or sequence generation with no target
-conditioning. The field moves fast — explosive in 2026 — so references dated
-before 2025 are generally out of scope, except where they belong to an active
-lineage whose full history is kept for understanding (ESM, RoseTTAFold).
+**In scope** = generates a protein or peptide sequence — peptide, minibinder,
+macrocycle, nanobody, antibody, any chain from the 20-letter amino-acid alphabet
+— that binds a named target, or predicts the structure such a system designs
+against. **Out of scope** = the small-molecule modality: a ligand is a
+variable-size graph under hard valence rules, not a chain from a fixed alphabet,
+so it takes different machinery and different benchmarks. Also out: sequence
+generation with no target conditioning. The field moves fast — explosive in 2026
+— so references dated before 2025 are generally out of scope, except where they
+belong to an active lineage whose full history is kept for understanding (ESM,
+RoseTTAFold).
 
 ## The goal
 
 Show a curious newcomer that landscape and give them the keys to understand it.
 The review is not a record of isolated claims, and not a log of disputes between
 approaches and lineages.
+
+## Target venue
+
+**PLOS Computational Biology, article type Review** — extracted author
+guidelines in `VENUE.md` (checked 2026-11-19). The operative constraints: main
+text 3,000–6,000 words; two or three display items; structure Title / Abstract /
+Introduction / Main Text (at most three heading levels) / Conclusions /
+Acknowledgments / References; references numbered in order of appearance, cited
+in square brackets; AI assistance disclosed at submission. The venue asks a
+Review for "a critique with new points of view" — the review's point of view is
+the coupling-level taxonomy of generator–critic architectures plus the
+disclosure limit on the field's evidence; the families-and-concepts exposition
+is the vehicle that carries it, not a summary of the field.
 
 ## The register
 
@@ -73,36 +91,87 @@ too light for this review.
 drafts, one per `#` heading in `literature/map.md`, in reading order, written
 into `literature/drafts/NN-slug.md`:
 
-| #   | Draft                   | Map unit                          | Prose words |
-| --- | ----------------------- | --------------------------------- | ----------: |
-| 01  | `01-introduction.md`    | The introduction                  |         800 |
-| 02  | `02-background.md`      | Background, four beats            |       1,800 |
-| 03  | `03-metrics-primer.md`  | The metrics primer                |         800 |
-| 04  | `04-alphafold.md`       | §1 AlphaFold and the open cluster |       1,200 |
-| 05  | `05-rosettafold.md`     | §2 RoseTTAFold → RFdiffusion      |       2,000 |
-| 06  | `06-boltz.md`           | §3 Boltz                          |       1,200 |
-| 07  | `07-chai.md`            | §4 Chai                           |         500 |
-| 08  | `08-backpropagation.md` | §5 Design by backpropagation      |         800 |
-| 09  | `09-protenix.md`        | §6 Protenix                       |         600 |
-| 10  | `10-esm.md`             | §7 ESM                            |       1,200 |
-| 11  | `11-closed-frontier.md` | §8 The closed frontier            |         500 |
-| 12  | `12-the-numbers.md`     | The numbers                       |       1,000 |
-| 13  | `13-conclusion.md`      | The conclusion                    |       1,000 |
+| #   | Draft                   | Map unit                                    | Prose words |
+| --- | ----------------------- | ------------------------------------------- | ----------: |
+| 01  | `01-introduction.md`    | The introduction (+ ~250-word abstract)     |         600 |
+| 02  | `02-background.md`      | Background, four beats                      |       1,100 |
+| 03  | `03-metrics-primer.md`  | The metrics primer — vocabulary source only |         250 |
+| 04  | `04-alphafold.md`       | §1 AlphaFold and the open cluster           |         550 |
+| 05  | `05-rosettafold.md`     | §2 RoseTTAFold → RFdiffusion                |         750 |
+| 06  | `06-boltz.md`           | §3 Boltz                                    |         500 |
+| 07  | `07-chai.md`            | §4 Chai                                     |         200 |
+| 08  | `08-backpropagation.md` | §5 Design by backpropagation                |         400 |
+| 09  | `09-protenix.md`        | §6 Protenix                                 |         350 |
+| 10  | `10-esm.md`             | §7 ESM                                      |         450 |
+| 11  | `11-closed-frontier.md` | §8 The closed frontier                      |         150 |
+| 12  | `12-the-numbers.md`     | The numbers — 2–3 display items, not prose  |           0 |
+| 13  | `13-conclusion.md`      | The conclusion                              |         450 |
 
 Completed passes are archived in subfolders of `literature/drafts/`, named for
 the attempt (`drafts/first-try/`); a new pass writes to the paths above.
 
-**The budget is set before writing, never after.** It comes from the backbone
-count: §1–§8 total 8,000 words, roughly two thirds of the review, divided by
-backbones with a floor of 500 for a section to make its moves at all. A draft
-written to length reads; a long draft cut to length does not, because cutting
-removes connective prose and leaves the facts, which is the wrong half.
+**The budget is set before writing, never after.** It is venue-driven:
+`VENUE.md` targets a PLOS Computational Biology Review — 3,000–6,000 words of
+main text and two or three display items — so the units above sum to ≈5,750
+words of main text plus an abstract of ≈250 drafted with unit 01. §1–§8 carry
+≈3,750 words (two thirds of the main text), weighted by backbone count, with a
+floor of 150 for a coda to make its move at all; the numbers unit spends its
+budget on display items, not prose. A draft written to length reads; a long
+draft cut to length does not, because cutting removes connective prose and
+leaves the facts, which is the wrong half.
 
-**Display items do not count** — the primer's parameter table, the five
-exhibits. Their conditions belong in columns, not in sentences.
+**Display items do not count.** Their conditions belong in columns, not in
+sentences.
 
 **A number in the budget is a target, not a ceiling to fill.** A section that
 says what it has to say in less is finished.
+
+## Weight, section shape, and placement
+
+Folded in from `literature/writing-plan.md` (now superseded); the plan's "Draft
+units" table and its "no word count" line are the parts that died — budgets and
+units live here and are venue-driven.
+
+**Tier determines treatment, and the map's tier wins over entry length.**
+**backbone** → a passage of its own: mechanism, the numbers that matter, the
+caveat, what it is contrasted with. **meat** → a sentence or two while a
+backbone claim is being made; its numbers may be quoted. **mention** → a clause,
+readable past without loss. Three failure modes, in the order they happen: the
+recency inversion (a 2026 preprint out-prosed against AlphaFold2), the
+interesting-detail trap, and cataloguing under the guise of completeness. Where
+the map over-supplies, cut rather than expand.
+
+**Every section makes the same four moves, in order:** the claim (what this
+lineage or technique contributed, as a proposition); the mechanism (told once
+per section, from the parsed corpus); the evidence (benchmarks and wet-lab
+campaigns, with the caveat that applies); the handoff (where the section sits on
+the coupling spine, and the seam into the next). A backbone passage that says
+what a system is without what it is **against** has described a paper, not made
+the argument.
+
+**Placement directives** (standing assignments):
+
+- Metric definitions ship beside the thing defined at first use; the primer
+  draft is the vocabulary source, not a rendered section.
+- The Latent-X1 / RFpeptides head-to-head lands under the numbers unit, not §8.
+- The conclusion's gaps admit only limits a cataloged publication states.
+- Developability and immunogenicity belong to the conclusion, not §8.
+- §2 opens by separating RF3 (predictor) from RFdiffusion3 (generator).
+- Display-item cells carry benchmark, cutoff and measurer, or they do not enter;
+  the campaigns table is ordered by designs tested, never by hit rate, and its
+  hit-definition column is mandatory.
+- Benchmark caveats are stated once in the display items' scope note and pointed
+  at, never relitigated per section; the physical-validity thread is stated
+  once, in §6.
+- ProteinMPNN is owned by §2; the trained-critic result by §3; BoltzDesign1's
+  analysis by §5; mBER's unchosen-targets argument by the identity beat.
+
+**`xrefs.md` answers one question only:** which paper to read when writing about
+another. It never sizes anything and never sets a tier.
+
+**Assembly:** introduction → background → §1–§8 → display items → conclusion.
+Seams are written from the ordering paragraph that closes the background and
+each unit's own _Why here_ line; no pass rewrites a draft body.
 
 ## A section is prose in one article
 
