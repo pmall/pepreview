@@ -1,4 +1,4 @@
-# Review Outline (v3): Deep-Learning Methods for Protein and Peptide Binder Generation
+# Review Outline (v3): De Novo Binder Design with Co-Folding and Generative Models
 
 Target venue: **PLOS Computational Biology (Review)** (see `VENUE.md`).
 
@@ -22,13 +22,14 @@ ______________________________________________________________________
 
 ## Front Matter
 
-- **Title:** Deep-Learning Methods for Protein and Peptide Binder Generation
-- **Abstract (~220 words):** Why protein/peptide binders matter, the shift from
-  random library screening to computational generation, the boundary separating
-  protein/peptide design from small-molecule design, the main architectural axes
-  (evolutionary input, coordinate generation, and how predictors drive design),
-  and the key open challenges (affinity, developability, prospective benchmarks,
-  filtering limits).
+- **Title:** De Novo Binder Design with Co-Folding and Generative Models
+- **Abstract (~220 words):** Why amino-acid-based binders (antibodies,
+  nanobodies, scFvs, minibinders, macrocyclic peptides) matter, the shift from
+  random library screening to computational de novo binder design, the scope
+  boundary separating amino-acid chains from small-molecule ligands, the main
+  architectural axes (evolutionary input, coordinate generation, and how
+  predictors drive design), and the key open challenges (affinity,
+  developability, prospective benchmarks, filtering limits).
 
 ______________________________________________________________________
 
@@ -38,15 +39,14 @@ Unhurried, accessible conceptual foundation for a newcomer to the field.
 
 ### 1.1 From experimental search to computational binder design (~320 words)
 
-- Role of protein and peptide binders (antibodies, nanobodies/VHHs, scFvs,
-  minibinders, macrocyclic peptides) as therapeutics and reagents capable of
-  engaging flat protein surfaces.
-- Traditional discovery via immunization and display libraries ($10^{12}$+
-  random sequences): effective, but wet-lab intensive per target and hard to
-  direct to a chosen epitope [@rfantibody].
-- Scope boundary: linear/cyclized chains from the 20-amino-acid alphabet
-  evaluated by folding against a target, distinct from small-molecule generation
-  over variable chemical graphs.
+- Role of amino-acid-based binders capable of engaging flat protein surfaces,
+  contrasting the three main design regimes tackled by general co-folding and
+  generative platforms: de novo minibinders (invented from scratch), macrocyclic
+  peptides (head-to-tail closed chains), and antibodies/nanobodies (conserved
+  frameworks with flexible CDR-H3 loops and weak evolutionary signal).
+- Scope boundary: general structure-based platforms for amino-acid chains from
+  the 20-letter alphabet, excluding small-molecule ligand generation and
+  specialized antibody-only sequence models.
 - Why accurate structure prediction (AlphaFold2 [@alphafold2], AlphaFold3
   [@alphafold3]) enabled design, and why generating a binder (inventing a
   sequence from $20^L$ possibilities confirmed only in a wet lab) differs

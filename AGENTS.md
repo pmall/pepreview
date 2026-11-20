@@ -2,10 +2,10 @@
 
 ## Goal
 
-This repository supports a systematic, descriptive review of deep-learning
-methods for **protein and peptide binder generation** (antibodies, nanobodies,
-VHHs, scFvs, minibinders, macrocyclic peptides — not small-molecule generation).
-The review explains the landscape, underlying mechanisms, and architectural
+This repository supports a systematic, descriptive review of co-folding and
+generative methods for **de novo binder design** (antibodies, nanobodies, VHHs,
+scFvs, minibinders, macrocyclic peptides — not small-molecule generation). The
+review explains the landscape, underlying mechanisms, and architectural
 differences for a curious reader, rather than ranking models or arguing a
 thesis.
 

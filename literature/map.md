@@ -2,19 +2,19 @@
 
 # Introduction
 
-- Binding a target protein is the basis for blocking, detecting, tagging, or
-  modulating biological activity. For protein targets, binders are typically
-  proteins or peptides (such as antibodies, nanobodies/VHHs, scFvs, minibinders,
-  and macrocyclic peptides), which represent a major class of therapeutics and
-  laboratory reagents.
-- Historically, finding a protein binder has relied on experimental search
-  rather than computational design: immunizing animals or screening libraries of
-  10¹² or more random sequences via phage or yeast display. These methods remain
+- Binding a target protein selectively is the basis for blocking, detecting,
+  tagging, or modulating biological activity. Antibodies, nanobodies (VHHs),
+  scFvs, minibinders, and macrocyclic peptides represent a major class of
+  therapeutics and laboratory reagents capable of engaging broad, flat protein
+  surfaces.
+- Historically, discovering such binders has relied on experimental search
+  rather than rational design: immunizing animals or screening libraries of 10¹²
+  or more random sequences via phage or yeast display. These methods remain
   standard, but they require wet-lab screening from the start, must be repeated
   per target, and return binders to whichever regions happen to be immunogenic
   or accessible rather than a user-specified site.
-- Computational binder generation aims to propose candidate sequences directly
-  for a chosen target protein and epitope.
+- Computational de novo binder design aims to propose candidate sequences
+  directly for a chosen target protein and epitope.
 - This shift became practical once protein structure prediction reached
   experimental accuracy. AlphaFold2 solved single-chain structure prediction at
   CASP14 [@alphafold2], and AlphaFold3 extended structure prediction to
@@ -35,13 +35,14 @@
   [NVIDIA](https://developer.nvidia.com/blog/high-throughput-structure-prediction-with-bionemo-inference-runtime/),
   [Anthropic](https://www.anthropic.com/research/claude-uplifts-biomolecular-modeling),
   [Anthropic kits](https://github.com/anthropics/uplifting-biomolecular-modeling).)
-- **Scope:** Given a target protein, generate a protein or peptide sequence
-  (antibody, nanobody, VHH, scFv, minibinder, or macrocyclic peptide) that binds
-  it. All of these modalities are modeled as chains drawn from the 20-letter
-  amino-acid alphabet evaluated by how they fold against the target.
-  Small-molecule binder generation is out of scope because small molecules are
-  variable-size chemical graphs constrained by valence rules, requiring
-  different model architectures and evaluation benchmarks.
+- **Scope:** De novo design of amino-acid-based binders (antibodies,
+  nanobodies/VHHs, scFvs, minibinders, and macrocyclic peptides) against a
+  target protein. All of these modalities are modeled as linear or cyclized
+  chains drawn from the 20-letter amino-acid alphabet and evaluated by how they
+  fold against the target. Small-molecule ligand generation is out of scope
+  because small molecules are variable-size chemical graphs constrained by
+  valence rules, requiring different model architectures and evaluation
+  benchmarks.
 - **Organization:** Background on co-folding architectures and how structure
   predictors are adapted for design; definitions of standard evaluation metrics;
   model families traced from structure predictors to design systems (AlphaFold,

@@ -5,9 +5,8 @@ Checked 2026-11-19 against PLOS Computational Biology public author guidelines.
 ## Journal fit and scope
 
 - Publishes computational approaches (including AI and machine learning) applied
-  to living systems at all scales; protein and peptide binder generation fits
-  directly within scope
-  (`journals.plos.org/ploscompbiol/s/journal-information`).
+  to living systems at all scales; de novo binder design fits directly within
+  scope (`journals.plos.org/ploscompbiol/s/journal-information`).
 - Open access, peer-reviewed, no length-based page charges.
 - Reviews are peer-reviewed front-section articles; confirm with the editorial
   office (`ploscompbiol@plos.org`) that an unsolicited Review on this topic is
