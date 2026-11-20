@@ -19,16 +19,10 @@ from datetime import date
 from pathlib import Path
 
 ENTRY_RE = re.compile(r"@(\w+)\{([^,]+),(.*?)\n\}\n", re.S)
-# map.md is one "# " heading per draft unit; the three benchmarking units
-# (primer, instruments, tables) share the label they had as Part IV.
-SECTION_RE = re.compile(
-    r"^# (?:§(\d)|(The metrics primer|The instruments|Tables A and B|Background))\b.*$",
-    re.M,
-)
-# entries defined inside the background unit rather than a numbered section
-SECTION_LABELS = {"Background": "BG"}
-# a map line that *defines* an entry, e.g. "* **Boltz-1** — `boltz1` · `10....`"
-DEFINITION_RE = re.compile(r"^\s*\*\s+\*\*.*?`([a-z0-9_]+)`", re.M)
+# map.md uses one "# " heading per top-level section (skipping the document title)
+SECTION_RE = re.compile(r"^# (?!Literature Map\b)(.+)$", re.M)
+# a map line that *defines* an entry, e.g. "- **Boltz-1** (`boltz1`..." or "- **Boltz-1** ([@boltz1]..."
+DEFINITION_RE = re.compile(r"^\s*[-*]\s+\*\*.*?(?:`([a-z0-9_]+)`|\[@([a-z0-9_]+)\])", re.M)
 
 
 def norm(text: str) -> str:
@@ -86,27 +80,24 @@ def load_catalog(repo_root: Path) -> dict[str, dict]:
 def load_sections(repo_root: Path, papers: dict[str, dict]) -> None:
     """Tag each paper with the map section(s) that define an entry for it."""
     text = (repo_root / "literature" / "map.md").read_text()
-    bounds = [
-        (m.start(), m.group(1) or SECTION_LABELS.get(m.group(2), "IV"))
-        for m in SECTION_RE.finditer(text)
-    ]
+    bounds = [(m.start(), m.group(1).strip()) for m in SECTION_RE.finditer(text)]
     for paper in papers.values():
         paper["sections"] = []
+
     def label_at(pos: int) -> str | None:
         return next((lab for start, lab in reversed(bounds) if start < pos), None)
 
     for match in DEFINITION_RE.finditer(text):
-        key = match.group(1)
+        key = match.group(1) or match.group(2)
         label = label_at(match.start())
         if key in papers and label and label not in papers[key]["sections"]:
             papers[key]["sections"].append(label)
 
-    # some entries share a bullet with a sibling and are named on a continuation
-    # line (LigandMPNN, Latent-X2, FLOWR); fall back to their first mention
+    # fallback to first mention for entries cited inline rather than at bullet start
     for key, paper in papers.items():
         if paper["sections"]:
             continue
-        first = re.search(r"`%s`" % re.escape(key), text)
+        first = re.search(r"(?:`%s`|@%s\b)" % (re.escape(key), re.escape(key)), text)
         label = label_at(first.start()) if first else None
         if label:
             paper["sections"].append(label)
@@ -188,13 +179,13 @@ def render(papers: dict[str, dict], edges: dict[str, dict[str, int]], missing: l
     add("that to be an artifact of publication date — worth a sentence in the draft that")
     add("covers them. Papers from this year are omitted: their zero carries no signal.")
     add("")
-    add("".join(f"- `{k}` (§{section_of(papers[k])}, {papers[k]['year']})\n" for k in older) or "- none\n")
+    add("".join(f"- `{k}` ({section_of(papers[k])}, {papers[k]['year']})\n" for k in older) or "- none\n")
 
     add("## Per publication")
     add("")
     for key in sorted(papers, key=lambda k: (section_of(papers[k]), k)):
         paper = papers[key]
-        add(f"### `{key}` — §{section_of(paper)}, {paper['year']}")
+        add(f"### `{key}` — {section_of(paper)}, {paper['year']}")
         add("")
         add(f"*{paper['title']}* · `{paper['doi']}`")
         add("")
