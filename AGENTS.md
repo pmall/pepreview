@@ -2,18 +2,36 @@
 
 ## Goal
 
-This repository supports a systematic, descriptive review of co-folding and
-generative methods for **de novo binder design** (antibodies, nanobodies, VHHs,
-scFvs, minibinders, macrocyclic peptides — not small-molecule generation). The
-review explains the landscape, underlying mechanisms, and architectural
-differences for a curious reader, rather than ranking models or arguing a
-thesis.
+This repository supports a descriptive scientific review of co-folding and
+generative methods for **de novo binder design** targeting protein–protein
+interactions. The primary focus is on designed peptides, macrocyclic peptides,
+and compact protein binders (minibinders) as candidate drug precursors; antibody
+and nanobody (VHH, scFv, mAb) systems are covered accurately where relevant as
+part of the field, rather than serving as the main lens. Small-molecule ligand
+generation is out of scope.
+
+The review is written from a drug-discovery and protein-engineering perspective
+for a curious scientific reader, emphasizing underlying mechanisms and
+architectural trade-offs rather than ranking models or arguing a thesis. Key
+topics include how replacing non-differentiable MSA lookups with a protein
+language model trunk (e.g., ESMC/ESMFold2) enables native single-sequence
+inference and end-to-end gradient backpropagation all the way back to the
+sequence, coordinate-generation strategies, design workflows, and the gap
+between in vitro binding hits and drug leads. Prose should read smoothly and
+draw selectively on illustrative examples from `literature/map.md` instead of
+enumerating every paper in the catalog. Never use em-dashes (`—`) in manuscript
+prose: reaching for an em-dash signals a poorly structured sentence that should
+be structured cleanly from the start. Never compress prose afterward to reduce
+word count: manuscripts are drafts, and if a draft or abstract is too long or
+dense, that is an outline and scope problem to solve by removing content rather
+than squeezing the text.
 
 Three core artifacts stay in sync:
 
-- `literature/map.md` — a neutral, standalone, fact-only skeleton of the review
-  (structure, concepts, model mechanisms, verified numbers, caveats, and
-  `[@bibkey]` citations).
+- `literature/map.md` — a neutral, verified reference knowledge base distilled
+  from the examined literature (concepts, model mechanisms, verified numbers,
+  caveats, and `[@bibkey]` citations). Drafts draw selectively from it to
+  illustrate ideas rather than exhaustively covering every entry.
 - `literature/refs.bib` — the verified BibTeX catalog (every entry carries a
   resolvable DOI and `keywords` tags).
 - `literature/corpus/` — primary publications stored by DOI (`/` replaced by
@@ -42,7 +60,8 @@ Target venue guidelines live in `VENUE.md` (PLOS Computational Biology Review).
 1. **Refresh cross-references:** Run `uv run scripts/build_xrefs.py` after
    updating the corpus or `literature/map.md`.
 1. **Draft:** Write prose drafts into `literature/drafts/` when requested,
-   following `VENUE.md` constraints.
+   following `VENUE.md` constraints and drawing selectively from
+   `literature/map.md` as a reference knowledge base.
 
 ## Invariants
 
@@ -57,7 +76,8 @@ Target venue guidelines live in `VENUE.md` (PLOS Computational Biology Review).
 
 ## Files
 
-- `literature/map.md` — neutral, fact-only review skeleton in section order.
+- `literature/map.md` — neutral, verified literature knowledge base and fact
+  reference.
 - `literature/refs.bib` — verified BibTeX catalog.
 - `literature/corpus/` — PDFs and parsed Markdown files named by DOI.
 - `literature/candidates.md` — decision log for undecided and excluded works.

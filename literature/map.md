@@ -20,11 +20,14 @@
   CASP14 [@alphafold2], and AlphaFold3 extended structure prediction to
   complexes involving proteins, nucleic acids, small-molecule ligands, and ions
   [@alphafold3].
-- Designing a binder differs fundamentally from predicting a structure. A
-  structure predictor maps a known sequence to its 3D fold and can be checked
-  directly against an experimental structure. A binder generator proposes a new
-  sequence intended to fold and bind a target, which can only be confirmed
-  experimentally in a wet lab.
+- Architecturally, binder generation is closely related to co-folding: supplying
+  all chain sequences predicts the complex structure, whereas leaving the binder
+  chain masked or noised lets the same network generate a complementary binder.
+  What differs in practice is search and validation: a structure predictor
+  evaluates a known sequence that can be checked directly against an
+  experimental structure, whereas binder design searches a vast sequence space
+  (20^*L* sequences for length *L*) without natural alignments for the designed
+  chain and can only confirm functional binding experimentally in a wet lab.
 - Between 2024 and 2026, the field expanded rapidly across multiple predictor
   families, open-source reproductions, and design pipelines. Industry investment
   in inference speed reflects active deployment: in September 2026, NVIDIA,
@@ -35,14 +38,13 @@
   [NVIDIA](https://developer.nvidia.com/blog/high-throughput-structure-prediction-with-bionemo-inference-runtime/),
   [Anthropic](https://www.anthropic.com/research/claude-uplifts-biomolecular-modeling),
   [Anthropic kits](https://github.com/anthropics/uplifting-biomolecular-modeling).)
-- **Scope:** De novo design of amino-acid-based binders (antibodies,
-  nanobodies/VHHs, scFvs, minibinders, and macrocyclic peptides) against a
-  target protein. All of these modalities are modeled as linear or cyclized
-  chains drawn from the 20-letter amino-acid alphabet and evaluated by how they
-  fold against the target. Small-molecule ligand generation is out of scope
-  because small molecules are variable-size chemical graphs constrained by
-  valence rules, requiring different model architectures and evaluation
-  benchmarks.
+- **Scope:** De novo design of peptides, macrocyclic peptides, minibinders, and
+  antibody formats (nanobodies/VHHs, scFvs, and full antibodies) targeting
+  protein–protein interactions. All of these modalities are modeled as linear or
+  cyclized amino-acid chains evaluated by how they fold against the target.
+  Small-molecule ligand generation is out of scope because small molecules are
+  variable-size chemical graphs constrained by valence rules, requiring
+  different model architectures and evaluation benchmarks.
 - **Organization:** Background on co-folding architectures and how structure
   predictors are adapted for design; definitions of standard evaluation metrics;
   model families traced from structure predictors to design systems (AlphaFold,
