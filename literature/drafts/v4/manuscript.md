@@ -6,33 +6,29 @@ submission.*
 
 ## Abstract
 
-Engaging broad, flat protein–protein interfaces with designed peptides,
-macrocyclic peptides, and compact protein minibinders, alongside established
-nanobody and antibody formats, is moving from random library screening toward
-epitope-directed computational design. This shift has been enabled by
-biomolecular co-folding networks, in which generating a complementary binder
-chain is architecturally closely related to predicting the three-dimensional
-structure of a multi-chain complex. This review examines how foundational
-choices inside co-folding architectures, notably how evolutionary information
-enters the network through multiple sequence alignments versus protein language
-models and how atomic coordinates are generated, shape practical binder-design
-workflows. Drawing selectively on illustrative systems across backbone
-generation, unified all-atom diffusion, and gradient-based sequence
-optimization, we trace the mechanistic trade-offs governing differentiability,
-chemical generality, and sequence realism. Finally, we discuss how to interpret
-computational confidence filters and wet-lab hit rates critically across
-heterogeneous experimental campaigns, and why a substantial translational gap
-still separates in vitro binding hits from developable, functional drug leads.
+Advances in protein structure prediction and biomolecular co-folding have
+enabled computational de novo binder design against specific protein targets. A
+growing range of generative models now proposes candidate sequences directly for
+a chosen binding site, narrowing experimental testing to tens of candidates per
+target across peptides, engineered scaffolds, and antibody formats. This review
+explains how co-folding architectures are adapted into binder-design workflows,
+focusing on the mechanistic trade-offs of how evolutionary information enters
+the network and how atomic coordinates are generated. We also examine why
+structural confidence filters remain an imperfect guide to candidate selection
+and how assay differences complicate comparing wet-lab hit rates across
+published campaigns. Finally, we outline the main technical and translational
+bottlenecks that still separate in vitro binding hits from developable drug
+leads.
 
 ## Introduction
 
 Binding a target protein selectively underlies biological detection, pathway
-modulation, and targeted therapy. Peptides, head-to-tail macrocyclic peptides,
-and compact de novo protein minibinders offer attractive drug precursors because
-they can engage broad, flat protein–protein interfaces that rarely accommodate
-small molecules, complementing clinically established antibody formats such as
-single-domain nanobodies (VHHs), single-chain variable fragments (scFvs), and
-full monoclonal antibodies (mAbs). Historically, discovering protein and peptide
+modulation, and targeted therapy. Peptides and compact de novo scaffolds (often
+termed minibinders) offer attractive drug precursors because they can engage
+broad, flat protein–protein interfaces that rarely accommodate small molecules.
+They complement clinically established antibody formats, including single-domain
+nanobodies (VHHs), single-chain variable fragments (scFvs), and full monoclonal
+antibodies (mAbs). Historically, discovering protein and peptide
 binders has depended on empirical search rather than rational construction,
 relying on animal immunization or phage and yeast display screens across
 libraries of $10^{12}$ or more random variants. Although experimental display
@@ -70,10 +66,10 @@ millions of variants in display libraries and early computational campaigns
 studies [@chai2; @rfpeptides; @boltzgen; @protenix_v2].
 
 This review focuses on co-folding and generative methods for the de novo design
-of linear peptides, macrocyclic peptides, compact minibinders, and antibody
-formats targeting protein–protein interactions. All of these modalities are
-modeled as linear or cyclized amino-acid chains folded against a protein
-surface; small-molecule ligand generation is excluded because variable-size
+of peptides, compact minibinders, and antibody formats targeting protein–protein
+interactions. All of these modalities are modeled as linear or, in specialized
+cases, cyclized amino-acid chains folded against a protein surface;
+small-molecule ligand generation is excluded because variable-size
 chemical graphs constrained by valence rules require distinct representations
 and evaluation benchmarks. Written from a drug-discovery and protein-engineering
 perspective, the review emphasizes underlying mechanisms and architectural
@@ -123,14 +119,14 @@ such as Chai-1. The trunk outputs single and pair representations along with a
 differentiable distogram head, feeding either a single-pass differentiable
 regression module (Invariant Point Attention) or an iterative all-atom diffusion
 or few-step flow/ODE coordinate generator. (B) These architectural choices map
-onto three practical binder-design workflows: decoupled generate-and-filter
-pipelines pairing backbone or all-atom generators with inverse folding and
-post-hoc refolding filters or binding classifiers; unified all-atom diffusion
-models trained jointly for structure prediction and design; and gradient-based
-sequence optimization using full-network backpropagation through regression
-modules, distogram or confidence-head gradients that bypass diffusion, or
-differentiable few-step ODE decoders, optionally regularized by language-model
-sequence priors or discrete mutation proposals.
+onto three practical binder-design workflows. Generate-and-filter pipelines
+decouple backbone or all-atom generation from inverse folding and post-hoc
+refolding filters or binding classifiers. Unified all-atom diffusion models
+train a single network jointly for structure prediction and design.
+Gradient-based sequence optimization backpropagates through regression modules,
+trunk distogram or confidence heads that bypass diffusion, or few-step ODE
+decoders, optionally regularized by language-model priors or discrete mutation
+proposals.
 
 ### Evolutionary inputs: multiple sequence alignments versus protein language models
 
@@ -250,9 +246,9 @@ methodological openness vary across the field.
 | System                                                                             | Input trunk                                                 | Coordinate formalism                                    | Design workflow                                                                                            | Modalities                                                           | Openness                                    |
 | ---------------------------------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------- |
 | RFdiffusion + ProteinMPNN [@rfdiffusion; @proteinmpnn]                             | MSA (RoseTTAFold fine-tuned)                                | SE(3) frame diffusion                                   | Generate-and-filter (backbone diffusion, inverse folding, AF2 filter)                                      | Minibinders, protein scaffolds                                       | Open code and weights                       |
-| RFpeptides [@rfpeptides]                                                           | MSA (RF2 with cyclic positional offset)                     | SE(3) frame diffusion                                   | Generate-and-filter (cyclic diffusion, ProteinMPNN, AfCycDesign filter)                                    | Macrocyclic peptides                                                 | Published architecture                      |
-| RFantibody [@rfantibody]                                                           | MSA (RoseTTAFold fine-tuned)                                | SE(3) frame diffusion                                   | Generate-and-filter (epitope-conditioned CDR diffusion, ProteinMPNN)                                       | VHHs, scFvs, mAbs                                                    | Published architecture                      |
 | RFdiffusion3 + LigandMPNN [@rfdiffusion3; @ligandmpnn]                             | Pre-trained 2-layer Pairformer (no RF predictor init)       | All-atom U-Net diffusion (100 steps)                    | Generate-and-filter (all-atom diffusion, inverse folding; AlphaDesign [@alphadesign] alternative)          | Minibinders, peptides, enzymes, ligand binders                       | Published architecture                      |
+| RFantibody [@rfantibody]                                                           | MSA (RoseTTAFold fine-tuned)                                | SE(3) frame diffusion                                   | Generate-and-filter (epitope-conditioned CDR diffusion, ProteinMPNN)                                       | VHHs, scFvs, mAbs                                                    | Published architecture                      |
+| RFpeptides [@rfpeptides]                                                           | MSA (RF2 with cyclic positional offset)                     | SE(3) frame diffusion                                   | Generate-and-filter (cyclic diffusion, ProteinMPNN, AfCycDesign filter)                                    | Macrocyclic peptides                                                 | Published architecture                      |
 | PPIFlow / AtomFlow [@ppiflow; @atomflow]                                           | Structure-conditioned flow networks                         | ODE flow matching                                       | Generate-and-filter (few-step flow generation, inverse folding)                                            | Protein–protein binders, all-atom complexes                          | Published architecture                      |
 | PXDesign-d / PXDesign-h [@pxdesign]                                                | MSA (Protenix Pairformer)                                   | DiT Cartesian diffusion (d) / 2-step ODE (h)            | Generate-and-filter (d) or end-to-end backpropagation (h)                                                  | Minibinders                                                          | Open Protenix platform                      |
 | Protenix-v2 [@protenix_v2]                                                         | MSA (Pairformer)                                            | All-atom diffusion                                      | Generate-and-filter (diffusion generation, confidence ranking)                                             | Minibinders, VHHs, Fv, mAbs                                          | Open Protenix platform                      |
@@ -287,26 +283,24 @@ self-consistency with a refolding predictor rather than experimental target
 engagement [@rfdiffusion].
 
 Targeted architectural modifications extend this decoupled paradigm across
-modalities and scales. RFpeptides adapts RFdiffusion and RoseTTAFold2 with a
-cyclic relative positional encoding so the diffusion network treats a peptide
-chain as closed head-to-tail [@rfpeptides]. After sequence assignment with
-ProteinMPNN and filtering through cyclic AlphaFold2 refolding (AfCycDesign)
-alongside Rosetta interface metrics, RFpeptides produced experimentally
-confirmed macrocyclic binders against all four tested targets from fewer than 20
-synthesized peptides each, backed by experimental crystal structures
-[@rfpeptides; @afcycdesign]. More recently, RFdiffusion3 moved away from
-fine-tuning a RoseTTAFold predictor altogether, instead pre-training a compact
-168-million-parameter all-atom transformer U-Net modeled on AlphaFold3's
-diffusion module directly on PDB and AlphaFold2 distillation structures
-[@rfdiffusion3]. By trimming its Pairformer trunk from 48 to 2 layers and
-sampling in 100 steps, RFdiffusion3 achieves all-atom design roughly an order of
-magnitude faster than earlier RFdiffusion releases [@rfdiffusion3]. Related
-variants in Table 1 extend inverse folding to non-protein contexts via
-LigandMPNN [@ligandmpnn] or autoregressive diffusion via AlphaDesign
-[@alphadesign], fine-tune diffusion for antibody loops in RFantibody
-[@rfantibody], replace frame representations with Cartesian diffusion
-transformers in PXDesign-d [@pxdesign], or accelerate sampling through ODE flow
-matching in PPIFlow and AtomFlow [@ppiflow; @atomflow].
+modalities and scales. RFdiffusion3 moved away from fine-tuning a RoseTTAFold
+predictor altogether, instead pre-training a compact 168-million-parameter
+all-atom transformer U-Net modeled on AlphaFold3's diffusion module directly on
+PDB and AlphaFold2 distillation structures [@rfdiffusion3]. By trimming its
+Pairformer trunk from 48 to 2 layers and sampling in 100 steps, RFdiffusion3
+achieves all-atom design roughly an order of magnitude faster than earlier
+RFdiffusion releases [@rfdiffusion3]. For specialized topologies such as
+head-to-tail macrocycles, RFpeptides adds a cyclic relative positional encoding
+to RFdiffusion and RoseTTAFold2 [@rfpeptides]. Paired with ProteinMPNN and
+cyclic AlphaFold2 (AfCycDesign) filtering, it produced
+crystal-structure-verified binders across four targets from fewer than 20
+synthesized peptides each [@rfpeptides; @afcycdesign]. Related variants in Table
+1 extend inverse folding to non-protein contexts via LigandMPNN [@ligandmpnn] or
+autoregressive diffusion via AlphaDesign [@alphadesign], fine-tune diffusion for
+antibody loops in RFantibody [@rfantibody], replace frame representations with
+Cartesian diffusion transformers in PXDesign-d [@pxdesign], or accelerate
+sampling through ODE flow matching in PPIFlow and AtomFlow [@ppiflow;
+@atomflow].
 
 ### Unified prediction-and-design all-atom models
 
@@ -347,21 +341,21 @@ implemented through ColabDesign [@colabdesign].
 When the predictor uses a single-pass IPA regression module, gradients propagate
 cleanly from predicted three-dimensional coordinates and confidence heads back
 to the input sequence [@alphafold2]. BindCraft leverages this full-network
-differentiability across AlphaFold-Multimer, randomly cycling among all five
-trained parameter sets between iterations to curb overfitting, annealing through
-continuous logits, softmax probabilities, straight-through estimation, and
-discrete mutation refinement, and finally applying soluble ProteinMPNN to
-redesign non-interface surface residues [@bindcraft]. A notable mechanistic
+differentiability across AlphaFold-Multimer, cycling randomly among all five
+trained parameter sets between iterations to curb overfitting [@bindcraft].
+Optimization anneals sequentially from continuous logits through softmax
+probabilities and straight-through estimation to discrete mutation refinement,
+after which soluble ProteinMPNN redesigns non-interface surface residues
+[@bindcraft]. A notable mechanistic
 feature of BindCraft is that it repredicts the target structure at every
 optimization step, permitting induced-fit target rearrangements ranging from 0.5
-to 5.5 Å Cα RMSD across designs [@bindcraft]. For macrocycles, AfCycDesign
+to 5.5 Å Cα RMSD across designs [@bindcraft]. For cyclic peptides, AfCycDesign
 applies a cyclic relative positional offset to AlphaFold2's peptide chain while
-keeping the target linear; eight experimental crystal structures of hallucinated
-monomers matched their design models within 1.0 Å, although its reported MDM2
-and Keap1 binders relied on grafting known binding motifs onto hallucinated
-scaffolds rather than direct de novo binder hallucination [@afcycdesign]. Both
-BindCraft and AfCycDesign inherit the single-sequence mismatch of MSA-trained
-networks, optimizing an invented chain in AlphaFold2's weakest operating regime
+keeping the target linear, yielding eight monomer crystal structures within
+1.0 Å of design, though its MDM2 and Keap1 binders relied on motif grafting
+rather than direct de novo hallucination [@afcycdesign]. Both BindCraft and
+AfCycDesign inherit the single-sequence mismatch of MSA-trained networks,
+optimizing an invented chain in AlphaFold2's weakest operating regime
 [@alphafold2; @bindcraft].
 
 Adapting gradient optimization to diffusion-based co-folders requires
@@ -463,8 +457,8 @@ independently of the underlying generative architecture.
 
 ### Reading wet-lab campaigns critically
 
-Over the past three years, experimental campaigns across macrocyclic peptides,
-compact minibinders, nanobodies, and antibodies have demonstrated that
+Over the past three years, experimental campaigns across compact minibinders,
+nanobodies, antibodies, and cyclic peptides have demonstrated that
 computational de novo design can routinely recover nanomolar and occasionally
 picomolar binders from modest synthesis budgets. Table 2 compiles representative
 campaigns grouped by modality alongside their target scope, testing budgets,
@@ -477,9 +471,6 @@ head-to-head rankings.
 
 | System                                                     | Target scope and selection                                                            | Designs tested per target                          | Assay and hit criterion                                                                                                                                | Key caveats                                                                                                               |
 | ---------------------------------------------------------- | ------------------------------------------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| **Macrocyclic peptides**                                   |                                                                                       |                                                    |                                                                                                                                                        |                                                                                                                           |
-| RFpeptides [@rfpeptides]                                   | 4 author-selected targets                                                             | 6–14 tested (of 11–27 selected)                    | SPR single-cycle kinetics at 100 µM (no numeric cutoff); 2–4 hits/target, best 6 nM (GABARAP), crystal structures                                      | Synthesis attrition (14/27 MCL-1, 11/26 RbtA tested); single assay format                                                 |
-| Latent-X1 / Latent-X2 (macrocycles) [@latentx1; @latentx2] | 3 RFpeptides-matched targets (X1); 2 targets (X2)                                     | 11–17 of 30 submitted (X1); 10/target (X2)         | SPR measurable signal (X1: 91–100%, best 5.35 µM); BLI > 0.1 nm and kinetics (X2: 9/10 PHD2, 8/10 K-Ras G12D, best 1.54 nM)                            | Undisclosed architecture; synthesis attrition in X1; single assay format                                                  |
 | **Minibinders**                                            |                                                                                       |                                                    |                                                                                                                                                        |                                                                                                                           |
 | RFdiffusion [@rfdiffusion]                                 | 5 author-selected targets                                                             | 95/target (475 pooled)                             | Single-point BLI at 10 µM ≥ 50% positive control; 19% pooled, best 28 nM (influenza HA)                                                                | Single assay; AlphaProteo yeast-display re-test recovered lower rates at 10–20× lower target concentration [@alphaproteo] |
 | AlphaProteo [@alphaproteo]                                 | 8 author-selected targets                                                             | 54–172/target                                      | Yeast-display flow cytometry > 0.2 (1.3 for IL-17A); 9–88% on 7 targets, 0/54 TNFα, best 82 pM (IL-7Rα)                                                | Undisclosed generative architecture; single display format for hit calls                                                  |
@@ -492,6 +483,9 @@ head-to-head rankings.
 | Chai-2 [@chai2]                                            | 52 novel targets (scFv/VHH); 5 targets (minibinders)                                  | ≤ 20/target/format (Ab); 20–25 (minibinders)       | BLI > 0.1 nm and > 300% background; 16% combined Ab (26/52 targets), 68% minibinders (best 18.3 pM)                                                    | Undisclosed generative architecture; avidity flagged on EFNA5 scFv and 4/10 minibinder affinities                         |
 | Protenix-v2 [@protenix_v2]                                 | Novelty-filtered soluble panel + 4 GPCRs                                              | 16–30/target (GPCRs); figure-only (soluble)        | BLI > background + 0.05 nm; binders on all soluble targets (2–48%), GPCR VHH-Fc 16–88%, mAb 0–50%                                                      | Manually chosen in-stock targets and epitopes; bivalent VHH-Fc avidity (including 112 pM GPRC5D)                          |
 | Germinal / mBER [@germinal; @mber]                         | 4 VHH + 2 scFv targets (Germinal); 145 of 436 targets, random hotspots (mBER)         | 43–101 ordered (Germinal); 1,153,241 pooled (mBER) | Germinal: split-luciferase + BLI (or SPR + BLI for Fab, best 170 nM VHH); mBER: phage enrichment (median ~0.4%, up to 38% ipTM-filtered)               | Germinal VHH rates use BLI sub-denominators; mBER reports phage enrichment without affinity quantification                |
+| **Macrocyclic peptides**                                   |                                                                                       |                                                    |                                                                                                                                                        |                                                                                                                           |
+| RFpeptides [@rfpeptides]                                   | 4 author-selected targets                                                             | 6–14 tested (of 11–27 selected)                    | SPR single-cycle kinetics at 100 µM (no numeric cutoff); 2–4 hits/target, best 6 nM (GABARAP), crystal structures                                      | Synthesis attrition (14/27 MCL-1, 11/26 RbtA tested); single assay format                                                 |
+| Latent-X1 / Latent-X2 (macrocycles) [@latentx1; @latentx2] | 3 RFpeptides-matched targets (X1); 2 targets (X2)                                     | 11–17 of 30 submitted (X1); 10/target (X2)         | SPR measurable signal (X1: 91–100%, best 5.35 µM); BLI > 0.1 nm and kinetics (X2: 9/10 PHD2, 8/10 K-Ras G12D, best 1.54 nM)                            | Undisclosed architecture; synthesis attrition in X1; single assay format                                                  |
 
 Three experimental factors explain much of the apparent spread in published hit
 rates and affinities. First, hit definitions and assay rigor differ markedly.
@@ -529,20 +523,21 @@ mBER's median per-design hit rate was roughly 0.4%, two orders of magnitude
 below curated small-panel headlines, whereas its best individual hotspots
 reached 7.5% overall and 38% (8/21) within an ipTM-filtered bin [@mber]. Even
 when identical molecules are re-tested across laboratories, assay conditions
-shift results: AlphaProteo's yeast-display resynthesis of RFdiffusion's full
-published panels (including nonbinders) recovered 16% versus 33% on IL-7Rα and
-0% versus 6% on TrkA at 10- to 20-fold lower target concentrations
-[@alphaproteo; @rfdiffusion], while Latent-X1 measured RFpeptides' two winning
-macrocycles at 4.4-fold and 5-fold weaker affinities than originally reported,
-outperforming on MDM2 (5.35 versus 8.38 µM) and trailing on MCL-1 (18.4 versus
-10.0 µM) without replicating the full campaign [@latentx1; @rfpeptides]. Because
-assay choices, target curation, and post-hoc filtering affect yields so
-strongly, wet-lab claims from closed or undisclosed commercial systems,
-including AlphaProteo [@alphaproteo], Chai-2 [@chai2], Latent-X1 and Latent-X2
-[@latentx1; @latentx2], API-only BoltzProt-1 [@boltzprot1], and unpublished
-models such as IsoDDE known publicly only from third-party scaling plots
-[@opendde], cannot be independently audited or reproduced from the literature
-alone [@bender_perspective].
+shift measured performance. When AlphaProteo resynthesized RFdiffusion's full
+published panels (including nonbinders) for yeast display at 10- to 20-fold
+lower target concentrations, hit rates fell from 33% to 16% on IL-7Rα and from
+6% to 0% on TrkA [@alphaproteo; @rfdiffusion]. Similarly, Latent-X1 measured
+RFpeptides' two winning macrocycles at 4.4-fold and 5-fold weaker affinities
+than originally reported, outperforming on MDM2 (5.35 versus 8.38 µM) and
+trailing on MCL-1 (18.4 versus 10.0 µM) without replicating the full campaign
+[@latentx1; @rfpeptides]. Because assay choices, target curation, and post-hoc
+filtering affect yields so strongly, wet-lab claims from closed or undisclosed
+commercial systems cannot be independently audited or reproduced from the
+literature alone [@bender_perspective]. This limitation applies to AlphaProteo
+[@alphaproteo], Chai-2 [@chai2], Latent-X1 and Latent-X2 [@latentx1;
+@latentx2], API-only BoltzProt-1 [@boltzprot1], and unpublished models such as
+IsoDDE, which is known publicly only from third-party scaling plots
+[@opendde].
 
 ## 4. From In Vitro Binding Hits to Drug Leads
 
@@ -636,28 +631,28 @@ antibody (113 pM), while a non-machine-learning consensus of selection data
 ranked third [@aintibody]. Yet AIntibody evaluated library-conditioned antibody
 engineering against a single well-characterized antigen (SARS-CoV-2 RBD) rather
 than target-conditioned de novo design across diverse epitopes and modalities
-[@aintibody]. Extending blinded, multi-group prospective testing to peptides,
-macrocycles, minibinders, and antibodies with orthogonal binding confirmation
+[@aintibody]. Extending blinded, multi-group prospective testing across
+peptides, minibinders, and antibody formats with orthogonal binding confirmation
 and developability profiling will be necessary to measure genuine progress
 cleanly.
 
 ## Conclusions
 
 Within a few years, biomolecular co-folding networks have reshaped de novo
-binder design against protein–protein interfaces. Pairing native single-sequence
-protein language-model trunks with all-atom diffusion and few-step flow or ODE
-modules, and augmenting structural confidence filters with classifiers trained
-directly on experimental binding outcomes, has made epitope-directed design of
-peptides, macrocycles, minibinders, and antibodies practical within experimental
-budgets of tens of candidates per target. Yet architectural advances have also
-sharpened where the real constraints lie. Structure-prediction confidence heads
-still miss accurate poses and vary unpredictably across targets, quantitative
-protein–protein affinity prediction remains unsolved, and uncharacterized or
-dynamic targets challenge static PDB-trained models. Bridging the remaining gap
-between in vitro binding hits and developable, low-immunogenicity, functionally
-active drug precursors, and verifying that progress through shared, blinded
-prospective benchmarks, defines the central agenda for the next stage of
-computational binder design.
+binder design against protein–protein interfaces. Native single-sequence
+language-model trunks, all-atom diffusion and flow modules, and classifiers
+trained directly on experimental binding data have steadily expanded what
+computational pipelines can generate and select. As a result, epitope-directed
+design across peptides, minibinders, and antibody formats is now practical
+within budgets of tens of tested candidates per target. Yet architectural
+advances have also sharpened where the real constraints lie.
+Structure-prediction confidence heads still miss accurate poses and vary
+unpredictably across targets, quantitative protein–protein affinity prediction
+remains unsolved, and uncharacterized or dynamic targets challenge static
+PDB-trained models. Bridging the remaining gap between in vitro binding hits and
+developable, low-immunogenicity, functionally active drug precursors, and
+verifying that progress through shared, blinded prospective benchmarks, defines
+the central agenda for the next stage of computational binder design.
 
 ## Acknowledgments
 
