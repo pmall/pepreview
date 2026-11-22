@@ -46,10 +46,10 @@ chemical graphs governed by valence rules require separate generative
 architectures and benchmarks.
 
 Discovering peptide and protein binders has long relied on empirical search
-rather than rational design. Standard campaigns screen display libraries
-exceeding $10^{12}$ random variants or immunize animals for antibodies, a process
-that must be repeated for each new target and offers limited control over the
-binding site [@rfpeptides; @bindcraft]. Computational de novo binder design
+rather than rational design. Standard campaigns screen display libraries of up
+to $10^{12}$ random variants or immunize animals for antibodies, a process that
+must be repeated for each new target and offers limited control over the binding
+site [@rfpeptides; @bindcraft]. Computational de novo binder design
 seeks to move beyond blind search by proposing candidate sequences for a chosen
 target protein and binding site.
 
