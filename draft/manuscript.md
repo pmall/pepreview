@@ -37,19 +37,22 @@ prediction in hand, the field has moved quickly to the inverse challenge:
 repurposing these neural architectures not merely to fold known proteins, but to
 generate de novo binders against specific protein targets.
 
-Compared with small-molecule drugs, peptides, small de novo proteins
-(minibinders), and antibodies are uniquely suited to this generative shift.
-Biologically, they can engage broad, flat protein surfaces that lack deep
-binding pockets, opening difficult targets for diagnostics, pathway modulation,
-and therapy. Computationally, because they are polypeptide chains rather than
-arbitrary chemical graphs, they inherit structure predictors and language models
-trained on the Protein Data Bank (PDB) and billions of natural sequences. Until
-recently, discovering such binders depended on empirical search, screening
-display libraries of $10^{12}$ or more random variants or immunizing animals for
-antibodies, a process that must be repeated for each target and offers limited
-control over the binding site [@rfpeptides; @bindcraft]. Computational de novo
-binder design seeks to move beyond blind search by proposing candidate sequences
-for a chosen target protein and binding site.
+Peptides, small de novo proteins (minibinders), and antibodies are especially
+well suited to this generative shift. As amino-acid chains, they share the same
+molecular representation as the natural proteins in the Protein Data Bank (PDB)
+and evolutionary sequence databases, allowing them to draw directly on modern
+structure predictors and protein language models. By contrast, small-molecule
+drug design occupies a different modeling world altogether, where variable
+chemical graphs governed by valence rules require separate generative
+architectures and benchmarks.
+
+Discovering peptide and protein binders has long relied on empirical search
+rather than rational design. Standard campaigns screen display libraries of
+$10^{12}$ or more random variants or immunize animals for antibodies, a process
+that must be repeated for each new target and offers limited control over the
+binding site [@rfpeptides; @bindcraft]. Computational de novo binder design
+seeks to move beyond blind search by proposing candidate sequences for a chosen
+target protein and binding site.
 
 Architecturally, binder generation is closely related to multi-chain structure
 prediction. Supplying the sequences of all interacting chains asks the network
