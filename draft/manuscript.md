@@ -25,65 +25,56 @@ leads.
 ## Introduction
 
 Artificial intelligence transformed structural biology by bringing protein
-structure prediction to near-experimental accuracy. AlphaFold2 demonstrated that
-coevolutionary signals in multiple sequence alignments (MSAs) can recover
-single-chain folds to a median backbone accuracy of 0.96 Å r.m.s.d.95 at CASP14,
-compared with 2.8 Å for the next best method [@alphafold2]. AlphaFold3
-subsequently generalized this framework to complexes containing proteins,
-nucleic acids, small-molecule ligands, and ions, establishing biomolecular
-co-folding as a general modeling paradigm [@alphafold3]. With accurate complex
-prediction in hand, the field has moved quickly to the inverse challenge:
-repurposing these neural architectures not merely to fold known proteins, but to
-generate de novo binders against specific protein targets.
+structure prediction to near-experimental accuracy. AlphaFold2 marked this
+turning point in the CASP14 assessment, showing that coevolutionary signals in
+multiple sequence alignments (MSAs) can recover single-chain folds to a median
+backbone accuracy of 0.96 Å r.m.s.d.95, compared with 2.8 Å for the next best
+method [@alphafold2]. AlphaFold3 subsequently generalized this framework to
+complexes containing proteins, nucleic acids, small-molecule ligands, and ions,
+establishing biomolecular co-folding as a general modeling paradigm
+[@alphafold3]. With accurate complex prediction in hand, the field has moved
+quickly to the inverse challenge: repurposing these neural architectures not
+merely to fold known proteins, but to generate de novo binders against specific
+protein targets.
 
-Peptides, small de novo proteins (minibinders), and antibodies are especially
-well suited to this generative shift. As amino-acid chains, they share the same
-molecular representation as the natural proteins in the Protein Data Bank (PDB)
-and evolutionary sequence databases, allowing them to draw directly on modern
-structure predictors and protein language models. By contrast, small-molecule
-drug design occupies a different modeling world altogether, where variable
-chemical graphs governed by valence rules require separate generative
-architectures and benchmarks.
-
-Discovering peptide and protein binders has long relied on empirical search
-rather than rational design. Standard campaigns screen display libraries of up
-to $10^{12}$ random variants or immunize animals for antibodies, a process that
-must be repeated for each new target and offers limited control over the binding
-site [@rfpeptides; @bindcraft]. Computational de novo binder design
-seeks to move beyond blind search by proposing candidate sequences for a chosen
-target protein and binding site.
-
-Architecturally, binder generation is closely related to multi-chain structure
-prediction. Supplying the sequences of all interacting chains asks the network
+Moving from complex prediction to binder generation draws on the same core
+architecture. Supplying the sequences of all interacting chains asks the network
 to predict the three-dimensional complex, whereas leaving the binder chain
-masked or initialized as noise asks the same underlying architecture to generate
-a complementary partner [@rfdiffusion; @boltzgen]. What differs sharply in
-practice is search and validation. During training and benchmarking, a structure
-predictor evaluates a fixed natural sequence whose predicted geometry can be
-scored directly against a held-out crystal or cryo-electron microscopy structure
-in the PDB. By contrast, de novo design must search a
-combinatorial space of $20^L$ sequences for a chain of length *L*, lacks natural
-evolutionary alignments for the invented binder, and has no pre-existing
-structural reference, so binding can only be confirmed by synthesizing and
-assaying candidates in a wet laboratory. Even with these challenges, the
-practical progress of generative and filtering pipelines is visible in
-experimental synthesis budgets, which have fallen from thousands or millions of
-variants in display libraries and early computational campaigns [@chai2;
-@rfantibody] down to tens of tested designs per target in recent studies
-[@chai2; @rfpeptides; @boltzgen; @protenix_v2].
+masked or initialized as noise asks the same model to generate a complementary
+partner [@rfdiffusion; @boltzgen]. What differs sharply in practice is search
+and validation. During training and benchmarking, a structure predictor
+evaluates a fixed natural sequence whose predicted geometry can be scored
+directly against a held-out crystal or cryo-electron microscopy structure in the
+Protein Data Bank (PDB). By contrast, de novo design must search a combinatorial
+space of $20^L$ sequences for a chain of length *L*, lacks natural evolutionary
+alignments for the invented binder, and has no pre-existing structural
+reference, so binding can only be confirmed by synthesizing and assaying
+candidates in a wet laboratory.
 
-This review focuses on generative methods for the de novo design of peptides,
-minibinders, and antibody formats against protein targets. All of these
-modalities are modeled as linear or, in specialized cases, cyclized amino-acid
-chains folded against a protein surface, leaving small-molecule ligand
-generation outside our scope. Written from a drug-discovery and
-protein-engineering perspective, the review emphasizes underlying mechanisms and
-architectural trade-offs rather than ranking models. We first examine how
-structure-prediction trunks and coordinate-generation modules operate, then
-trace how those components give rise to distinct binder-design workflows,
-evaluate computational filtering limits alongside wet-lab campaign evidence, and
-conclude with the translational and technical bottlenecks separating in vitro
-binding hits from viable drug leads.
+Many therapeutically relevant protein targets present broad, flat surfaces that
+lack the deep pockets required by small-molecule drugs. Engaging these surfaces
+calls for peptides, compact de novo proteins (minibinders), or antibody formats
+such as nanobodies (VHHs), single-chain variable fragments (scFvs), and
+monoclonal antibodies (mAbs). Conventional discovery obtains such binders by
+screening vast random display libraries or immunizing animals, a process that
+must be repeated for each new target and offers limited control over the binding
+site. Generative and filtering pipelines instead propose candidate sequences
+directly against a chosen target structure, narrowing experimental synthesis
+budgets from thousands or millions of variants in display libraries and early
+computational campaigns [@chai2; @rfantibody] down to tens of tested designs per
+target [@chai2; @rfpeptides; @boltzgen; @protenix_v2].
+
+Written from a drug-discovery and protein-engineering perspective, this review
+examines these protein- and peptide-design methods, emphasizing underlying
+mechanisms and architectural trade-offs rather than ranking models. We first
+examine how structure-prediction trunks and coordinate-generation modules
+operate, then trace how those components give rise to distinct binder-design
+workflows, evaluate computational filtering limits alongside wet-lab campaign
+evidence, and conclude with the translational and technical bottlenecks
+separating in vitro binding hits from viable drug leads. Small-molecule drug
+design, which operates on variable chemical graphs governed by valence rules,
+requires separate architectures and benchmarks and therefore lies outside the
+scope of this review.
 
 ## 1. Co-folding Architectures and Mechanistic Trade-offs
 
