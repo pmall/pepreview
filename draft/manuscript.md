@@ -14,9 +14,8 @@ peptides, minibinders, and antibodies. This review examines how multi-chain
 structure predictors are turned into binder-design workflows, focusing on two
 core mechanistic trade-offs: how evolutionary information enters the network and
 how atomic coordinates are generated. In particular, we discuss how replacing
-database multiple sequence alignments with protein language models enables
-native single-sequence optimization, and how coordinate-generation choices
-balance speed, differentiability, and chemical generality. We also examine why
+multiple sequence alignments with protein language models enables native
+single-sequence optimization, and how coordinate-generation choices balance speed, differentiability, and chemical generality. We also examine why
 structural confidence filters remain an imperfect guide to candidate selection
 and why experimental differences prevent treating published wet-lab hit rates as
 direct comparisons. Finally, we outline the main technical and translational
@@ -47,8 +46,8 @@ chemical graphs governed by valence rules require separate generative
 architectures and benchmarks.
 
 Discovering peptide and protein binders has long relied on empirical search
-rather than rational design. Standard campaigns screen display libraries of
-$10^{12}$ or more random variants or immunize animals for antibodies, a process
+rather than rational design. Standard campaigns screen display libraries
+exceeding $10^{12}$ random variants or immunize animals for antibodies, a process
 that must be repeated for each new target and offers limited control over the
 binding site [@rfpeptides; @bindcraft]. Computational de novo binder design
 seeks to move beyond blind search by proposing candidate sequences for a chosen
