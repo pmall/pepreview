@@ -678,12 +678,6 @@ developable, functionally active drug leads will depend on overcoming these
 limitations and evaluating progress through transparent methods and shared,
 blinded prospective benchmarks.
 
-## Acknowledgments
-
-Acknowledgments, author contributions, financial disclosures, competing
-interests, data availability, and AI-assistance disclosures required by *PLOS
-Computational Biology* will be completed prior to submission.
-
 ## References
 
 All inline citations use verified Pandoc keys resolving to the repository BibTeX

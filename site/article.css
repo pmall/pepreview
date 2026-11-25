@@ -1,0 +1,520 @@
+/* ==========================================================================
+   Single-column article & print stylesheet on top of Wada Kujaku
+   Everything — title, prose, figures, tables, references — stays strictly
+   inside one centered column with zero overflow on screen and clean PDF print.
+   ========================================================================== */
+
+:root {
+  --size-title:   clamp(1.75rem, 3vw, 2.25rem);
+  --leading-title: 1.18;
+  --size-heading: 1.38rem;
+  --leading-heading: 1.28;
+  --size-body:    1rem;
+  --leading-body: 1.68;
+  --size-caption: 0.875rem;
+  --leading-caption: 1.48;
+  --size-code:    0.875rem;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg-base);
+}
+
+body {
+  margin: 0;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-size: var(--size-body);
+  line-height: var(--leading-body);
+}
+
+/* Single centered column — text, figures, and tables share the exact same width */
+.article {
+  max-width: 54rem; /* 864px: comfortable reading + spacious enough for 5-6 col tables */
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 3.75rem) clamp(1.25rem, 4vw, 2.5rem) 4.5rem;
+}
+
+/* Title block */
+.article-header {
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--accent-primary);
+}
+
+.article-header h1 {
+  margin: 0 0 0.75rem;
+  color: var(--text-primary);
+}
+
+.article-subtitle {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+/* Sections & headings */
+.article-section {
+  margin-bottom: 2.25rem;
+}
+
+.article-section h2 {
+  font-size: var(--size-heading);
+  line-height: var(--leading-heading);
+  margin: 0 0 0.9rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.article-section h3 {
+  font-size: 1.1rem;
+  line-height: 1.32;
+  font-weight: 600;
+  color: var(--accent-primary);
+  margin: 1.75rem 0 0.6rem;
+}
+
+.article p {
+  margin: 0 0 1rem;
+}
+
+/* Abstract callout */
+.abstract-section {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--accent-primary);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2.25rem;
+}
+
+.abstract-section h2 {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0.55rem;
+}
+
+.abstract-section p:last-child {
+  margin-bottom: 0;
+}
+
+/* Citations & math */
+.cite {
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+}
+
+.cite-link {
+  color: var(--accent-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.cite-link:hover {
+  color: var(--accent-secondary);
+  text-decoration: underline;
+}
+
+.math {
+  white-space: nowrap;
+}
+
+/* Figures — strictly 100% column width, never overflowing */
+.article-figure {
+  margin: 1.75rem 0 2rem;
+  width: 100%;
+}
+
+.figure-plate {
+  width: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+}
+
+.figure-plate img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.article-figure figcaption {
+  margin-top: 0.65rem;
+  font-size: var(--size-caption);
+  line-height: var(--leading-caption);
+  color: var(--text-secondary);
+}
+
+.article-figure figcaption strong {
+  color: var(--text-primary);
+}
+
+/* Tables — strictly 100% column width, fixed layout, never overflowing */
+.table-block {
+  width: 100%;
+  margin: 1.85rem 0 2.15rem;
+}
+
+.table-caption {
+  margin: 0 0 0.6rem;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--text-primary);
+}
+
+.data-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  line-height: 1.42;
+  background: var(--bg-surface);
+  border-top: 1.5px solid var(--border-strong);
+  border-bottom: 1.5px solid var(--border-strong);
+}
+
+.data-table thead th {
+  text-align: left;
+  vertical-align: bottom;
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--bg-inverse);
+  background: var(--bg-muted);
+  padding: 0.55rem 0.55rem;
+  border-bottom: 1.5px solid var(--border-strong);
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.data-table tbody td {
+  vertical-align: top;
+  padding: 0.5rem 0.55rem;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+.data-table tbody tr:nth-child(even) td {
+  background: transparent;
+}
+
+.data-table tbody tr.row-odd td {
+  background: var(--bg-surface);
+}
+
+.data-table tbody tr.row-even td {
+  background: #F4F7F7;
+}
+
+.data-table td.col-system {
+  font-weight: 600;
+  color: var(--bg-inverse);
+}
+
+.data-table tr.table-group-row td {
+  background: var(--bg-muted);
+  color: var(--bg-inverse);
+  font-weight: 700;
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.45rem 0.55rem;
+  border-top: 1.5px solid var(--accent-primary);
+  border-bottom: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--accent-primary);
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* References */
+.reference-list {
+  margin: 0;
+  padding-left: 2.5rem;
+}
+
+.reference-list li {
+  margin-bottom: 0.5rem;
+  padding-left: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  overflow-wrap: break-word;
+}
+
+.reference-list li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-primary);
+}
+
+.reference-list li:target {
+  background: var(--bg-muted);
+  border-radius: var(--radius-sm);
+}
+
+.doi-link {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  word-break: break-all;
+}
+
+/* Small screens: keep tables readable without overflowing viewport */
+@media (max-width: 680px) {
+  .data-table {
+    font-size: 0.7rem;
+  }
+  .data-table thead th,
+  .data-table tbody td {
+    padding: 0.4rem 0.35rem;
+  }
+}
+
+/* ==========================================================================
+   Print & PDF Layout
+   - Uniform portrait pages: text, figures, and tables share the exact same width
+   - Fixed table layout + clean wrapping + repeating headers across page breaks
+   ========================================================================== */
+@page {
+  margin: 15mm 14mm 16mm 14mm;
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html, body {
+    background: #FFFFFF !important;
+    color: #17323A !important;
+    font-size: 9.8pt;
+    line-height: 1.5;
+  }
+
+  .article {
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .article-header {
+    padding-bottom: 9pt;
+    margin-bottom: 12pt;
+    border-bottom: 1.8pt solid #0D7372;
+  }
+
+  .article-header h1 {
+    font-size: 17.5pt;
+    line-height: 1.18;
+    margin-bottom: 5pt;
+  }
+
+  .article-subtitle {
+    font-size: 8.4pt;
+    line-height: 1.4;
+  }
+
+  .article-section {
+    margin-bottom: 12pt;
+  }
+
+  .article-section h2 {
+    font-size: 12.2pt;
+    margin: 12pt 0 5pt;
+    padding-bottom: 2.5pt;
+    border-bottom: 0.75pt solid #D3DFDF;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .article-section h3 {
+    font-size: 10.4pt;
+    margin: 10pt 0 4pt;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .article p {
+    margin: 0 0 6.5pt;
+    orphans: 3;
+    widows: 3;
+  }
+
+  .abstract-section {
+    background: #F5F7F7 !important;
+    border: 0.6pt solid #D3DFDF;
+    border-left: 2.5pt solid #0D7372;
+    padding: 8pt 10pt;
+    margin-bottom: 12pt;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .abstract-section h2 {
+    font-size: 7.5pt;
+    margin: 0 0 3.5pt;
+  }
+
+  .abstract-section p {
+    font-size: 9pt;
+    line-height: 1.46;
+  }
+
+  a, .cite-link {
+    color: #17323A !important;
+    text-decoration: none !important;
+  }
+
+  .cite {
+    color: #17323A !important;
+  }
+
+  .article-figure {
+    margin: 10pt 0 11pt;
+    width: 100%;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .figure-plate {
+    background: #FFFFFF !important;
+    border: 0.6pt solid #D3DFDF;
+    border-radius: 2pt;
+    padding: 6pt;
+  }
+
+  .figure-plate img {
+    width: 100%;
+    max-width: 100%;
+    max-height: 118mm;
+    object-fit: contain;
+  }
+
+  .article-figure figcaption {
+    font-size: 8.2pt;
+    line-height: 1.38;
+    margin-top: 4.5pt;
+  }
+
+  /* Tables: same portrait width as prose, crisp compact typography, no overflow */
+  .table-block {
+    width: 100%;
+    max-width: 100%;
+    margin: 12pt 0 14pt;
+  }
+
+  .table-caption {
+    font-size: 8.6pt;
+    line-height: 1.35;
+    margin: 0 0 5pt;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .data-table {
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: collapse;
+    font-size: 7.1pt;
+    line-height: 1.32;
+    border-top: 1.2pt solid #17323A;
+    border-bottom: 1.2pt solid #17323A;
+  }
+
+  .data-table thead {
+    display: table-header-group;
+  }
+
+  .data-table thead th {
+    font-size: 6.6pt;
+    line-height: 1.25;
+    padding: 3.5pt 4pt;
+    background: #E3EBEB !important;
+    color: #123B3F !important;
+    border-bottom: 1.2pt solid #17323A;
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: auto;
+  }
+
+  .data-table tbody tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .data-table tbody td {
+    font-size: 7.1pt;
+    line-height: 1.32;
+    padding: 3.2pt 4pt;
+    border-bottom: 0.5pt solid #D3DFDF;
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: auto;
+  }
+
+  .data-table tbody tr.row-odd td {
+    background: #FFFFFF !important;
+  }
+
+  .data-table tbody tr.row-even td {
+    background: #F5F7F7 !important;
+  }
+
+  .data-table tr.table-group-row {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .data-table tr.table-group-row td {
+    font-size: 6.9pt;
+    padding: 3.2pt 4pt;
+    background: #E3EBEB !important;
+    color: #123B3F !important;
+    border-top: 1pt solid #0D7372;
+    border-bottom: 0.6pt solid #D3DFDF;
+    border-left: 2.5pt solid #0D7372;
+  }
+
+  .reference-list {
+    padding-left: 28pt;
+    margin-left: 0;
+  }
+
+  .reference-list li {
+    font-size: 8pt;
+    line-height: 1.38;
+    margin-bottom: 2.5pt;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .reference-list li:target {
+    background: transparent !important;
+  }
+
+  .doi-link {
+    font-size: 7.4pt;
+    color: #0D7372 !important;
+  }
+}
