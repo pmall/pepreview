@@ -196,11 +196,10 @@ generation as an ordinary differential equation (ODE) with straighter transport
 trajectories requiring far fewer integration steps. On unconditional protein
 monomers, FrameFlow recast frame diffusion as flow matching and reported twofold
 higher designability at five times fewer timesteps [@frameflow].
-Target-conditioned flow models, including PPIFlow, OriginFlow, AtomFlow, and
-D-Flow, extend these faster trajectories to protein–protein interfaces
-[@ppiflow; @originflow; @atomflow; @dflow]. Beyond faster sampling, few-step ODE
-decoders can restore end-to-end differentiability through all-atom coordinates
-[@pxdesign].
+Target-conditioned flow models, including PPIFlow, OriginFlow, and D-Flow,
+extend these faster trajectories to protein–protein interfaces \[@ppiflow;
+@originflow; @dflow\]. Beyond faster sampling, few-step ODE decoders can restore
+end-to-end differentiability through all-atom coordinates [@pxdesign].
 
 Predicting free three-dimensional coordinates in all-atom diffusion models also
 introduces physical-validity errors that rigid amino-acid frames largely
@@ -236,17 +235,17 @@ supported modalities, and methodological openness.
 | System                                                                             | Input trunk                                                 | Coordinate formalism                                    | Design workflow                                                                                            | Modalities                                                           | Openness                                    |
 | ---------------------------------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------- |
 | RFdiffusion + ProteinMPNN [@rfdiffusion; @proteinmpnn]                             | MSA (RoseTTAFold fine-tuned)                                | SE(3) frame diffusion                                   | Generate-and-filter (backbone diffusion, inverse folding, AF2 filter)                                      | Minibinders, protein scaffolds                                       | Open code and weights                       |
-| RFdiffusion3 + LigandMPNN [@rfdiffusion3; @ligandmpnn]                             | Pre-trained 2-layer Pairformer (no RF predictor init)       | All-atom U-Net diffusion (100 steps)                    | Generate-and-filter (all-atom diffusion, inverse folding; AlphaDesign [@alphadesign] alternative)          | Minibinders, peptides, enzymes, ligand binders                       | Published architecture                      |
+| RFdiffusion3 + LigandMPNN [@rfdiffusion3; @ligandmpnn]                             | Pre-trained 2-layer Pairformer (no RF predictor init)       | All-atom U-Net diffusion (100 steps)                    | Generate-and-filter (all-atom diffusion, inverse folding; AlphaDesign [@alphadesign] alternative)          | Minibinders, enzymes, ligand binders                                 | Published architecture                      |
 | RFantibody [@rfantibody]                                                           | MSA (RoseTTAFold fine-tuned)                                | SE(3) frame diffusion                                   | Generate-and-filter (epitope-conditioned CDR diffusion, ProteinMPNN)                                       | VHHs, scFvs, mAbs                                                    | Published architecture                      |
 | RFpeptides [@rfpeptides]                                                           | MSA (RF2 with cyclic positional offset)                     | SE(3) frame diffusion                                   | Generate-and-filter (cyclic diffusion, ProteinMPNN, AfCycDesign filter)                                    | Macrocyclic peptides                                                 | Published architecture                      |
-| PPIFlow / AtomFlow [@ppiflow; @atomflow]                                           | Structure-conditioned flow networks                         | ODE flow matching                                       | Generate-and-filter (few-step flow generation, inverse folding)                                            | Protein–protein binders, all-atom complexes                          | Published architecture                      |
+| PPIFlow [@ppiflow]                                                                 | Structure-conditioned flow network                          | ODE flow matching                                       | Generate-and-filter (flow-matching generation, inverse folding)                                            | Protein–protein binders                                              | Published architecture                      |
 | PXDesign-d / PXDesign-h [@pxdesign]                                                | MSA (Protenix Pairformer)                                   | DiT Cartesian diffusion (d) / 2-step ODE (h)            | Generate-and-filter (d) or end-to-end backpropagation (h)                                                  | Minibinders                                                          | Open Protenix platform                      |
 | Protenix-v2 [@protenix_v2]                                                         | MSA (Pairformer)                                            | All-atom diffusion                                      | Generate-and-filter (diffusion generation, confidence ranking)                                             | Minibinders, VHHs, Fv, mAbs                                          | Open Protenix platform                      |
 | BoltzGen [@boltzgen]                                                               | MSA (Pairformer)                                            | All-atom diffusion                                      | Unified joint prediction and design with Boltz-2 refolding filter                                          | Minibinders, peptides, VHHs (excludes full mAbs)                     | Open weights, training code, and data (MIT) |
 | BoltzProt-1 [@boltzprot1]                                                          | MSA (Pairformer)                                            | All-atom diffusion                                      | Refined BoltzGen generator ranked by BoltzPPI binding classifier                                           | VHHs, protein binders                                                | Commercial API only (weights closed)        |
 | BindCraft / AfCycDesign [@bindcraft; @afcycdesign]                                 | MSA trunk (AF2 / AF2-Multimer, single-seq binder)           | Single-pass IPA regression                              | Full-network backpropagation (BindCraft adds ProteinMPNN surface redesign; AfCycDesign adds cyclic offset) | Minibinders (BindCraft); macrocycles (AfCycDesign)                   | Open code (ColabDesign / AF2 weights)       |
 | BoltzDesign1 / RFOptimization [@boltzdesign1; @rfoptimization]                     | MSA (Boltz-1 or RF3 Pairformer)                             | Diffusion bypassed (distogram and confidence gradients) | Continuous sequence relaxation (BoltzDesign1) or discrete mutation search (RFOptimization)                 | Minibinders, cyclic peptides, ligand binders                         | Open code on MIT/BSD predictor weights      |
-| Germinal / mBER [@germinal; @mber]                                                 | MSA trunk (AF2-Multimer) + IgLM or ESM-2 prior              | Single-pass IPA regression                              | Backpropagation regularized by live IgLM (Germinal) or static ESM-2 (mBER) priors                          | scFvs and VHHs (Germinal; OpenGerminal [@opengerminal]); VHHs (mBER) | Open code (OpenGerminal Apache-2.0)         |
+| Germinal / mBER [@germinal; @mber]                                                 | MSA trunk (AF2-Multimer) + IgLM or ESM-2 prior              | Single-pass IPA regression                              | Backpropagation regularized by live IgLM (Germinal) or static ESM-2 (mBER) priors                          | scFvs and VHHs (Germinal); VHHs (OpenGerminal [@opengerminal]; mBER) | Open code (OpenGerminal Apache-2.0)         |
 | ESMC / ESMFold2 [@esmc]                                                            | PLM trunk (6B ESMC, optional MSA)                           | Sliding-window atom-attention diffusion                 | Native single-sequence backpropagation through PLM and folding trunk distogram                             | Minibinders, scFvs                                                   | Biohub / EvolutionaryScale release          |
 | AlphaProteo / Chai-2 / Latent-X1 & X2 [@alphaproteo; @chai2; @latentx1; @latentx2] | Undisclosed (Chai-2 folding module resembles hybrid Chai-1) | Undisclosed generative architectures                    | Published wet-lab campaigns with confidence and self-consistency filtering                                 | Minibinders, macrocycles, VHHs, scFvs                                | Undisclosed generative architectures        |
 
@@ -290,8 +289,7 @@ structures [@rfpeptides]. Related variants in Table 1 explore alternative
 inverse-folding architectures in AlphaDesign [@alphadesign], adapt backbone
 generation for antibody loops in RFantibody [@rfantibody], replace frame
 representations with Cartesian diffusion transformers in PXDesign-d [@pxdesign],
-or accelerate sampling through ODE flow matching in PPIFlow and AtomFlow
-[@ppiflow; @atomflow].
+or adopt ODE flow matching for backbone generation in PPIFlow [@ppiflow].
 
 ### Unified prediction-and-design all-atom models
 
@@ -302,7 +300,7 @@ exemplifies this unified approach under a fully reproducible MIT release
 providing model weights, training code, and datasets [@boltzgen]. Conditioned on
 a target, BoltzGen simultaneously generates atomic coordinates and amino-acid
 identities for masked binder chains, covering peptides, minibinders, and
-nanobodies, though full antibodies were excluded from training [@boltzgen]. It
+nanobodies, though full-antibody design was not demonstrated [@boltzgen]. It
 matches the structure-prediction accuracy of Boltz-2 on the same benchmark test
 set, yet its design pipeline relies on Boltz-2 to refold and filter generated
 candidates [@boltzgen]. Commercial systems such as Chai-2 and Latent-X may use
@@ -366,12 +364,12 @@ heads while placing a stop-gradient on the diffusion module to block
 backpropagation through iterative denoising. BoltzDesign1 applies this strategy
 to Boltz-1's 64-bin Pairformer distogram, optimizing the pairwise distance
 distribution from which diffusion samples; on 212 BindCraft binders, Pairformer
-contacts matched diffusion-sampled contacts on 76% of designs [@boltzdesign1].
-ESMFold2 applies the same distogram-gradient strategy through its native
-single-sequence PLM trunk, invoking the diffusion and confidence modules only at
-the end to score interface predicted TM-score (ipTM) [@esmc]. The second
-solution preserves coordinate-level backpropagation by replacing iterative
-diffusion with a few-step deterministic decoder. Built on the open
+contacts recovered reference interface contacts on 76% of designs
+[@boltzdesign1]. ESMFold2 applies the same distogram-gradient strategy through
+its native single-sequence PLM trunk, invoking the diffusion and confidence
+modules only at the end to score interface predicted TM-score (ipTM) [@esmc].
+The second solution preserves coordinate-level backpropagation by replacing
+iterative diffusion with a few-step deterministic decoder. Built on the open
 AlphaFold3-style predictor Protenix, PXDesign-h substitutes a differentiable
 two-step ODE sampler for its 200-step diffusion module and optimizes against
 five ensemble models resampled at each step [@pxdesign].
@@ -454,15 +452,16 @@ PXDesign found that Protenix and AlphaFold2 selected largely different subsets
 of true binders and that no single cutoff maximized accuracy on all targets
 simultaneously [@pxdesign].
 
-Replacing structure-prediction confidence with classifiers trained on wet-lab
-binding outcomes can also substantially improve hit rates on identical candidate
+Replacing structure-prediction confidence with dedicated protein–protein binding
+classifiers can also substantially improve hit rates on identical candidate
 pools. In a controlled comparison on 10 low-homology targets, BoltzProt-1 kept
 the BoltzGen generator and a fixed budget of 15 designs per target, swapping
-BoltzGen's confidence scores for BoltzPPI, a classifier trained on experimental
-binding data [@boltzprot1]. This change alone more than doubled confirmed
-binders from 3.3% (5/150) to 8.0% (12/150), expanding confirmed hits from 2 to 4
-of the 10 targets [@boltzprot1]. Candidate ranking therefore shapes experimental
-yield independently of the generative architecture.
+BoltzGen's confidence scores for BoltzPPI, a binding classifier trained on
+solved complex structures and synthetic negatives [@boltzprot1]. This change
+alone more than doubled confirmed binders from 3.3% (5/150) to 8.0% (12/150),
+expanding confirmed hits from 2 to 3 of the 10 targets [@boltzprot1]. Candidate
+ranking therefore shapes experimental yield independently of the generative
+architecture.
 
 ### Reading wet-lab campaigns critically
 
@@ -483,17 +482,17 @@ context-dependent demonstrations rather than head-to-head rankings.
 | RFdiffusion [@rfdiffusion]                                 | 5 author-selected targets                                                             | 95/target (475 pooled)                             | Single-point BLI at 10 µM ≥ 50% positive control; 19% pooled, best 28 nM (influenza HA)                                                                | Single assay; AlphaProteo yeast-display re-test recovered lower rates at 10–20× lower target concentration [@alphaproteo] |
 | AlphaProteo [@alphaproteo]                                 | 8 author-selected targets                                                             | 54–172/target                                      | Yeast-display flow cytometry > 0.2 (1.3 for IL-17A); 9–88% on 7 targets, 0/54 TNFα, best 82 pM (IL-7Rα)                                                | Undisclosed generative architecture; single display format for hit calls                                                  |
 | BindCraft [@bindcraft]                                     | 12 author-selected targets                                                            | 6–53/target                                        | SPR binding observed (no numeric cutoff); 10–100% (mean 46.3%), best < 1 nM (PD-1), 5 nM (CbAgo)                                                       | PD-1 sub-nM hit measured as bivalent Fc fusion (avidity); single assay format                                             |
-| PXDesign (PXDesign-d) [@pxdesign]                          | 6 author-selected targets                                                             | 9–17/target                                        | BLI > 0.06 nm at 1 µM then $K_D$ < 1,000 nM; 20–73% on 5 targets, 0/16 TNFα                                                                            | Expression attrition shifts rates (PD-L1: 72.7% tested vs. 47.1% sent); wet-lab tested diffusion mode only                |
-| ESMFold2 campaign [@esmc]                                  | 5 author-selected targets (minibinders and scFvs)                                     | 84/cohort                                          | BLI stringent (0.25–0.4 nm) and inclusive (> 0.1 nm); mean 70.0% minibinders (best 68 pM), 21.0% scFvs                                                 | Author-selected targets; cutoff shading image-only; best-hit target not stated in text                                    |
+| PXDesign (PXDesign-d) [@pxdesign]                          | 6 author-selected targets                                                             | 10–17/target                                       | BLI > 0.06 nm at 1 µM then $K_D$ < 1,000 nM; 20–73% on 5 targets, 0/16 TNFα                                                                            | Expression attrition shifts rates (PD-L1: 72.7% tested vs. 47.1% sent); wet-lab tested diffusion mode only                |
+| ESMFold2 campaign [@esmc]                                  | 5 author-selected targets (minibinders and scFvs)                                     | 84/cohort                                          | BLI stringent (0.25–0.4 nm) and inclusive (> 0.1 nm); mean 70.0% minibinders (best 68 pM), 21.0% scFvs                                                 | Author-selected targets; best-hit target not stated in text                                                               |
 | **Nanobodies and antibodies**                              |                                                                                       |                                                    |                                                                                                                                                        |                                                                                                                           |
 | RFantibody [@rfantibody]                                   | 4 targets (yeast display); 3 targets (SPR)                                            | 9,000/target (display); 95/target (SPR)            | Yeast display or single-concentration SPR; 0–2% confirmed hit rate, best 78 nM (HA), 1.4 µM (RSV site III)                                             | Authors note library screening remains necessary given current success rates                                              |
-| BoltzGen / BoltzProt-1 [@boltzgen; @boltzprot1]            | 9 novel targets (\<30% PDB identity, BoltzGen); 10 low-homology targets (BoltzProt-1) | 15/target                                          | BoltzGen: sensorgram or ≥ 300% control (6/9 targets, best 6.1 nM VHH); BoltzProt-1: flipped orientation + vendor confirmation (8.0% vs. 3.3% BoltzGen) | BoltzProt-1 separates orthogonal confirmation from screening hits; API-only (weights closed)                              |
+| BoltzGen / BoltzProt-1 [@boltzgen; @boltzprot1]            | 9 novel targets (\<30% PDB identity, BoltzGen); 10 low-homology targets (BoltzProt-1) | 15/target                                          | BoltzGen: sensorgram or ≥ 300% control (6/9 targets, best 6.1 nM VHH); BoltzProt-1: flipped orientation + vendor confirmation (8.0% vs. 3.3% BoltzGen) | BoltzProt-1 separates orthogonal confirmation from screening hits and is API-only (weights closed)                        |
 | Chai-2 [@chai2]                                            | 52 novel targets (scFv/VHH); 5 targets (minibinders)                                  | ≤ 20/target/format (Ab); 20–25 (minibinders)       | BLI > 0.1 nm and > 300% background; 16% combined Ab (26/52 targets), 68% minibinders (best 18.3 pM)                                                    | Undisclosed generative architecture; avidity flagged on EFNA5 scFv and 4/10 minibinder affinities                         |
 | Protenix-v2 [@protenix_v2]                                 | Novelty-filtered soluble panel + 4 GPCRs                                              | 16–30/target (GPCRs); figure-only (soluble)        | BLI > background + 0.05 nm; binders on all soluble targets (2–48%), GPCR VHH-Fc 16–88%, mAb 0–50%                                                      | Manually chosen in-stock targets and epitopes; bivalent VHH-Fc avidity (including 112 pM GPRC5D)                          |
 | Germinal / mBER [@germinal; @mber]                         | 4 VHH + 2 scFv targets (Germinal); 145 of 436 targets, random hotspots (mBER)         | 43–101 ordered (Germinal); 1,153,241 pooled (mBER) | Germinal: split-luciferase + BLI (or SPR + BLI for Fab, best 170 nM VHH); mBER: phage enrichment (median ~0.4%, up to 38% ipTM-filtered)               | Germinal VHH rates use BLI sub-denominators; mBER reports phage enrichment without affinity quantification                |
 | **Macrocyclic peptides**                                   |                                                                                       |                                                    |                                                                                                                                                        |                                                                                                                           |
 | RFpeptides [@rfpeptides]                                   | 4 author-selected targets                                                             | 6–14 tested (of 11–27 selected)                    | SPR single-cycle kinetics at 100 µM (no numeric cutoff); 2–4 hits/target, best 6 nM (GABARAP), crystal structures                                      | Synthesis attrition (14/27 MCL-1, 11/26 RbtA tested); single assay format                                                 |
-| Latent-X1 / Latent-X2 (macrocycles) [@latentx1; @latentx2] | 3 RFpeptides-matched targets (X1); 2 targets (X2)                                     | 11–17 of 30 submitted (X1); 10/target (X2)         | SPR measurable signal (X1: 91–100%, best 5.35 µM); BLI > 0.1 nm and kinetics (X2: 9/10 PHD2, 8/10 K-Ras G12D, best 1.54 nM)                            | Undisclosed architecture; synthesis attrition in X1; single assay format                                                  |
+| Latent-X1 / Latent-X2 (macrocycles) [@latentx1; @latentx2] | 3 targets, 2 RFpeptides-matched (X1); 2 targets (X2)                                  | 11–17 of 30 submitted (X1); 10/target (X2)         | SPR measurable signal (X1: 91–100%, best 5.35 µM); BLI > 0.1 nm and kinetics (X2: 9/10 PHD2, 8/10 K-Ras G12D, best 1.54 nM)                            | Undisclosed architecture; synthesis attrition in X1; single assay format                                                  |
 
 Three experimental factors explain much of the apparent spread in published hit
 rates and affinities. Hit definitions and assay rigor vary widely: some studies
@@ -669,14 +668,15 @@ pipelines still filter designs using structural confidence scores from
 co-folding models trained to minimize three-dimensional coordinate error on
 bound complexes, not to distinguish binders from nonbinders. Those metrics vary
 widely in predictive accuracy between targets and can be outperformed by
-classifiers trained on wet-lab binding data. Published campaigns also resist
-direct comparison, as differences in assay rigor, multivalent avidity, construct
-attrition, and target curation strongly shape reported hit rates. Beyond initial
-hit discovery, quantitative protein–protein affinity prediction and design
-against flexible or structurally uncharacterized targets are unresolved modeling
-challenges. Translating in vitro binding hits into developable, functionally
-active drug leads will depend on overcoming these limitations and evaluating
-progress through transparent methods and shared, blinded prospective benchmarks.
+dedicated binding classifiers trained on known complexes. Published campaigns
+also resist direct comparison, as differences in assay rigor, multivalent
+avidity, construct attrition, and target curation strongly shape reported hit
+rates. Beyond initial hit discovery, quantitative protein–protein affinity
+prediction and design against flexible or structurally uncharacterized targets
+are unresolved modeling challenges. Translating in vitro binding hits into
+developable, functionally active drug leads will depend on overcoming these
+limitations and evaluating progress through transparent methods and shared,
+blinded prospective benchmarks.
 
 ## Acknowledgments
 
