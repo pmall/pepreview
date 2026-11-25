@@ -150,7 +150,7 @@ ESMC is a PLM trained on roughly 2.8 billion sequences, whose frozen
 pair-state folding layers (24 in ESMFold2-Fast) and a sliding-window
 atom-attention diffusion transformer [@esmc]. In single-sequence mode, ESMFold2
 matches MSA-enabled AlphaFold3 on antibody–antigen structure prediction, a
-parity confirmed by independent AtlasFold benchmarks [@esmc; @atlasfold], while
+parity confirmed by independent AtlasFold benchmarks [@atlasfold], while
 retaining an optional detachable MSA encoder for unusually high-perplexity
 sequences [@esmc]. For binder design, this architecture provides a clear
 advantage: because a PLM expects single sequences natively, gradients from the
@@ -217,8 +217,8 @@ introduces physical-validity errors that rigid amino-acid frames largely
 avoided. Because bond geometry and handedness are learned from data rather than
 fixed by residue templates, AlphaFold3 reported occasional steric clashes and a
 4.4% chirality violation rate on the PoseBusters physical-plausibility benchmark
-for protein–ligand complexes, despite penalizing such violations when ranking
-its sampled structures [@alphafold3; @posebusters]. Two strategies address this
+[@posebusters] for protein–ligand complexes, despite penalizing such violations
+when ranking its sampled structures [@alphafold3]. Two strategies address this
 limitation. Boltz-1x applies explicit steering potentials during denoising to
 suppress clashes and inverted stereocenters [@boltz1]. RoseTTAFold3 instead
 encodes stereochemistry during training to avoid perturbing inference
@@ -293,10 +293,10 @@ LigandMPNN in place of ProteinMPNN whenever non-protein atoms such as ligands,
 nucleic acids, or metal ions are present [@rfdiffusion3; @ligandmpnn]. For
 specialized topologies like head-to-tail macrocycles, RFpeptides adds a cyclic
 relative positional encoding to RFdiffusion and RoseTTAFold2 [@rfpeptides].
-After inverse folding and filtering with cyclic AlphaFold2 (AfCycDesign),
-RFpeptides yielded binders against all four targets from fewer than 20
-synthesized peptides per target, supported by experimental crystal structures
-[@rfpeptides; @afcycdesign]. Related variants in Table 1 explore alternative
+After inverse folding and filtering with cyclic AlphaFold2 (AfCycDesign)
+[@afcycdesign], RFpeptides yielded binders against all four targets from fewer
+than 20 synthesized peptides per target, supported by experimental crystal
+structures [@rfpeptides]. Related variants in Table 1 explore alternative
 inverse-folding architectures in AlphaDesign [@alphadesign], adapt backbone
 generation for antibody loops in RFantibody [@rfantibody], replace frame
 representations with Cartesian diffusion transformers in PXDesign-d [@pxdesign],
@@ -366,7 +366,7 @@ binders relied on motif grafting rather than de novo hallucination
 [@afcycdesign]. However, both BindCraft and AfCycDesign rely on MSA-trained
 AlphaFold2 models for invented binder chains that lack evolutionary alignments,
 forcing optimization into the predictor's weakest, MSA-free regime
-\[@alphafold2; @bindcraft\].
+\[@alphafold2; @bindcraft; @afcycdesign\].
 
 Adapting gradient optimization to diffusion-based co-folders requires
 circumventing the cost of differentiating through hundreds of denoising steps
@@ -539,10 +539,10 @@ originally reported, shifting from 1.90 to 8.38 µM on MDM2 and from 2.0 to 10.0
 µM on MCL-1 [@latentx1; @rfpeptides]. Alongside these experimental confounders,
 several commercial systems keep their architectures, weights, and selection
 pipelines undisclosed, placing their wet-lab claims outside independent
-verification [@bender_perspective]. These include AlphaProteo [@alphaproteo],
-Chai-2 [@chai2], Latent-X1 and Latent-X2 [@latentx1; @latentx2], API-only
-BoltzProt-1 [@boltzprot1], and unpublished models such as IsoDDE, which is known
-from third-party scaling plots alone [@opendde].
+verification [@bender_perspective]. These include AlphaProteo, Chai-2, Latent-X1
+and Latent-X2, and API-only BoltzProt-1 \[@alphaproteo; @chai2; @latentx1;
+@latentx2; @boltzprot1\], as well as unpublished models such as IsoDDE, which is
+known from third-party scaling plots alone [@opendde].
 
 ## 4. From In Vitro Binding Hits to Drug Leads
 
