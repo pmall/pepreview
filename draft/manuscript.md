@@ -12,15 +12,16 @@ Generative models conditioned on target structures now narrow experimental
 testing from massive empirical libraries to tens of candidates for peptides,
 minibinders, and antibodies. This review examines how multi-chain structure
 predictors are turned into binder-design workflows, focusing on two core
-mechanistic trade-offs: how evolutionary information enters the network and how
-atomic coordinates are generated. In particular, replacing multiple sequence
-alignments with protein language models supports native single-sequence
-optimization, whereas coordinate-generation choices balance speed,
-differentiability, and chemical generality. We then assess why structural
-confidence filters remain an imperfect guide to candidate selection and why
-experimental differences prevent treating published wet-lab hit rates as direct
-comparisons. Finally, we outline the main technical and translational
-bottlenecks separating in vitro binding hits from developable drug leads.
+mechanistic trade-offs: supplying evolutionary information through multiple
+sequence alignments or protein language models, and generating atomic
+coordinates through regression, diffusion, or flow matching. We trace how these
+architectural choices give rise to generate-and-filter pipelines, unified
+all-atom diffusion models, and gradient-based sequence optimization. We then
+assess why structural confidence filters remain an imperfect guide to candidate
+selection and why experimental differences prevent treating published wet-lab
+hit rates as direct comparisons. Finally, we outline the main technical and
+translational bottlenecks separating in vitro binding hits from developable drug
+leads.
 
 ## Introduction
 
@@ -40,13 +41,14 @@ architecture. Supplying the sequences of all interacting chains asks the network
 to predict the three-dimensional complex, whereas leaving the binder chain
 masked or initialized as noise asks the same model to generate a complementary
 partner [@rfdiffusion; @boltzgen]. What differs sharply in practice is search
-and validation. During training and benchmarking, a structure predictor
-evaluates a fixed natural sequence whose output geometry can be scored against a
+and validation. Evaluating a structure predictor starts from a given natural
+sequence whose predicted geometry can be scored purely in silico against a
 held-out crystal or cryo-electron microscopy structure in the Protein Data Bank
-(PDB). By contrast, de novo design must search a combinatorial space of $20^L$
-sequences for a chain of length *L* without evolutionary alignments or a
-pre-existing experimental reference. Confirming binding therefore requires
-synthesizing and assaying candidates in a wet laboratory.
+(PDB). In de novo design, the sequence itself is unknown and must be discovered
+from a combinatorial space of $20^L$ possibilities for a chain of length *L*
+without evolutionary alignments or a pre-existing experimental reference.
+Confirming binding therefore requires synthesizing and assaying candidates in a
+wet laboratory.
 
 Many therapeutically relevant protein targets present broad, flat surfaces that
 lack the deep pockets required by small-molecule drugs. Engaging these surfaces
@@ -87,7 +89,7 @@ Boltz, Chai-1, Protenix, and RoseTTAFold3 \[@alphafold3; @boltz1; @chai1;
 @protenix_v1; @rosettafold3\], and the recurrent folding trunk in ESMFold and
 ESMFold2 [@esm2; @esmc]. A linear projection on the pairwise representation
 predicts a distogram, giving a probability distribution over binned physical
-distances (typically 2 to 22 Å in 64 bins) for every residue pair. For binder
+distances for every residue pair, typically 2 to 22 Å in 64 bins. For binder
 design, the entire trunk is differentiable and executes in a single forward pass
 for a given complex [@boltz1], so the distogram can serve both as a training
 loss and as a smooth surrogate objective during sequence optimization
@@ -134,7 +136,7 @@ non-differentiable, and undefined for a synthetic binder sequence with no
 natural homologs. Consequently, whenever an MSA-trained model evaluates or
 optimizes a de novo binder chain, that chain must run in single-sequence mode
 (without an MSA), even if the target protein carries a deep alignment. Both the
-AlphaFold2 and AlphaFold3 papers report that shallow-MSA and single-sequence
+AlphaFold2 and AlphaFold3 studies report that shallow-MSA and single-sequence
 inputs represent their weakest accuracy regime [@alphafold2; @alphafold3].
 
 Replacing database lookups with a protein language model (PLM) embeds
@@ -187,18 +189,17 @@ coordinates along a stochastic differential equation trajectory [@alphafold3].
 Subsequent all-atom co-folders, including Boltz, Chai-1, Protenix, RoseTTAFold3,
 and ESMFold2, adopted variants of this diffusion formalism \[@boltz1; @chai1;
 @protenix_v1; @rosettafold3; @esmc\]. Unlike single-pass regression, stochastic
-diffusion samples from a distribution of plausible structures instead of
-outputting one deterministic pose. In practice, co-folders generate a pool of
-candidate structures for a given complex by running multiple random seeds of the
-overall network and drawing a batch of diffusion samples per trunk pass (five
-model seeds with five samples each in standard AlphaFold3 inference), then use
-an internal confidence head to select a top-ranked prediction [@alphafold3].
-Diffusion brings broad chemical generality at two costs relevant to design.
-First, iterative denoising is slow, often requiring hundreds to roughly 1,000
-forward passes per generated structure [@frameflow]. Second, unrolling those
-denoising steps to compute sequence gradients is computationally impractical,
-breaking the simple end-to-end backpropagation path available in IPA regression
-models [@boltzdesign1].
+diffusion samples a distribution of plausible structures instead of outputting
+one deterministic pose. In practice, co-folders run multiple model seeds and
+draw a batch of diffusion samples per trunk pass before using an internal
+confidence head to select a top-ranked prediction, for example five seeds with
+five samples each in standard AlphaFold3 inference [@alphafold3]. These gains in
+chemical generality come at two practical costs for binder design. First,
+iterative denoising is slow, often requiring hundreds to roughly 1,000 forward
+passes per generated structure [@frameflow]. Second, unrolling those denoising
+steps to compute sequence gradients is computationally impractical, breaking the
+simple end-to-end backpropagation path available in IPA regression models
+[@boltzdesign1].
 
 Flow matching addresses the sampling bottleneck by formulating coordinate
 generation as an ordinary differential equation (ODE) with straighter transport
@@ -229,8 +230,7 @@ with 1.88 Å for AlphaFold3 and 2.24 Å for Boltz-1x [@rosettafold3].
 Structure predictors evaluate one candidate at a time, making blind exploration
 of sequence space impractical. Binder-design systems therefore repurpose these
 networks through three primary workflows (Fig 1B). The first generates a
-three-dimensional binder geometry (either a backbone alone or an all-atom
-structure including side chains) against the target, assigns a compatible
+three-dimensional binder geometry against the target, assigns a compatible
 sequence with a separate inverse-folding model, and refolds the complex to
 filter candidates. The second trains a single all-atom diffusion network to
 generate atomic coordinates and amino-acid identities simultaneously,
@@ -278,10 +278,9 @@ binder-aligned RMSD below 1 Å, and a per-residue confidence (pLDDT) above 80
 [@alphaproteo]. Clearing these computational filters does not guarantee wet-lab
 success. As the ProteinMPNN authors noted, high native sequence recovery on
 offline fixed-backbone benchmarks does not necessarily predict whether a
-designed sequence will fold accurately [@proteinmpnn]. Likewise, the "in silico
-success" rates frequently quoted for backbone generators measure
-self-consistency with a refolding predictor, not experimental target engagement
-[@rfdiffusion].
+designed sequence will fold accurately [@proteinmpnn]. Likewise, the in silico
+success rates frequently quoted for backbone generators measure self-consistency
+with a refolding predictor, not experimental target engagement [@rfdiffusion].
 
 Targeted architectural modifications extend this decoupled workflow to new
 modalities and scales. RFdiffusion3 moved away from fine-tuning a RoseTTAFold
@@ -297,8 +296,8 @@ relative positional encoding to RFdiffusion and RoseTTAFold2 [@rfpeptides].
 After inverse folding and filtering with cyclic AlphaFold2 (AfCycDesign),
 RFpeptides yielded binders against all four targets from fewer than 20
 synthesized peptides per target, supported by experimental crystal structures
-[@rfpeptides; @afcycdesign]. Related variants in Table 1 explore autoregressive
-diffusion for inverse folding in AlphaDesign [@alphadesign], adapt backbone
+[@rfpeptides; @afcycdesign]. Related variants in Table 1 explore alternative
+inverse-folding architectures in AlphaDesign [@alphadesign], adapt backbone
 generation for antibody loops in RFantibody [@rfantibody], replace frame
 representations with Cartesian diffusion transformers in PXDesign-d [@pxdesign],
 or accelerate sampling through ODE flow matching in PPIFlow and AtomFlow
@@ -306,21 +305,21 @@ or accelerate sampling through ODE flow matching in PPIFlow and AtomFlow
 
 ### Unified prediction-and-design all-atom models
 
-A second workflow eliminates the handoff between separate geometry generators
-and inverse-folding models by training a single all-atom diffusion network
-jointly for structure prediction and de novo sequence–structure generation.
-BoltzGen exemplifies this unified approach under a fully reproducible MIT
-release providing model weights, training code, and datasets [@boltzgen].
-Conditioned on a target, BoltzGen simultaneously generates atomic coordinates
-and amino-acid identities for masked binder chains, covering peptides,
-minibinders, and nanobodies, though full antibodies were excluded from training
-[@boltzgen]. It matches the structure-prediction accuracy of Boltz-2 on the same
-benchmark test set, yet its design pipeline relies on Boltz-2 to refold and
-filter generated candidates [@boltzgen]. Commercial systems such as Chai-2 and
-Latent-X may use related co-design strategies internally, but their generative
-architectures remain undisclosed [@chai2; @latentx1; @latentx2]. BoltzGen
-therefore stands as the clearest open representative of this class, while its
-successor BoltzProt-1 is offered through a commercial API [@boltzprot1].
+A second workflow eliminates the handoff between geometry generators and
+inverse-folding models by training a single all-atom diffusion network jointly
+for structure prediction and de novo sequence–structure generation. BoltzGen
+exemplifies this unified approach under a fully reproducible MIT release
+providing model weights, training code, and datasets [@boltzgen]. Conditioned on
+a target, BoltzGen simultaneously generates atomic coordinates and amino-acid
+identities for masked binder chains, covering peptides, minibinders, and
+nanobodies, though full antibodies were excluded from training [@boltzgen]. It
+matches the structure-prediction accuracy of Boltz-2 on the same benchmark test
+set, yet its design pipeline relies on Boltz-2 to refold and filter generated
+candidates [@boltzgen]. Commercial systems such as Chai-2 and Latent-X may use
+related co-design strategies internally, but their generative architectures
+remain undisclosed [@chai2; @latentx1; @latentx2]. BoltzGen therefore stands as
+the clearest open representative of this class, while its successor BoltzProt-1
+is offered through a commercial API [@boltzprot1].
 
 Joint all-atom training also exposes how generative diffusion models memorize
 biases in the Protein Data Bank. The BoltzGen authors documented that at
@@ -342,10 +341,10 @@ optimization step, this soft sequence is passed alongside the target through the
 differentiable predictor to compute a design loss favoring confident folding and
 tight interchain contacts. Gradients of that loss flow backward through the
 network to update the sequence weights, nudging each position toward amino acids
-that improve the predicted complex. To produce a real protein with one amino
-acid per site, a temperature-annealing schedule gradually sharpens these
-distributions over iterations until each position commits to a discrete one-hot
-residue, a strategy popularized by ColabDesign [@colabdesign].
+that improve the predicted complex. To obtain a discrete sequence, a
+temperature-annealing schedule gradually sharpens these distributions over
+iterations until each position commits to a one-hot residue, a strategy
+popularized by ColabDesign [@colabdesign].
 
 When the predictor uses a single-pass IPA regression module, gradients propagate
 cleanly from predicted three-dimensional coordinates and confidence heads back
@@ -355,19 +354,19 @@ independently trained models between iterations to curb overfitting
 [@bindcraft]. It sharpens the binder sequence over four stages, annealing
 continuous amino-acid weights into discrete residues with a straight-through
 step that sends one-hot sequences forward and continuous gradients backward,
-before finishing with final mutation refinement [@bindcraft]. A ProteinMPNN
-variant then redesigns non-interface residues to improve stability and
-solubility [@bindcraft]. A notable mechanistic feature of BindCraft is that it
-repredicts the target structure at every optimization step, permitting
-induced-fit rearrangements ranging from 0.5 to 5.5 Å Cα RMSD [@bindcraft]. For
-cyclic peptides, AfCycDesign applies a cyclic relative positional offset to
+before a final mutation-refinement step [@bindcraft]. A ProteinMPNN variant then
+redesigns non-interface residues to improve stability and solubility
+[@bindcraft]. A notable mechanistic feature of BindCraft is that it repredicts
+the target structure at every optimization step, permitting induced-fit
+rearrangements ranging from 0.5 to 5.5 Å Cα RMSD [@bindcraft]. For cyclic
+peptides, AfCycDesign applies a cyclic relative positional offset to
 AlphaFold2's peptide chain while keeping the target linear, yielding eight
 monomer crystal structures within 1.0 Å of design, though its MDM2 and Keap1
 binders relied on motif grafting rather than de novo hallucination
-[@afcycdesign]. However, both BindCraft and AfCycDesign depend on MSA-trained
-AlphaFold2 models although the invented binder chain lacks an evolutionary
-alignment, forcing optimization into the predictor's weakest, MSA-free regime
-[@alphafold2; @bindcraft].
+[@afcycdesign]. However, both BindCraft and AfCycDesign rely on MSA-trained
+AlphaFold2 models for invented binder chains that lack evolutionary alignments,
+forcing optimization into the predictor's weakest, MSA-free regime
+\[@alphafold2; @bindcraft\].
 
 Adapting gradient optimization to diffusion-based co-folders requires
 circumventing the cost of differentiating through hundreds of denoising steps
@@ -378,16 +377,14 @@ backpropagation through iterative denoising. BoltzDesign1 applies this strategy
 to Boltz-1's 64-bin Pairformer distogram, optimizing the pairwise distance
 distribution from which diffusion samples; on 212 BindCraft binders, Pairformer
 contacts matched diffusion-sampled contacts on 76% of designs [@boltzdesign1].
-ESMFold2 pairs the same distogram-gradient approach with its native
-single-sequence PLM, running one-stage continuous optimization through both the
-6-billion-parameter ESMC network and two ESMFold2 trunk replicates before
-invoking the diffusion and confidence modules in the final steps to score
-interface predicted TM-score (ipTM) [@esmc]. The second solution preserves
-coordinate-level backpropagation by replacing iterative diffusion with a
-few-step deterministic decoder. Built on the open AlphaFold3-style predictor
-Protenix, PXDesign-h substitutes a differentiable two-step ODE sampler for its
-200-step diffusion module and optimizes against five ensemble models resampled
-at each step [@pxdesign].
+ESMFold2 applies the same distogram-gradient strategy through its native
+single-sequence PLM trunk, invoking the diffusion and confidence modules only at
+the end to score interface predicted TM-score (ipTM) [@esmc]. The second
+solution preserves coordinate-level backpropagation by replacing iterative
+diffusion with a few-step deterministic decoder. Built on the open
+AlphaFold3-style predictor Protenix, PXDesign-h substitutes a differentiable
+two-step ODE sampler for its 200-step diffusion module and optimizes against
+five ensemble models resampled at each step [@pxdesign].
 
 Optimizing a sequence solely for high predicted confidence can produce unnatural
 amino-acid compositions that exploit a single predictor's blind spots rather
@@ -457,25 +454,24 @@ simultaneously [@pxdesign].
 
 Replacing structure-prediction confidence with classifiers trained on wet-lab
 binding outcomes can also substantially improve hit rates on identical candidate
-pools. In a controlled comparison on 10 low-homology targets (150 designs
-total), BoltzProt-1 kept the BoltzGen generator and 15-design-per-target testing
-budget fixed and swapped BoltzGen's confidence scores for BoltzPPI, a classifier
-trained on experimental binding data [@boltzprot1]. This change alone more than
-doubled confirmed binders from 3.3% (5/150) to 8.0% (12/150), expanding
-confirmed hits from 2 to 4 of the 10 targets [@boltzprot1]. Candidate ranking
-therefore shapes experimental yield independently of the generative
-architecture.
+pools. In a controlled comparison on 10 low-homology targets, BoltzProt-1 kept
+the BoltzGen generator and a fixed budget of 15 designs per target, swapping
+BoltzGen's confidence scores for BoltzPPI, a classifier trained on experimental
+binding data [@boltzprot1]. This change alone more than doubled confirmed
+binders from 3.3% (5/150) to 8.0% (12/150), expanding confirmed hits from 2 to 4
+of the 10 targets [@boltzprot1]. Candidate ranking therefore shapes experimental
+yield independently of the generative architecture.
 
 ### Reading wet-lab campaigns critically
 
-Over the past three years, experimental campaigns spanning compact minibinders,
-nanobodies, antibodies, and cyclic peptides have shown that computational de
-novo design can routinely produce nanomolar and occasionally picomolar binders
-from modest synthesis budgets. Table 2 compiles representative studies grouped
-by modality alongside their target scope, number of designs tested, binding
-criteria, and key caveats. Because no two de novo campaigns share a common
-target panel, assay format, or positivity threshold, headline hit rates should
-be read as context-dependent demonstrations rather than head-to-head rankings.
+Recent experimental campaigns spanning compact minibinders, nanobodies,
+antibodies, and cyclic peptides have shown that computational de novo design can
+routinely produce nanomolar and occasionally picomolar binders from modest
+synthesis budgets. Table 2 compiles representative studies grouped by modality
+alongside their target scope, number of designs tested, binding criteria, and
+key caveats. Because no two de novo campaigns share a common target panel, assay
+format, or positivity threshold, headline hit rates should be read as
+context-dependent demonstrations rather than head-to-head rankings.
 
 **Table 2. Representative Wet-Lab De Novo Binder Campaigns and Assay Context.**
 
@@ -499,21 +495,22 @@ be read as context-dependent demonstrations rather than head-to-head rankings.
 
 Three experimental factors explain much of the apparent spread in published hit
 rates and affinities. Hit definitions and assay rigor vary widely: some studies
-call binders from a permissive primary screen, such as a qualitative surface
-plasmon resonance (SPR) signal without a numeric cutoff \[@bindcraft;
+call binders from a permissive primary screen alone, such as a qualitative
+surface plasmon resonance (SPR) signal without a numeric cutoff \[@bindcraft;
 @rfpeptides; @latentx1\] or a small single-point biolayer interferometry (BLI)
-shift of 0.05 to 0.1 nm above background [@protenix_v2; @pxdesign; @chai2],
-whereas others verify candidates in a second, independent assay that eliminates
-many initial hits. For example, BoltzProt-1 separates initial screening hits
-from validated binders confirmed by reversing sensor orientation and external
-vendor re-testing [@boltzprot1], and Germinal similarly verified antigen-binding
-fragment (Fab) hits with both SPR and BLI [@germinal]. Multivalent avidity also
-overstates apparent affinities when binders are tested as dimeric Fc fusions or
-under dense sensor-immobilization setups that allow simultaneous multi-site
-engagement, a caveat flagged on headline picomolar and sub-nanomolar hits in
-Protenix-v2, BindCraft, and Chai-2 [@protenix_v2; @bindcraft; @chai2]. Finally,
-excluding constructs that fail chemical synthesis or protein expression shrinks
-the hit-rate denominator and inflates reported success rates. In practice,
+shift of 0.05 to 0.1 nm above background [@protenix_v2; @pxdesign; @chai2].
+Other campaigns add orthogonal confirmation in a second, independent assay,
+which reduces the final validated hit count relative to single-screen calls. For
+example, BoltzProt-1 separates initial screening hits from validated binders
+confirmed by reversing sensor orientation and external vendor re-testing
+[@boltzprot1], and Germinal similarly verified antigen-binding fragment (Fab)
+hits with both SPR and BLI [@germinal]. Multivalent avidity also overstates
+apparent affinities when binders are tested as dimeric Fc fusions or under dense
+sensor-immobilization setups that allow simultaneous multi-site engagement, a
+caveat flagged on reported picomolar and sub-nanomolar hits in Protenix-v2,
+BindCraft, and Chai-2 [@protenix_v2; @bindcraft; @chai2]. Finally, excluding
+constructs that fail chemical synthesis or protein expression shrinks the
+hit-rate denominator and inflates reported success rates. In practice,
 cyclic-peptide campaigns such as RFpeptides and Latent-X1 often assayed only
 about half of the sequences selected for synthesis [@rfpeptides; @latentx1], and
 PXDesign showed on PD-L1 that omitting six poorly expressing designs raised its
@@ -528,7 +525,7 @@ designed more than 1.15 million unique VHHs against 436 human cell-surface
 proteins (145 assayed by phage display without affinity measurement), aiming at
 randomly sampled exposed hotspots [@mber]. On uncurated hotspots, mBER's median
 per-design hit rate was roughly 0.4%, two orders of magnitude below curated
-small-panel headlines, while its best individual sites reached 7.5% overall and
+small-panel reports, while its best individual sites reached 7.5% overall and
 38% (8/21) within an ipTM-filtered bin [@mber].
 
 Even when identical molecules are re-tested in different laboratories, assay
@@ -641,40 +638,43 @@ meta-analyses such as Overath et al. standardize computational scoring without
 removing assay heterogeneity among source studies [@overath_meta]. The blinded
 AIntibody challenge proved that unified wet-lab benchmarking involving 29
 organizations is feasible, combining uniform affinity kinetics with a five-assay
-developability panel [@aintibody]. However, that benchmark remained narrow in
-scope, testing library-conditioned antibody optimization against the
-well-characterized SARS-CoV-2 receptor-binding domain rather than
-target-conditioned de novo design spanning diverse modalities [@aintibody].
-Extending multi-group blinded prospective evaluation to novel targets and
-uncurated epitopes for peptides, minibinders, and antibodies, with full
-reporting of ordered constructs, independent binding confirmation, and
-developability profiling, will be essential for fair head-to-head comparison of
-design methods.
+developability panel [@aintibody]. However, that benchmark was narrow in scope,
+testing library-conditioned antibody optimization against the well-characterized
+SARS-CoV-2 receptor-binding domain rather than target-conditioned de novo design
+spanning diverse modalities [@aintibody]. Extending multi-group blinded
+prospective evaluation to novel targets and uncurated epitopes for peptides,
+minibinders, and antibodies, with full reporting of ordered constructs,
+independent binding confirmation, and developability profiling, will be
+essential for fair head-to-head comparison of design methods.
 
 ## Conclusions
 
-Within a few years, biomolecular co-folding models have transformed de novo
-binder design from massive empirical library screening into targeted
-computational sequence generation. For peptides, minibinders, and antibody
-formats, workflows built on either MSA-based or single-sequence language-model
-trunks can now yield nanomolar binders from tens of tested candidates on
-well-characterized targets. Tracing these systems from their underlying
-components shows that no single architecture dominates every setting, as each
-approach carries distinct strengths and limitations in single-sequence
-differentiability, sampling speed, all-atom chemical generality, and
-stereochemical fidelity. At the same time, rapid generative progress has shifted
-the primary bottleneck away from proposing plausible folds and toward selecting
-real binders. Structure-prediction confidence heads estimate coordinate error on
-solved complexes, not binding thermodynamics, so they still misrank accurate
-poses, vary widely in accuracy across targets, and can be outperformed by
-classifiers trained directly on wet-lab outcomes. Comparing published campaigns
-further requires looking past headline hit rates to assay rigor, multivalent
-avidity effects, construct attrition, and target curation, while quantitative
-protein–protein affinity prediction and flexible or uncharacterized targets
-remain open technical frontiers. Turning in vitro binding hits into developable,
-functionally active drug leads, and testing genuine progress through transparent
-methods and shared, blinded prospective benchmarks, will define the next stage
-of computational binder design.
+Within a few years, protein structure prediction and biomolecular co-folding
+have matured into reliable tools for modeling macromolecular complexes. Design
+pipelines built on these predictors have begun shifting binder discovery away
+from massive empirical library screening toward targeted computational
+generation. On well-characterized targets, such workflows can already deliver
+nanomolar binders in peptide, minibinder, and antibody formats from only tens of
+synthesized candidates. This progress does not rest on a single strategy:
+tracing current systems from their underlying components reveals distinct
+architectural approaches to exploring sequence space, each striking a different
+balance between differentiability, sampling speed, and all-atom chemical
+generality.
+
+Generating plausible binders is no longer the limiting step; the primary
+bottleneck is identifying which candidates to test experimentally. Most
+pipelines still filter designs using structural confidence scores from
+co-folding models trained to minimize three-dimensional coordinate error on
+bound complexes, not to distinguish binders from nonbinders. Those metrics vary
+widely in predictive accuracy between targets and can be outperformed by
+classifiers trained on wet-lab binding data. Published campaigns also resist
+direct comparison, as differences in assay rigor, multivalent avidity, construct
+attrition, and target curation strongly shape reported hit rates. Beyond initial
+hit discovery, quantitative protein–protein affinity prediction and design
+against flexible or structurally uncharacterized targets are unresolved modeling
+challenges. Translating in vitro binding hits into developable, functionally
+active drug leads will depend on overcoming these limitations and evaluating
+progress through transparent methods and shared, blinded prospective benchmarks.
 
 ## Acknowledgments
 
