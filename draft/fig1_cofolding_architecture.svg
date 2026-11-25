@@ -1,0 +1,403 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 436" width="1000" height="436" role="img" aria-labelledby="fig1-title fig1-desc">
+  <title id="fig1-title">Two-Stage Co-folding Architecture</title>
+  <desc id="fig1-desc">Two-stage co-folding architecture showing MSA lookup versus protein language model inputs, a unified reasoning trunk with pairwise distogram readout, and single-pass IPA rigid-frame regression versus iterative all-atom diffusion.</desc>
+
+  <defs>
+    <style>
+      text {
+        font-family: 'Geist', 'Hiragino Sans', 'Yu Gothic', system-ui, -apple-system, sans-serif;
+      }
+      .mono {
+        font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+      }
+    </style>
+    <marker id="arr-fwd" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M 0 1.2 L 9 5 L 0 8.8 Z" fill="#17323A"/>
+    </marker>
+    <marker id="arr-sm" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto">
+      <path d="M 0 1.5 L 8.5 5 L 0 8.5 Z" fill="#17323A"/>
+    </marker>
+    <marker id="arr-teal" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto">
+      <path d="M 0 1.5 L 8.5 5 L 0 8.5 Z" fill="#0D7372"/>
+    </marker>
+    <marker id="arr-purple" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto">
+      <path d="M 0 1.5 L 8.5 5 L 0 8.5 Z" fill="#7A5195"/>
+    </marker>
+  </defs>
+
+  <!-- Column headers -->
+  <text x="150" y="26" font-size="11" font-weight="600" letter-spacing="1.1" fill="#4D6A74" text-anchor="middle">EVOLUTIONARY INPUT</text>
+  <text x="490" y="26" font-size="11" font-weight="600" letter-spacing="1.1" fill="#4D6A74" text-anchor="middle">STAGE 1 · REASONING TRUNK</text>
+  <text x="840" y="26" font-size="11" font-weight="600" letter-spacing="1.1" fill="#4D6A74" text-anchor="middle">STAGE 2 · COORDINATES</text>
+
+  <!-- ========================================================= -->
+  <!-- COLUMN 1: EVOLUTIONARY INPUTS (x=20..280, w=260)          -->
+  <!-- ========================================================= -->
+
+  <!-- Card 1A: MSA Lookup (y=46..216, h=170) -->
+  <g id="card-msa">
+    <rect x="20" y="46" width="260" height="170" rx="6" fill="#FFFFFF" stroke="#17323A" stroke-width="1.5"/>
+    <rect x="20" y="46" width="260" height="5" rx="2" fill="#4D6A74"/>
+    <text x="150" y="76" font-size="15" font-weight="600" fill="#17323A" text-anchor="middle">MSA Lookup</text>
+    <text x="150" y="95" font-size="11.5" fill="#4D6A74" text-anchor="middle">Database retrieval · MSA-free binder</text>
+
+    <!-- MSA Mini-Illustration Canvas (232 x 96) -->
+    <rect x="34" y="108" width="232" height="96" rx="5" fill="#F5F7F7" stroke="#D3DFDF" stroke-width="1"/>
+
+    <!-- Target MSA block (4 aligned sequence rows) -->
+    <text x="44" y="121" font-size="9.5" font-weight="600" fill="#4D6A74">Target MSA</text>
+
+    <!-- Coevolving column highlights -->
+    <rect x="114" y="126" width="16" height="44" rx="2" fill="#E3EBEB" stroke="#0D7372" stroke-width="1"/>
+    <rect x="196" y="126" width="16" height="44" rx="2" fill="#E3EBEB" stroke="#0D7372" stroke-width="1"/>
+    <!-- Coevolution coupling arc above highlighted columns (clear of label) -->
+    <path d="M 122 126 Q 163 112 204 126" fill="none" stroke="#0D7372" stroke-width="1.2" stroke-dasharray="3 2"/>
+
+    <!-- Row 1 (query target) -->
+    <g transform="translate(44, 129)">
+      <rect x="0" y="0" width="14" height="6" rx="1" fill="#17323A"/>
+      <rect x="18" y="0" width="16" height="6" rx="1" fill="#4D6A74"/>
+      <rect x="38" y="0" width="14" height="6" rx="1" fill="#4D6A74"/>
+      <rect x="56" y="0" width="12" height="6" rx="1" fill="#17323A"/>
+      <rect x="72" y="0" width="12" height="6" rx="1" fill="#0D7372"/>
+      <rect x="88" y="0" width="22" height="6" rx="1" fill="#4D6A74"/>
+      <rect x="114" y="0" width="18" height="6" rx="1" fill="#4D6A74"/>
+      <rect x="136" y="0" width="14" height="6" rx="1" fill="#17323A"/>
+      <rect x="154" y="0" width="12" height="6" rx="1" fill="#0D7372"/>
+      <rect x="170" y="0" width="20" height="6" rx="1" fill="#4D6A74"/>
+      <rect x="194" y="0" width="18" height="6" rx="1" fill="#17323A"/>
+    </g>
+    <!-- Row 2 -->
+    <g transform="translate(44, 138)">
+      <rect x="0" y="0" width="14" height="6" rx="1" fill="#4D6A74" opacity="0.8"/>
+      <rect x="18" y="0" width="16" height="6" rx="1" fill="#4D6A74" opacity="0.6"/>
+      <rect x="38" y="0" width="14" height="6" rx="1" fill="#4D6A74" opacity="0.5"/>
+      <rect x="56" y="0" width="12" height="6" rx="1" fill="#4D6A74" opacity="0.7"/>
+      <rect x="72" y="0" width="12" height="6" rx="1" fill="#0D7372"/>
+      <rect x="88" y="0" width="22" height="6" rx="1" fill="#4D6A74" opacity="0.6"/>
+      <rect x="114" y="0" width="18" height="6" rx="1" fill="#4D6A74" opacity="0.5"/>
+      <rect x="136" y="0" width="14" height="6" rx="1" fill="#4D6A74" opacity="0.7"/>
+      <rect x="154" y="0" width="12" height="6" rx="1" fill="#0D7372"/>
+      <rect x="170" y="0" width="20" height="6" rx="1" fill="#4D6A74" opacity="0.6"/>
+      <rect x="194" y="0" width="18" height="6" rx="1" fill="#4D6A74" opacity="0.75"/>
+    </g>
+    <!-- Row 3 (correlated mutation pair in purple) -->
+    <g transform="translate(44, 147)">
+      <rect x="0" y="0" width="14" height="6" rx="1" fill="#4D6A74" opacity="0.65"/>
+      <rect x="18" y="0" width="16" height="6" rx="1" fill="#4D6A74" opacity="0.55"/>
+      <rect x="38" y="0" width="14" height="6" rx="1" fill="#4D6A74" opacity="0.65"/>
+      <rect x="56" y="0" width="12" height="6" rx="1" fill="#4D6A74" opacity="0.5"/>
+      <rect x="72" y="0" width="12" height="6" rx="1" fill="#7A5195"/>
+      <rect x="88" y="0" width="22" height="6" rx="1" fill="#4D6A74" opacity="0.7"/>
+      <rect x="114" y="0" width="18" height="6" rx="1" fill="#4D6A74" opacity="0.55"/>
+      <rect x="136" y="0" width="14" height="6" rx="1" fill="#4D6A74" opacity="0.65"/>
+      <rect x="154" y="0" width="12" height="6" rx="1" fill="#7A5195"/>
+      <rect x="170" y="0" width="20" height="6" rx="1" fill="#4D6A74" opacity="0.5"/>
+      <rect x="194" y="0" width="18" height="6" rx="1" fill="#4D6A74" opacity="0.65"/>
+    </g>
+    <!-- Row 4 (correlated mutation pair in gold) -->
+    <g transform="translate(44, 156)">
+      <rect x="0" y="0" width="14" height="6" rx="1" fill="#4D6A74" opacity="0.5"/>
+      <rect x="18" y="0" width="16" height="6" rx="1" fill="#4D6A74" opacity="0.65"/>
+      <rect x="38" y="0" width="14" height="6" rx="1" fill="#4D6A74" opacity="0.5"/>
+      <rect x="56" y="0" width="12" height="6" rx="1" fill="#4D6A74" opacity="0.6"/>
+      <rect x="72" y="0" width="12" height="6" rx="1" fill="#C2A14D" stroke="#17323A" stroke-width="0.6"/>
+      <rect x="88" y="0" width="22" height="6" rx="1" fill="#4D6A74" opacity="0.45"/>
+      <rect x="114" y="0" width="18" height="6" rx="1" fill="#4D6A74" opacity="0.6"/>
+      <rect x="136" y="0" width="14" height="6" rx="1" fill="#4D6A74" opacity="0.5"/>
+      <rect x="154" y="0" width="12" height="6" rx="1" fill="#C2A14D" stroke="#17323A" stroke-width="0.6"/>
+      <rect x="170" y="0" width="20" height="6" rx="1" fill="#4D6A74" opacity="0.55"/>
+      <rect x="194" y="0" width="18" height="6" rx="1" fill="#4D6A74" opacity="0.5"/>
+    </g>
+
+    <!-- De novo binder: single sequence + empty dashed homolog zone -->
+    <line x1="44" y1="176" x2="256" y2="176" stroke="#D3DFDF" stroke-width="1"/>
+    <text x="44" y="188" font-size="9.5" font-weight="600" fill="#7A5195">De novo binder</text>
+    <rect x="128" y="181" width="66" height="6" rx="1.5" fill="#7A5195"/>
+    <rect x="128" y="190" width="66" height="8" rx="1.5" fill="none" stroke="#7A5195" stroke-width="1" stroke-dasharray="3 2"/>
+    <text x="200" y="197" font-size="9" fill="#4D6A74">no MSA</text>
+  </g>
+
+  <!-- Card 1B: Protein Language Model (y=244..414, h=170) -->
+  <g id="card-plm">
+    <rect x="20" y="244" width="260" height="170" rx="6" fill="#FFFFFF" stroke="#0D7372" stroke-width="1.8"/>
+    <rect x="20" y="244" width="260" height="5" rx="2" fill="#0D7372"/>
+    <text x="150" y="274" font-size="15" font-weight="600" fill="#17323A" text-anchor="middle">Protein Language Model</text>
+    <text x="150" y="293" font-size="11.5" fill="#4D6A74" text-anchor="middle">Native single-sequence · Learned priors</text>
+
+    <!-- PLM Mini-Illustration Canvas (232 x 96) -->
+    <rect x="34" y="306" width="232" height="96" rx="5" fill="#F5F7F7" stroke="#D3DFDF" stroke-width="1"/>
+
+    <!-- Self-attention arcs above ONE single sequence strip -->
+    <path d="M 58 352 C 58 318, 178 318, 178 352" fill="none" stroke="#0D7372" stroke-width="1.7" opacity="0.9"/>
+    <path d="M 82 352 C 82 326, 154 326, 154 352" fill="none" stroke="#0D7372" stroke-width="1.2" opacity="0.55"/>
+    <path d="M 106 352 C 106 322, 226 322, 226 352" fill="none" stroke="#7A5195" stroke-width="1.6" opacity="0.85"/>
+    <path d="M 130 352 C 130 334, 202 334, 202 352" fill="none" stroke="#0D7372" stroke-width="1.1" opacity="0.45"/>
+    <path d="M 58 352 C 58 332, 130 332, 130 352" fill="none" stroke="#4D6A74" stroke-width="1" opacity="0.45"/>
+    <text x="150" y="320" font-size="9.5" font-weight="600" fill="#0D7372" text-anchor="middle">Single sequence · Contextual attention</text>
+
+    <!-- Single input sequence strip (explicitly 1 row vs 4-row MSA above) -->
+    <g transform="translate(46, 353)">
+      <rect x="0" y="0" width="20" height="10" rx="2" fill="#17323A"/>
+      <rect x="24" y="0" width="20" height="10" rx="2" fill="#0D7372"/>
+      <rect x="48" y="0" width="20" height="10" rx="2" fill="#4D6A74"/>
+      <rect x="72" y="0" width="20" height="10" rx="2" fill="#0D7372"/>
+      <rect x="96" y="0" width="20" height="10" rx="2" fill="#17323A"/>
+      <rect x="120" y="0" width="20" height="10" rx="2" fill="#0D7372"/>
+      <rect x="144" y="0" width="20" height="10" rx="2" fill="#7A5195"/>
+      <rect x="168" y="0" width="20" height="10" rx="2" fill="#7A5195"/>
+      <rect x="192" y="0" width="16" height="10" rx="2" fill="#0D7372"/>
+    </g>
+
+    <!-- Subtle down-projection into dense learned representation bar -->
+    <line x1="150" y1="366" x2="150" y2="375" stroke="#0D7372" stroke-width="1.3" marker-end="url(#arr-teal)"/>
+    <rect x="52" y="378" width="196" height="16" rx="3" fill="#123B3F"/>
+    <text x="150" y="389.5" font-size="9.5" font-weight="600" fill="#F2F7F6" text-anchor="middle">Learned evolutionary embeddings</text>
+  </g>
+
+  <!-- Symmetrical connectors Col 1 -> Stage 1 (x=280..340) -->
+  <path d="M 280 131 H 308 V 188 H 334" fill="none" stroke="#17323A" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-fwd)"/>
+  <path d="M 280 329 H 308 V 272 H 334" fill="none" stroke="#17323A" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-fwd)"/>
+
+  <!-- ========================================================= -->
+  <!-- COLUMN 2: STAGE 1 REASONING TRUNK + DISTOGRAM (x=340..640)-->
+  <!-- ========================================================= -->
+  <g id="stage-1">
+    <rect x="340" y="46" width="300" height="368" rx="8" fill="#123B3F"/>
+
+    <!-- Top Trunk Header -->
+    <text x="490" y="78" font-size="17" font-weight="700" fill="#F2F7F6" text-anchor="middle">Reasoning Trunk</text>
+    <text x="490" y="99" font-size="11.5" fill="#E3EBEB" text-anchor="middle">Evoformer · Pairformer · Folding trunk</text>
+    <text x="490" y="117" font-size="11" font-weight="600" fill="#C2A14D" text-anchor="middle">Single forward pass</text>
+
+    <!-- Clear 1D amino-acid sequence representation with per-residue feature colors -->
+    <g transform="translate(382, 132)">
+      <rect x="0" y="0" width="22" height="22" rx="3" fill="#0D7372"/>
+      <text x="11" y="15" class="mono" font-size="10.5" font-weight="600" fill="#FFFFFF" text-anchor="middle">M</text>
+      <rect x="24" y="0" width="22" height="22" rx="3" fill="#4D6A74"/>
+      <text x="35" y="15" class="mono" font-size="10.5" font-weight="600" fill="#FFFFFF" text-anchor="middle">A</text>
+      <rect x="48" y="0" width="22" height="22" rx="3" fill="#7A5195"/>
+      <text x="59" y="15" class="mono" font-size="10.5" font-weight="600" fill="#FFFFFF" text-anchor="middle">K</text>
+      <rect x="72" y="0" width="22" height="22" rx="3" fill="#0D7372"/>
+      <text x="83" y="15" class="mono" font-size="10.5" font-weight="600" fill="#FFFFFF" text-anchor="middle">L</text>
+      <rect x="96" y="0" width="22" height="22" rx="3" fill="#4D6A74"/>
+      <text x="107" y="15" class="mono" font-size="10.5" font-weight="600" fill="#FFFFFF" text-anchor="middle">V</text>
+      <rect x="120" y="0" width="22" height="22" rx="3" fill="#0D7372"/>
+      <text x="131" y="15" class="mono" font-size="10.5" font-weight="600" fill="#FFFFFF" text-anchor="middle">G</text>
+      <rect x="144" y="0" width="22" height="22" rx="3" fill="#7A5195"/>
+      <text x="155" y="15" class="mono" font-size="10.5" font-weight="600" fill="#FFFFFF" text-anchor="middle">D</text>
+      <rect x="168" y="0" width="22" height="22" rx="3" fill="#4D6A74"/>
+      <text x="179" y="15" class="mono" font-size="10.5" font-weight="600" fill="#FFFFFF" text-anchor="middle">R</text>
+      <rect x="192" y="0" width="24" height="22" rx="3" fill="#17323A" stroke="#4D6A74" stroke-width="1"/>
+      <text x="204" y="15" class="mono" font-size="10.5" font-weight="600" fill="#E3EBEB" text-anchor="middle">…</text>
+      <text x="108" y="36" font-size="10" fill="#E3EBEB" text-anchor="middle">1D per-residue representation</text>
+    </g>
+
+    <!-- Integrated Pairwise Distogram Card inside Stage 1 -->
+    <rect x="358" y="188" width="264" height="208" rx="6" fill="#FFFFFF"/>
+    <text x="490" y="213" font-size="14" font-weight="600" fill="#17323A" text-anchor="middle">Pairwise Distogram</text>
+    <text x="490" y="231" font-size="11.5" fill="#4D6A74" text-anchor="middle">Binned distance readout per residue pair</text>
+
+    <!-- Distogram Visual Canvas (238 x 142) -->
+    <rect x="371" y="242" width="238" height="142" rx="5" fill="#F5F7F7" stroke="#D3DFDF" stroke-width="1"/>
+
+    <!-- Left: Symmetric 6x6 Pairwise Matrix -->
+    <text x="424" y="258" font-size="9.5" font-weight="600" fill="#4D6A74" text-anchor="middle">2D pair map (i, j)</text>
+    <g transform="translate(382, 265)">
+      <rect x="0" y="0" width="84" height="84" rx="3" fill="#FFFFFF" stroke="#D3DFDF" stroke-width="1"/>
+      <!-- Diagonal -->
+      <rect x="3" y="3" width="11" height="11" rx="1.5" fill="#17323A"/>
+      <rect x="16" y="16" width="11" height="11" rx="1.5" fill="#17323A"/>
+      <rect x="29" y="29" width="11" height="11" rx="1.5" fill="#17323A"/>
+      <rect x="42" y="42" width="11" height="11" rx="1.5" fill="#17323A"/>
+      <rect x="55" y="55" width="11" height="11" rx="1.5" fill="#17323A"/>
+      <rect x="68" y="68" width="11" height="11" rx="1.5" fill="#17323A"/>
+      <!-- Near-diagonal & pairwise contacts -->
+      <rect x="16" y="3" width="11" height="11" rx="1.5" fill="#0D7372" opacity="0.55"/>
+      <rect x="3" y="16" width="11" height="11" rx="1.5" fill="#0D7372" opacity="0.55"/>
+      <rect x="29" y="16" width="11" height="11" rx="1.5" fill="#0D7372" opacity="0.55"/>
+      <rect x="16" y="29" width="11" height="11" rx="1.5" fill="#0D7372" opacity="0.55"/>
+      <rect x="29" y="3" width="11" height="11" rx="1.5" fill="#0D7372" opacity="0.3"/>
+      <rect x="3" y="29" width="11" height="11" rx="1.5" fill="#0D7372" opacity="0.3"/>
+      <rect x="42" y="29" width="11" height="11" rx="1.5" fill="#0D7372" opacity="0.5"/>
+      <rect x="29" y="42" width="11" height="11" rx="1.5" fill="#0D7372" opacity="0.5"/>
+      <rect x="55" y="42" width="11" height="11" rx="1.5" fill="#0D7372" opacity="0.5"/>
+      <rect x="42" y="55" width="11" height="11" rx="1.5" fill="#0D7372" opacity="0.5"/>
+      <rect x="68" y="55" width="11" height="11" rx="1.5" fill="#0D7372" opacity="0.55"/>
+      <rect x="55" y="68" width="11" height="11" rx="1.5" fill="#0D7372" opacity="0.55"/>
+      <!-- Long-range contacts -->
+      <rect x="55" y="16" width="11" height="11" rx="1.5" fill="#0D7372" opacity="0.75"/>
+      <rect x="16" y="55" width="11" height="11" rx="1.5" fill="#0D7372" opacity="0.75"/>
+      <rect x="68" y="16" width="11" height="11" rx="1.5" fill="#0D7372" opacity="0.4"/>
+      <rect x="16" y="68" width="11" height="11" rx="1.5" fill="#0D7372" opacity="0.4"/>
+      <rect x="68" y="29" width="11" height="11" rx="1.5" fill="#0D7372" opacity="0.6"/>
+      <rect x="29" y="68" width="11" height="11" rx="1.5" fill="#0D7372" opacity="0.6"/>
+      <!-- Highlighted cell (i, j) dead center vertically -->
+      <rect x="68" y="42" width="11" height="11" rx="1.5" fill="#C2A14D" stroke="#17323A" stroke-width="1.2"/>
+      <rect x="42" y="68" width="11" height="11" rx="1.5" fill="#C2A14D" stroke="#17323A" stroke-width="1"/>
+    </g>
+    <text x="424" y="376" font-size="9" fill="#0D7372" font-weight="600" text-anchor="middle">Residues 1 … L</text>
+
+    <!-- Connector from highlighted cell (461, 313) dead center vertically to histogram -->
+    <line x1="462" y1="313" x2="492" y2="313" stroke="#17323A" stroke-width="1.3" stroke-dasharray="3 2" marker-end="url(#arr-sm)"/>
+
+    <!-- Right: Binned Distance Distribution Histogram (exact 84px height matching 2D matrix y=265..349) -->
+    <text x="548" y="258" font-size="9.5" font-weight="600" fill="#4D6A74" text-anchor="middle">P(distance | i, j)</text>
+    <g transform="translate(496, 265)">
+      <!-- Axes: y=0..84 matches matrix y=265..349 exactly -->
+      <line x1="0" y1="84" x2="104" y2="84" stroke="#17323A" stroke-width="1.3"/>
+      <line x1="0" y1="0" x2="0" y2="84" stroke="#17323A" stroke-width="1.3"/>
+      <!-- 9 crisp distance bins scaled to 84px height -->
+      <rect x="5" y="75" width="8" height="9" rx="1" fill="#D3DFDF"/>
+      <rect x="16" y="63" width="8" height="21" rx="1" fill="#0D7372" opacity="0.45"/>
+      <rect x="27" y="38" width="8" height="46" rx="1" fill="#0D7372" opacity="0.75"/>
+      <rect x="38" y="6" width="8" height="78" rx="1" fill="#C2A14D" stroke="#17323A" stroke-width="1.1"/>
+      <rect x="49" y="23" width="8" height="61" rx="1" fill="#0D7372" opacity="0.85"/>
+      <rect x="60" y="49" width="8" height="35" rx="1" fill="#0D7372" opacity="0.55"/>
+      <rect x="71" y="65" width="8" height="19" rx="1" fill="#0D7372" opacity="0.35"/>
+      <rect x="82" y="73" width="8" height="11" rx="1" fill="#D3DFDF"/>
+      <rect x="93" y="78" width="8" height="6" rx="1" fill="#D3DFDF"/>
+      <!-- Axis tick labels -->
+      <text x="4" y="96" class="mono" font-size="8.5" fill="#4D6A74">2 Å</text>
+      <text x="101" y="96" class="mono" font-size="8.5" fill="#4D6A74" text-anchor="end">22 Å</text>
+    </g>
+    <text x="548" y="376" font-size="9" fill="#0D7372" font-weight="600" text-anchor="middle">64 distance bins</text>
+  </g>
+
+  <!-- Symmetrical distribution rail Stage 1 -> Stage 2 (x=640..700) -->
+  <line x1="640" y1="230" x2="670" y2="230" stroke="#17323A" stroke-width="2"/>
+  <line x1="670" y1="131" x2="670" y2="329" stroke="#17323A" stroke-width="2"/>
+  <line x1="670" y1="131" x2="694" y2="131" stroke="#17323A" stroke-width="2" marker-end="url(#arr-fwd)"/>
+  <line x1="670" y1="329" x2="694" y2="329" stroke="#17323A" stroke-width="2" marker-end="url(#arr-fwd)"/>
+
+  <!-- ========================================================= -->
+  <!-- COLUMN 3: STAGE 2 COORDINATE MODULES (x=700..980, w=280)  -->
+  <!-- ========================================================= -->
+
+  <!-- Card 2A: Single-Pass Regression (IPA) (y=46..216, h=170) -->
+  <g id="card-ipa">
+    <rect x="700" y="46" width="280" height="170" rx="6" fill="#FFFFFF" stroke="#0D7372" stroke-width="1.8"/>
+    <rect x="700" y="46" width="6" height="170" rx="2" fill="#0D7372"/>
+    <text x="843" y="76" font-size="15" font-weight="600" fill="#17323A" text-anchor="middle">Single-Pass Regression (IPA)</text>
+    <text x="843" y="95" font-size="11.5" fill="#4D6A74" text-anchor="middle">One pass · Canonical protein frames</text>
+
+    <!-- IPA Mini-Illustration Canvas (248 x 96) -->
+    <rect x="718" y="108" width="248" height="96" rx="5" fill="#F5F7F7" stroke="#D3DFDF" stroke-width="1"/>
+
+    <!-- Left: 5 loose / unaligned rigid backbone triangles -->
+    <text x="760" y="122" font-size="9.5" font-weight="600" fill="#4D6A74" text-anchor="middle">Rigid frames</text>
+    <g transform="translate(724, 128)">
+      <!-- Triangle 1 -->
+      <polygon points="8,16 20,4 24,20" fill="#0D7372" fill-opacity="0.22" stroke="#0D7372" stroke-width="1.4"/>
+      <circle cx="17" cy="13" r="1.8" fill="#17323A"/>
+      <!-- Triangle 2 -->
+      <polygon points="34,12 48,6 44,23" fill="#0D7372" fill-opacity="0.22" stroke="#0D7372" stroke-width="1.4"/>
+      <circle cx="42" cy="14" r="1.8" fill="#17323A"/>
+      <!-- Triangle 3 -->
+      <polygon points="16,38 30,30 28,48" fill="#0D7372" fill-opacity="0.22" stroke="#0D7372" stroke-width="1.4"/>
+      <circle cx="25" cy="39" r="1.8" fill="#17323A"/>
+      <!-- Triangle 4 -->
+      <polygon points="46,34 62,28 58,46" fill="#0D7372" fill-opacity="0.22" stroke="#0D7372" stroke-width="1.4"/>
+      <circle cx="55" cy="36" r="1.8" fill="#17323A"/>
+      <!-- Triangle 5 -->
+      <polygon points="30,56 44,50 42,67" fill="#0D7372" fill-opacity="0.22" stroke="#0D7372" stroke-width="1.4"/>
+      <circle cx="39" cy="58" r="1.8" fill="#17323A"/>
+    </g>
+
+    <!-- Single-pass arrow -->
+    <text x="826" y="148" class="mono" font-size="9.5" font-weight="600" fill="#0D7372" text-anchor="middle">1 pass</text>
+    <line x1="802" y1="158" x2="848" y2="158" stroke="#0D7372" stroke-width="2" marker-end="url(#arr-teal)"/>
+
+    <!-- Right: Folded backbone of linked rigid residue triangles -->
+    <text x="908" y="122" font-size="9.5" font-weight="600" fill="#0D7372" text-anchor="middle">Folded backbone</text>
+    <g transform="translate(860, 128)">
+      <!-- Smooth peptide backbone trace behind frames -->
+      <path d="M 12 52 C 20 26, 38 14, 50 22 C 62 30, 68 50, 82 42" fill="none" stroke="#17323A" stroke-width="1.8" stroke-linecap="round"/>
+      <!-- 5 arranged rigid residue triangles snapped along the fold -->
+      <polygon points="4,56 14,42 20,58" fill="#0D7372" fill-opacity="0.28" stroke="#0D7372" stroke-width="1.4"/>
+      <polygon points="18,32 30,20 34,36" fill="#0D7372" fill-opacity="0.28" stroke="#0D7372" stroke-width="1.4"/>
+      <polygon points="40,18 54,14 52,30" fill="#0D7372" fill-opacity="0.28" stroke="#0D7372" stroke-width="1.4"/>
+      <polygon points="56,36 70,32 66,48" fill="#0D7372" fill-opacity="0.28" stroke="#0D7372" stroke-width="1.4"/>
+      <polygon points="74,44 88,34 88,50" fill="#0D7372" fill-opacity="0.28" stroke="#0D7372" stroke-width="1.4"/>
+      <!-- C-alpha backbone nodes -->
+      <circle cx="13" cy="51" r="2.2" fill="#17323A"/>
+      <circle cx="27" cy="29" r="2.2" fill="#17323A"/>
+      <circle cx="49" cy="21" r="2.2" fill="#17323A"/>
+      <circle cx="64" cy="39" r="2.2" fill="#17323A"/>
+      <circle cx="83" cy="42" r="2.2" fill="#17323A"/>
+    </g>
+  </g>
+
+  <!-- Card 2B: All-Atom Diffusion (y=244..414, h=170) -->
+  <g id="card-diff">
+    <rect x="700" y="244" width="280" height="170" rx="6" fill="#FFFFFF" stroke="#7A5195" stroke-width="1.8"/>
+    <rect x="700" y="244" width="6" height="170" rx="2" fill="#7A5195"/>
+    <text x="843" y="274" font-size="15" font-weight="600" fill="#17323A" text-anchor="middle">All-Atom Diffusion</text>
+    <text x="843" y="293" font-size="11.5" fill="#4D6A74" text-anchor="middle">Iterative denoising · Broad chemistry</text>
+
+    <!-- All-Atom Diffusion Mini-Illustration Canvas (248 x 96) -->
+    <rect x="718" y="306" width="248" height="96" rx="5" fill="#F5F7F7" stroke="#D3DFDF" stroke-width="1"/>
+
+    <!-- Left: Gaussian cloud of free individual atoms -->
+    <text x="760" y="320" font-size="9.5" font-weight="600" fill="#4D6A74" text-anchor="middle">Atom cloud</text>
+    <g transform="translate(724, 326)">
+      <circle cx="36" cy="34" r="30" fill="none" stroke="#D3DFDF" stroke-width="1.2" stroke-dasharray="3 2"/>
+      <!-- Scattered individual atoms -->
+      <circle cx="20" cy="20" r="2.8" fill="#7A5195" opacity="0.75"/>
+      <circle cx="34" cy="12" r="2.5" fill="#4D6A74"/>
+      <circle cx="50" cy="18" r="2.8" fill="#0D7372"/>
+      <circle cx="14" cy="34" r="2.5" fill="#4D6A74"/>
+      <circle cx="29" cy="28" r="3" fill="#7A5195"/>
+      <circle cx="44" cy="31" r="2.8" fill="#7A5195" opacity="0.8"/>
+      <circle cx="58" cy="32" r="2.5" fill="#4D6A74"/>
+      <circle cx="22" cy="46" r="2.8" fill="#0D7372"/>
+      <circle cx="36" cy="44" r="3.2" fill="#C2A14D" stroke="#17323A" stroke-width="0.9"/>
+      <circle cx="51" cy="46" r="2.8" fill="#7A5195"/>
+      <circle cx="30" cy="57" r="2.5" fill="#4D6A74"/>
+      <circle cx="44" cy="56" r="2.5" fill="#7A5195" opacity="0.65"/>
+      <circle cx="17" cy="53" r="2.3" fill="#4D6A74" opacity="0.7"/>
+      <circle cx="56" cy="23" r="2.3" fill="#4D6A74" opacity="0.7"/>
+    </g>
+
+    <!-- Iterative multi-step denoising arrow -->
+    <text x="826" y="346" class="mono" font-size="9.5" font-weight="600" fill="#7A5195" text-anchor="middle">T steps</text>
+    <circle cx="803" cy="356" r="2" fill="#7A5195" opacity="0.45"/>
+    <circle cx="811" cy="356" r="2" fill="#7A5195" opacity="0.7"/>
+    <circle cx="819" cy="356" r="2" fill="#7A5195"/>
+    <line x1="825" y1="356" x2="848" y2="356" stroke="#7A5195" stroke-width="2" marker-end="url(#arr-purple)"/>
+
+    <!-- Right: Bonded all-atom structure (peptide + side chains + small ring/ion) -->
+    <text x="908" y="320" font-size="9.5" font-weight="600" fill="#7A5195" text-anchor="middle">All-atom complex</text>
+    <g transform="translate(860, 326)">
+      <!-- Bonds (peptide curve + side-chain branches) -->
+      <line x1="12" y1="48" x2="24" y2="34" stroke="#17323A" stroke-width="1.5"/>
+      <line x1="24" y1="34" x2="40" y2="26" stroke="#17323A" stroke-width="1.5"/>
+      <line x1="40" y1="26" x2="54" y2="38" stroke="#17323A" stroke-width="1.5"/>
+      <line x1="54" y1="38" x2="44" y2="54" stroke="#17323A" stroke-width="1.5"/>
+      <!-- Side-chain branches -->
+      <line x1="24" y1="34" x2="14" y2="20" stroke="#17323A" stroke-width="1.3"/>
+      <line x1="40" y1="26" x2="44" y2="12" stroke="#17323A" stroke-width="1.3"/>
+      <line x1="54" y1="38" x2="66" y2="50" stroke="#17323A" stroke-width="1.3"/>
+      <!-- Small bonded chemical ring / non-protein motif -->
+      <polygon points="66,22 76,14 88,18 88,30 76,34" fill="#E3EBEB" stroke="#17323A" stroke-width="1.3"/>
+      <!-- Non-covalent interaction dash to gold heteroatom/ion -->
+      <line x1="54" y1="38" x2="66" y2="22" stroke="#7A5195" stroke-width="1.1" stroke-dasharray="2.5 2"/>
+
+      <!-- Atoms -->
+      <circle cx="12" cy="48" r="3.4" fill="#7A5195"/>
+      <circle cx="24" cy="34" r="3.4" fill="#7A5195"/>
+      <circle cx="40" cy="26" r="3.4" fill="#7A5195"/>
+      <circle cx="54" cy="38" r="3.4" fill="#7A5195"/>
+      <circle cx="44" cy="54" r="3.4" fill="#7A5195"/>
+      <circle cx="14" cy="20" r="3" fill="#0D7372"/>
+      <circle cx="44" cy="12" r="3" fill="#0D7372"/>
+      <circle cx="66" cy="50" r="3" fill="#0D7372"/>
+      <!-- Ligand ring vertices + highlighted gold heteroatom -->
+      <circle cx="66" cy="22" r="3.6" fill="#C2A14D" stroke="#17323A" stroke-width="1"/>
+      <circle cx="76" cy="14" r="2.6" fill="#17323A"/>
+      <circle cx="88" cy="18" r="2.6" fill="#17323A"/>
+      <circle cx="88" cy="30" r="2.6" fill="#17323A"/>
+      <circle cx="76" cy="34" r="2.6" fill="#0D7372"/>
+    </g>
+  </g>
+</svg>

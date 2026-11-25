@@ -178,6 +178,7 @@ def parse_manuscript(md_text: str) -> tuple[str, list[Section]]:
         if (
             joined.startswith("**Fig ")
             or joined.startswith("**Table ")
+            or joined.startswith("![")
             or joined.startswith("|")
             or (joined.startswith("*") and joined.endswith("*") and "Draft Review Manuscript" in joined)
         ):

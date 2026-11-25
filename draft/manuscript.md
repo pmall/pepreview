@@ -104,26 +104,16 @@ encoding sequence, structure, and function as discrete tokens within a
 multimodal masked language model so that any track can be prompted or generated
 jointly [@esm3].
 
-**Fig 1. Co-folding architectural trade-offs and binder-design workflows.** (A)
-Two-stage co-folding architectures separate a differentiable
-sequence-to-pairwise reasoning trunk from a three-dimensional coordinate module.
-Evolutionary information enters the trunk via database multiple sequence
-alignment (MSA) retrieval, which is non-differentiable and undefined for
-invented sequences, via a pre-trained protein language model (PLM) trunk such as
-ESMC/ESMFold2 that supports native single-sequence inference and end-to-end
-gradient backpropagation to input sequences, or via a hybrid dual-track trunk
-such as Chai-1. The trunk outputs single and pair representations along with a
-differentiable distogram head, feeding either a single-pass differentiable
-regression module (Invariant Point Attention) or an iterative all-atom diffusion
-or few-step flow/ODE coordinate generator. (B) These architectural choices map
-onto three practical binder-design workflows. Generate-and-filter pipelines
-decouple backbone or all-atom generation from inverse folding and post-hoc
-refolding filters or binding classifiers. Unified all-atom diffusion models
-train a single network jointly for structure prediction and design.
-Gradient-based sequence optimization backpropagates through regression modules,
-trunk distogram or confidence heads that bypass diffusion, or few-step ODE
-decoders, optionally regularized by language-model priors or discrete mutation
-proposals.
+![Fig 1. Two-stage co-folding architecture.](fig1_cofolding_architecture.svg)
+
+**Fig 1. Two-stage co-folding architecture.** Modern co-folding models split
+structure prediction into a single-pass reasoning trunk (Stage 1) and a
+coordinate-generation module (Stage 2). Evolutionary inputs enter either through
+database multiple sequence alignment (MSA) retrieval or through a protein
+language model (PLM) operating on single sequences. The trunk builds per-residue
+(1D) and pairwise (2D) representations alongside a binned pairwise distogram,
+feeding either single-pass rigid-frame regression (IPA) or iterative all-atom
+diffusion.
 
 ### Evolutionary inputs: multiple sequence alignments versus protein language models
 
@@ -229,7 +219,7 @@ with 1.88 Å for AlphaFold3 and 2.24 Å for Boltz-1x [@rosettafold3].
 
 Structure predictors evaluate one candidate at a time, making blind exploration
 of sequence space impractical. Binder-design systems therefore repurpose these
-networks through three primary workflows (Fig 1B). The first generates a
+networks through three primary workflows (Fig 2). The first generates a
 three-dimensional binder geometry against the target, assigns a compatible
 sequence with a separate inverse-folding model, and refolds the complex to
 filter candidates. The second trains a single all-atom diffusion network to
@@ -402,6 +392,18 @@ single-point mutations that are accepted or rejected iteratively. To curb
 predictor-specific overfitting, it interleaves Boltz refolding with LigandMPNN
 resampling while holding out AlphaFold3 as an independent check
 [@rfoptimization].
+
+![Fig 2. Three de novo binder-design workflows.](fig2_design_workflows.svg)
+
+**Fig 2. Three de novo binder-design workflows.** Conditioned on a target
+structure, current design pipelines generate a bound binder structure and
+sequence through three routes: (1) generate-and-filter pipelines denoise an
+unlabeled three-dimensional binder before assigning its sequence via inverse
+folding; (2) unified all-atom co-design models generate atomic coordinates and
+amino-acid sequence together in one network; and (3) gradient-based optimization
+updates a relaxed *L* × 20 sequence matrix by backpropagating a design loss
+through a frozen structure predictor. All three workflows feed into candidate
+filtering and wet-lab assays.
 
 ## 3. Candidate Selection and Experimental Evidence
 

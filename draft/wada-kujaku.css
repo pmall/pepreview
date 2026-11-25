@@ -1,0 +1,173 @@
+/* ==========================================================================
+   WADA — KUJAKU theme (孔雀, peacock)
+   Teal + purple with a gold spark, in the spirit of Sanzo Wada's
+   "A Dictionary of Color Combinations". For biology, drug-discovery
+   and AI slides, pages and figures: cool, precise, modern.
+
+   Exported from the Wada design system (tokens v5). Standalone: no
+   components, no JavaScript. Drop it in with <link rel="stylesheet">.
+
+   1. Fonts        3. Base elements      5. SVG figure classes
+   2. Tokens       4. Type utilities
+
+   CONTRAST: every pairing below meets WCAG AA (4.5:1) at any size.
+     text-primary, text-secondary,
+     accent-primary, accent-secondary, link  -> bg-base, bg-surface, bg-muted
+     text-inverse    -> bg-inverse, accent-primary, accent-secondary
+     text-on-accent  -> accent-primary, accent-secondary
+     accent-inverse, link-inverse            -> bg-inverse
+   NEVER: accent-tertiary (gold) as text on a light ground (2.0–2.5:1);
+          text-primary on bg-inverse or an accent fill.
+   ========================================================================== */
+
+/* 1. Fonts ---------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+/* 2. Tokens --------------------------------------------------------------- */
+:root {
+  /* Grounds */
+  --bg-base:    #F5F7F7;   /* default page / slide background */
+  --bg-surface: #FFFFFF;   /* cards, panels, figure plates */
+  --bg-muted:   #E3EBEB;   /* table stripes, callouts, diagram regions */
+  --bg-inverse: #123B3F;   /* title / section slides, emphasis bands */
+
+  /* Text */
+  --text-primary:   #17323A;  /* headings, body */
+  --text-secondary: #4D6A74;  /* captions, labels, axes */
+  --text-inverse:   #F2F7F6;  /* on bg-inverse and accent fills */
+  --text-on-accent: #FFFFFF;  /* on accent-primary / accent-secondary fills */
+
+  /* Accents */
+  --accent-primary:   #0D7372;  /* teal: lead accent, first series, kickers */
+  --accent-secondary: #7A5195;  /* purple: comparison series, diagrams */
+  --accent-tertiary:  #C2A14D;  /* gold: reference lines, one highlighted point */
+  --accent-inverse:   #C2A14D;  /* highlight on bg-inverse */
+
+  /* Links */
+  --link:         #7A5195;      /* on light grounds; underlined, never bold */
+  --link-inverse: #C2A14D;      /* on bg-inverse */
+
+  /* Borders */
+  --border-subtle: #D3DFDF;     /* hairlines, gridlines (decorative only) */
+  --border-strong: #17323A;     /* axes, emphasised frames, control borders */
+
+  /* Type families */
+  --font-display: 'Geist', 'Hiragino Sans', 'Yu Gothic', system-ui, sans-serif;
+  --font-body:    'Geist', 'Hiragino Sans', 'Yu Gothic', system-ui, sans-serif;
+  --font-mono:    'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Type scale (16:9 slides at 1920 × 1080; scale the set together for web/print) */
+  --size-title:   56px;  --leading-title:   1.05; --tracking-title:   -0.03em; --weight-title:   700;
+  --size-heading: 36px;  --leading-heading: 1.15; --tracking-heading: -0.02em; --weight-heading: 600;
+  --size-lead:    22px;  --leading-lead:    1.45;
+  --size-body:    18px;  --leading-body:    1.5;
+  --size-caption: 14px;  --leading-caption: 1.4;
+  --size-kicker:  14px;  --tracking-kicker: 0.08em;
+  --size-code:    15px;
+
+  /* Spacing (doubling scale) */
+  --space-1: 8px;    /* label to value, icon to text */
+  --space-2: 16px;   /* inside cards and callouts, between list items */
+  --space-3: 32px;   /* between blocks */
+  --space-4: 64px;   /* page / slide margins */
+
+  /* Radius (kept small: precise, not decorative) */
+  --radius-sm:   2px;     /* tags, chart bars */
+  --radius-md:   6px;     /* cards, callouts, figure plates */
+  --radius-full: 9999px;  /* pills, dots */
+
+  /* Focus ring: solid, ≥3:1 on every ground */
+  --focus-ring: 2px solid var(--accent-primary);
+}
+
+/* 3. Base elements -------------------------------------------------------- */
+html { background: var(--bg-base); }
+body {
+  margin: 0;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--size-body);
+  line-height: var(--leading-body);
+  font-variant-numeric: lining-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { font-family: var(--font-display); color: var(--text-primary); margin: 0 0 var(--space-2); }
+h1 { font-size: var(--size-title);   line-height: var(--leading-title);   letter-spacing: var(--tracking-title);   font-weight: var(--weight-title); }
+h2 { font-size: var(--size-heading); line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); font-weight: var(--weight-heading); }
+h3 { font-size: 24px; line-height: 1.25; letter-spacing: -0.01em; font-weight: 600; }
+h4 { font-size: var(--size-body); line-height: 1.35; font-weight: 600; }
+
+p, ul, ol { margin: 0 0 var(--space-2); }
+small, figcaption { font-size: var(--size-caption); line-height: var(--leading-caption); color: var(--text-secondary); }
+strong, b { font-weight: 600; }
+
+a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); font-size: var(--size-code); }
+pre { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: var(--space-2); overflow-x: auto; line-height: 1.5; }
+:not(pre) > code { background: var(--bg-muted); border-radius: var(--radius-sm); padding: 1px 4px; }
+
+hr { border: 0; border-top: 1px solid var(--border-subtle); margin: var(--space-3) 0; }
+
+blockquote { margin: 0 0 var(--space-2); padding: var(--space-2) 20px; background: var(--bg-muted); border-radius: var(--radius-md); }
+
+table { border-collapse: collapse; font-size: var(--size-caption); background: var(--bg-surface); }
+th { text-align: left; font-weight: 600; font-size: 13px; color: var(--text-secondary); padding: 10px 12px; border-bottom: 1.5px solid var(--border-strong); }
+td { padding: 9px 12px; border-bottom: 1px solid var(--border-subtle); }
+tbody tr:nth-child(even) td { background: var(--bg-muted); }
+td.num, th.num { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+button {
+  font: 600 15px/1 var(--font-body);
+  padding: 11px var(--space-2); border-radius: var(--radius-md); cursor: pointer;
+  background: var(--accent-primary); color: var(--text-on-accent); border: 1.5px solid transparent;
+}
+button:hover { background: var(--accent-secondary); }
+button:disabled { opacity: .45; cursor: not-allowed; }
+
+img, svg, video { max-width: 100%; height: auto; }
+
+/* Inverse band: wrap any block in .inverse for a dark teal section */
+.inverse { background: var(--bg-inverse); color: var(--text-inverse); }
+.inverse h1, .inverse h2, .inverse h3, .inverse h4 { color: var(--text-inverse); }
+.inverse a { color: var(--link-inverse); }
+.inverse small, .inverse figcaption { color: var(--text-inverse); }
+
+/* 4. Type utilities ------------------------------------------------------- */
+.title   { font: var(--weight-title) var(--size-title)/var(--leading-title) var(--font-display); letter-spacing: var(--tracking-title); }
+.heading { font: var(--weight-heading) var(--size-heading)/var(--leading-heading) var(--font-display); letter-spacing: var(--tracking-heading); }
+.kicker  { font: 600 var(--size-kicker)/1.3 var(--font-body); letter-spacing: var(--tracking-kicker); text-transform: uppercase; color: var(--accent-primary); margin: 0 0 var(--space-1); }
+.inverse .kicker { color: var(--accent-inverse); }
+.lead    { font: 500 var(--size-lead)/var(--leading-lead) var(--font-body); color: var(--text-secondary); }
+.inverse .lead { color: var(--text-inverse); }
+.caption { font: 400 var(--size-caption)/var(--leading-caption) var(--font-body); color: var(--text-secondary); }
+.mono    { font-family: var(--font-mono); }
+
+/* Surfaces */
+.surface { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: var(--space-2); }
+.muted   { background: var(--bg-muted); border-radius: var(--radius-md); padding: var(--space-2) 20px; }
+
+/* 5. SVG figure classes (same names as the Wada SVG style block) ----------- */
+.bg-base          { fill: var(--bg-base); }
+.bg-surface       { fill: var(--bg-surface); }
+.bg-muted         { fill: var(--bg-muted); }
+.text-primary     { fill: var(--text-primary); }
+.text-secondary   { fill: var(--text-secondary); }
+.text-on-accent   { fill: var(--text-on-accent); }
+.accent-primary   { fill: var(--accent-primary); }
+.accent-secondary { fill: var(--accent-secondary); }
+.accent-tertiary  { fill: var(--accent-tertiary); }
+.stroke-primary   { stroke: var(--accent-primary); }
+.stroke-secondary { stroke: var(--accent-secondary); }
+.stroke-tertiary  { stroke: var(--accent-tertiary); }
+.stroke-strong    { stroke: var(--border-strong); }
+.stroke-subtle    { stroke: var(--border-subtle); }
+
+/* Charts: one series = accent-primary; two = + accent-secondary (also vary marker
+   shape — the two are close in lightness); reference line / single highlight =
+   accent-tertiary (gold markers on light grounds get a border-strong outline);
+   gridlines border-subtle, axes border-strong, labels .caption. */
